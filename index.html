@@ -53,6 +53,63 @@ button:active{transform:scale(.97)}
 @media(max-width:390px){
   .history-metrics{grid-template-columns:repeat(2,1fr)}
 }
+
+/* Becoming My Dream Self */
+.becoming-card{position:relative;overflow:hidden}
+.becoming-hero{margin-top:3px}
+.becoming-kicker{font-size:9px;text-transform:uppercase;letter-spacing:1.5px;color:var(--muted);font-weight:900}
+.becoming-title{font-size:23px;line-height:1.05;font-weight:950;letter-spacing:-.7px;margin-top:4px}
+.becoming-subtitle{font-size:10px;color:var(--muted);line-height:1.45;margin-top:6px}
+.window-switch{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;background:#f1eee9;border-radius:12px;padding:4px;margin-top:14px}
+.window-switch button{border:0;background:transparent;color:var(--muted);font-size:10px;font-weight:900;padding:9px 5px;border-radius:9px}
+.window-switch button.active{background:#fff;color:var(--ink);box-shadow:0 2px 8px rgba(0,0,0,.06)}
+.trajectory-wrap{margin-top:15px;border:1px solid var(--line);border-radius:16px;background:linear-gradient(180deg,#fff,#f9f7f3);padding:11px 10px 9px}
+.trajectory-top{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.trajectory-label{font-size:9px;text-transform:uppercase;letter-spacing:1px;color:var(--muted);font-weight:900}
+.trajectory-current{font-size:9px;font-weight:900;color:var(--green)}
+.trajectory-svg{width:100%;height:148px;display:block;margin-top:2px}
+.trajectory-line{fill:none;stroke:currentColor;stroke-width:2.1;stroke-linecap:round;stroke-linejoin:round;opacity:.42}
+.trajectory-line-glow{fill:none;stroke:currentColor;stroke-width:8;stroke-linecap:round;stroke-linejoin:round;opacity:.05}
+.trajectory-dot{cursor:pointer;transition:transform .15s ease}
+.trajectory-dot:hover{transform:scale(1.15)}
+.trajectory-dot.active{filter:drop-shadow(0 2px 4px rgba(0,0,0,.16))}
+.trajectory-end{fill:#fff;stroke-width:2.2}
+.trajectory-destination{fill:none;stroke:currentColor;stroke-width:1.3;stroke-dasharray:3 4;opacity:.2}
+.direction-box{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:12px;padding:10px 11px;border-radius:12px;background:#191919;color:#fff}
+.direction-left{min-width:0}
+.direction-label{font-size:8px;text-transform:uppercase;letter-spacing:1.1px;color:#a8a8a8;font-weight:900}
+.direction-value{font-size:15px;font-weight:950;margin-top:2px}
+.direction-copy{font-size:9px;color:#c8c8c8;line-height:1.35;margin-top:3px}
+.direction-arrow{font-size:28px;line-height:1;font-weight:300;flex-shrink:0}
+.evidence-calendar{margin-top:14px}
+.evidence-calendar-head{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.evidence-calendar-title{font-size:9px;text-transform:uppercase;letter-spacing:1px;color:var(--muted);font-weight:900}
+.evidence-calendar-help{font-size:8px;color:var(--muted)}
+.evidence-grid{display:grid;grid-template-columns:repeat(10,1fr);gap:6px;margin-top:9px}
+.evidence-day{position:relative;aspect-ratio:1;border:1px solid var(--line);border-radius:8px;background:#f0ede8;padding:0;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.evidence-day[data-level="3"]{background:#191919;border-color:#191919}
+.evidence-day[data-level="2"]{background:#dcd8d1}
+.evidence-day[data-level="1"]{background:#efede9}
+.evidence-day[data-level="0"]{background:#faf9f7}
+.evidence-day.current{outline:2px solid var(--green);outline-offset:1px}
+.evidence-dot{width:5px;height:5px;border-radius:50%;background:#bdb7ae}
+.evidence-day[data-level="3"] .evidence-dot{background:#fff}
+.evidence-day[data-level="2"] .evidence-dot{background:#77716a}
+.evidence-day[data-level="0"] .evidence-dot{background:#d8d3cc}
+.day-popover{display:none;margin-top:9px;border:1px solid var(--line);border-radius:12px;background:#fff;padding:10px}
+.day-popover.show{display:block}
+.day-popover-head{display:flex;justify-content:space-between;align-items:flex-start;gap:10px}
+.day-popover-date{font-size:11px;font-weight:900}
+.day-popover-close{border:0;background:transparent;font-size:18px;line-height:1;color:var(--muted);padding:0}
+.day-popover-summary{font-size:9px;line-height:1.45;color:var(--muted);margin-top:4px}
+.day-popover-actions{display:flex;gap:6px;margin-top:8px}
+.day-popover-actions button{flex:1;border:1px solid var(--line);background:#fff;border-radius:9px;padding:8px;font-size:9px;font-weight:850}
+.day-popover-actions .primary{background:#191919;color:#fff;border-color:#191919}
+.becoming-footnote{font-size:8px;color:var(--muted);line-height:1.4;margin-top:10px}
+@media(max-width:390px){
+  .evidence-grid{gap:5px}
+  .trajectory-svg{height:138px}
+}
 </style>
 </head>
 <body>
@@ -63,6 +120,68 @@ button:active{transform:scale(.97)}
   <h1>Proof over promises.</h1>
   <p>This is how I'm becoming.</p>
 </header>
+
+
+<section class="card becoming-card" id="becomingCard">
+  <div class="becoming-hero">
+    <div class="becoming-kicker">Identity in motion</div>
+    <div class="becoming-title">Becoming My Dream Self</div>
+    <div class="becoming-subtitle">The evidence of who I’m becoming.</div>
+  </div>
+
+  <div class="window-switch" role="tablist" aria-label="Trajectory window">
+    <button id="window7" onclick="setTrajectoryWindow(7)">7D</button>
+    <button id="window14" onclick="setTrajectoryWindow(14)">14D</button>
+    <button id="window30" onclick="setTrajectoryWindow(30)">30D</button>
+  </div>
+
+  <div class="trajectory-wrap">
+    <div class="trajectory-top">
+      <div class="trajectory-label">Your trajectory</div>
+      <div class="trajectory-current" id="trajectoryCurrent">Today</div>
+    </div>
+    <svg id="trajectorySvg" class="trajectory-svg" viewBox="0 0 320 148" role="img" aria-label="Interactive trajectory over time">
+      <path id="trajectoryGlow" class="trajectory-line-glow"></path>
+      <path id="trajectoryLine" class="trajectory-line"></path>
+      <path id="trajectoryDestination" class="trajectory-destination" d="M302 17 C280 28 284 55 302 69 C284 83 280 110 302 131"></path>
+      <g id="trajectoryDots"></g>
+    </svg>
+  </div>
+
+  <div class="direction-box">
+    <div class="direction-left">
+      <div class="direction-label">Your direction</div>
+      <div class="direction-value" id="directionValue">—</div>
+      <div class="direction-copy" id="directionCopy"></div>
+    </div>
+    <div class="direction-arrow" id="directionArrow">→</div>
+  </div>
+
+  <div class="evidence-calendar">
+    <div class="evidence-calendar-head">
+      <div class="evidence-calendar-title">Recent evidence</div>
+      <div class="evidence-calendar-help">Tap a day to explore</div>
+    </div>
+    <div class="evidence-grid" id="evidenceGrid"></div>
+    <div class="day-popover" id="dayPopover">
+      <div class="day-popover-head">
+        <div>
+          <div class="day-popover-date" id="popoverDate"></div>
+          <div class="day-popover-summary" id="popoverSummary"></div>
+        </div>
+        <button class="day-popover-close" onclick="closeDayPopover()">×</button>
+      </div>
+      <div class="day-popover-actions">
+        <button onclick="closeDayPopover()">Close</button>
+        <button class="primary" id="popoverEditButton">Open Day</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="becoming-footnote">
+    The path reflects consistency across the behaviors you chose as evidence of your identity. It is not a score and it never “finishes.”
+  </div>
+</section>
 
 <div class="tabs">
   <button class="tab-button active" id="todayTab" onclick="showTab('today')">Today</button>
@@ -195,7 +314,7 @@ button:active{transform:scale(.97)}
 
 
 <script>
-const KEY="dream-self-dashboard-v12";
+const KEY="dream-self-dashboard-v13";
 const OLD_KEY="dream-self-dashboard-v7";
 
 function todayKey(){
@@ -272,7 +391,7 @@ function loadDB(){
   }
 
   const db={version:12,days:{},activeDate:todayKey(),lastSeenDate:todayKey()};
-  const oldRaw=localStorage.getItem("dream-self-dashboard-v11") || localStorage.getItem("dream-self-dashboard-v10") || localStorage.getItem(OLD_KEY);
+  const oldRaw=localStorage.getItem("dream-self-dashboard-v12") || localStorage.getItem("dream-self-dashboard-v11") || localStorage.getItem("dream-self-dashboard-v10") || localStorage.getItem(OLD_KEY);
   if(oldRaw){
     try{
       const old=JSON.parse(oldRaw);
@@ -772,7 +891,159 @@ function showTab(tab){
   renderAll();
 }
 
+
+let trajectoryWindow=30;
+let selectedHistoryDate=null;
+
+function dayEvidenceLevel(state){
+  // This is intentionally qualitative:
+  // 3 = strong evidence, 2 = mixed evidence, 1 = light evidence, 0 = little evidence.
+  let signals=0;
+  if(Object.values(state.salah).filter(v=>v==="prayed").length>=4) signals++;
+  if(qA(state)) signals++;
+  if(bA(state)) signals++;
+  if(fA(state)) signals++;
+  if(Object.values(state.salah).some(v=>v==="prayed")) signals++;
+
+  if(signals>=4)return 3;
+  if(signals>=2)return 2;
+  if(signals>=1)return 1;
+  return 0;
+}
+function dayEvidenceLabel(level){
+  return level===3?"Strong evidence":level===2?"Mixed evidence":level===1?"Light evidence":"Little evidence";
+}
+function dayEvidenceSummary(state){
+  const pieces=[];
+  const prayed=Object.values(state.salah).filter(v=>v==="prayed").length;
+  if(prayed)pieces.push(`${prayed}/5 salah recorded as prayed`);
+  if(qA(state))pieces.push("Qur'an Awwal showed up");
+  if(bA(state))pieces.push("Business Awwal showed up");
+  if(fA(state))pieces.push("Fitness Awwal showed up");
+  if(state.logged)pieces.push(state.autoLogged?"day was auto-logged":"day was logged");
+  return pieces.length?pieces.join(" · "):"No strong identity evidence recorded yet.";
+}
+function evidenceValue(state){
+  // Internal placement value only; it is never shown to the user.
+  let v=0;
+  v += Object.values(state.salah).filter(x=>x==="prayed").length * 1.15;
+  v += qA(state) ? 2.4 : 0;
+  v += bA(state) ? 2.4 : 0;
+  v += fA(state) ? 2.4 : 0;
+  v += Math.min(1.6, quranXP(state)*.18);
+  v += Math.min(1.6, businessXP(state)*.12);
+  v += Math.min(1.6, fitnessXP(state)*.20);
+  return v;
+}
+function getWindowDates(n){
+  const out=[];
+  for(let i=n-1;i>=0;i--)out.push(dayOffsetKey(-i));
+  return out;
+}
+function clamp(v,a,b){return Math.max(a,Math.min(b,v))}
+function trajectoryPoint(i,count,value,maxValue){
+  const left=12,right=304,top=17,bottom=131;
+  const x=count===1?158:left+(right-left)*(i/(count-1));
+  const normalized=maxValue>0?value/maxValue:0;
+  const wave=Math.sin(i*1.35)*6;
+  const y=bottom-(top+bottom?normalized*(bottom-top):0)+wave;
+  return {x:clamp(x,left,right),y:clamp(y,top,bottom)};
+}
+function renderBecoming(){
+  const dates=getWindowDates(trajectoryWindow);
+  const states=dates.map(d=>db.days[d]||normalizeDay({...blank(),date:d},d));
+  const values=states.map(evidenceValue);
+  const maxValue=Math.max(1,...values);
+  const points=states.map((s,i)=>trajectoryPoint(i,states.length,values[i],maxValue));
+
+  const linePath=points.map((p,i)=>(i?"L":"M")+` ${p.x.toFixed(1)} ${p.y.toFixed(1)}`).join(" ");
+  const line=document.getElementById("trajectoryLine");
+  const glow=document.getElementById("trajectoryGlow");
+  const dots=document.getElementById("trajectoryDots");
+  const nowIndex=dates.indexOf(todayKey());
+
+  line.setAttribute("d",linePath);
+  glow.setAttribute("d",linePath);
+
+  dots.innerHTML=points.map((p,i)=>{
+    const date=dates[i],state=states[i],level=dayEvidenceLevel(state);
+    const current=date===todayKey();
+    const recent=date===todayKey();
+    const r=current?5.6:(level===3?4.2:3.5);
+    const stroke=current?"var(--green)":"#77716a";
+    return `<circle class="trajectory-dot ${current?"active":""}" cx="${p.x}" cy="${p.y}" r="${r}" fill="${level===0?"#e6e1d9":"#191919"}" stroke="${stroke}" stroke-width="${current?2.3:1.5}" data-date="${date}" onclick="selectTrajectoryDay('${date}')" aria-label="${humanDate(date)}"></circle>`;
+  }).join("");
+
+  document.getElementById("trajectoryCurrent").textContent=nowIndex>=0?"Today":"Current";
+  ["7","14","30"].forEach(n=>document.getElementById("window"+n).classList.toggle("active",Number(n)===trajectoryWindow));
+
+  renderDirection(states,dates);
+  renderEvidenceCalendar();
+}
+function renderDirection(states,dates){
+  const values=states.map(evidenceValue);
+  const mid=Math.max(1,Math.floor(values.length/2));
+  const earlier=values.slice(0,mid);
+  const recent=values.slice(mid);
+  const avg=a=>a.length?a.reduce((x,y)=>x+y,0)/a.length:0;
+  const first=avg(earlier),second=avg(recent);
+  const delta=second-first;
+  let label="Holding steady",copy="Your recent behavior is maintaining the pattern you have been building.",arrow="→";
+
+  if(delta>.55){
+    label="Moving closer";
+    copy="Your recent days are showing stronger and more consistent evidence of the person you want to become.";
+    arrow="↗";
+  }else if(delta<-.55){
+    label="Drifting";
+    copy="Your recent days have been less aligned than the pattern you established earlier. The next clear action still counts.";
+    arrow="↘";
+  }else if(second>first+.15){
+    label="Building momentum";
+    copy="The direction is beginning to strengthen, even though the pattern is still settling.";
+    arrow="↗";
+  }
+
+  document.getElementById("directionValue").textContent=label;
+  document.getElementById("directionCopy").textContent=copy;
+  document.getElementById("directionArrow").textContent=arrow;
+}
+function renderEvidenceCalendar(){
+  const days=getWindowDates(Math.min(30,trajectoryWindow));
+  const el=document.getElementById("evidenceGrid");
+  el.innerHTML=days.map(date=>{
+    const state=db.days[date]||normalizeDay({...blank(),date},date);
+    const level=dayEvidenceLevel(state);
+    return `<button class="evidence-day ${date===todayKey()?"current":""}" data-level="${level}" title="${humanDate(date)} · ${dayEvidenceLabel(level)}" onclick="selectHistoryDay('${date}')"><span class="evidence-dot"></span></button>`;
+  }).join("");
+}
+function setTrajectoryWindow(n){
+  trajectoryWindow=n;
+  closeDayPopover();
+  renderBecoming();
+}
+function selectTrajectoryDay(date){
+  selectHistoryDay(date);
+}
+function selectHistoryDay(date){
+  const state=db.days[date]||normalizeDay({...blank(),date},date);
+  selectedHistoryDate=date;
+  document.getElementById("popoverDate").textContent=longDate(date);
+  document.getElementById("popoverSummary").textContent=dayEvidenceSummary(state);
+  document.getElementById("popoverEditButton").textContent=date===todayKey()?"Open Today":"Edit Day";
+  document.getElementById("popoverEditButton").onclick=function(){
+    closeDayPopover();
+    editDay(date);
+  };
+  document.getElementById("dayPopover").classList.add("show");
+}
+function closeDayPopover(){
+  selectedHistoryDate=null;
+  document.getElementById("dayPopover").classList.remove("show");
+}
+
 function renderAll(){
+  renderBecoming();
   renderSalah();
   renderQuran();
   renderBusiness();
