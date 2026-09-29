@@ -2,801 +2,709 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
 <title>Dream Self Dashboard</title>
 
 <style>
 :root {
-  --panel:#f5f5f1;
-  --card:#fff;
-  --text:#1d1d1b;
-  --muted:#72726b;
-  --border:#e2e2da;
-  --accent:#315c4c;
-  --accent-bg:#e6eee9;
-  --earned:#3d765e;
-  --spent:#b85b55;
-  --penalty:#c06a2d;
-  --reason:#DB904B;
+  --bg: #f5f3ee;
+  --card: #ffffff;
+  --ink: #161616;
+  --muted: #77736c;
+  --line: #e7e3dc;
+  --green: #285c45;
+  --green-light: #e5f0e9;
+  --red: #a94338;
+  --red-light: #f8e9e7;
+  --orange: #DB904B;
+  --gold: #b79555;
+  --black: #151515;
 }
 
 * {
-  box-sizing:border-box;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
 }
 
 body {
-  margin:0;
-  background:#fafaf7;
-  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
-  color:var(--text);
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display",
+               "SF Pro Text", Inter, sans-serif;
 }
 
 button,
 input,
 select,
 textarea {
-  font:inherit;
+  font: inherit;
 }
 
 button {
-  cursor:pointer;
+  cursor: pointer;
 }
 
-input,
-select,
-textarea {
-  color:var(--text);
-  background:#fff;
-  border:1px solid var(--border);
+.app {
+  width: 100%;
+  max-width: 720px;
+  margin: auto;
+  padding: 18px 14px 60px;
 }
 
-.dashboard {
-  max-width:1400px;
-  margin:auto;
-  padding:20px;
-}
+/* HEADER */
 
-/* TOP */
-
-.top {
-  background:var(--panel);
-  border:1px solid var(--border);
-  border-radius:22px;
-  padding:18px;
-  margin-bottom:12px;
-}
-
-.topline {
-  display:flex;
-  justify-content:space-between;
-  gap:12px;
-  align-items:flex-start;
+.header {
+  padding: 18px 4px 20px;
 }
 
 .eyebrow {
-  font-size:10px;
-  letter-spacing:.14em;
-  text-transform:uppercase;
-  color:var(--muted);
-  font-weight:800;
+  font-size: 11px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--muted);
+  font-weight: 700;
 }
 
-.title {
-  font-size:27px;
-  font-weight:850;
-  line-height:1.1;
-  margin-top:4px;
+.header h1 {
+  margin: 7px 0 5px;
+  font-size: 31px;
+  line-height: 1.05;
+  letter-spacing: -1.2px;
 }
 
-.subtitle {
-  font-size:12px;
-  color:var(--muted);
-  line-height:1.45;
-  margin-top:6px;
-  max-width:600px;
-}
-
-.date-row {
-  display:flex;
-  align-items:center;
-  gap:6px;
-  white-space:nowrap;
-}
-
-.date-row input {
-  width:142px;
-  padding:9px;
-  border-radius:9px;
-  font-size:12px;
-}
-
-/* IDENTITY */
-
-.identity {
-  display:grid;
-  grid-template-columns:repeat(3,minmax(0,1fr));
-  gap:8px;
-  margin-top:15px;
-}
-
-.identity-card {
-  background:#fff;
-  border:1px solid var(--border);
-  border-radius:13px;
-  padding:11px;
-}
-
-.identity-head {
-  display:flex;
-  justify-content:space-between;
-}
-
-.identity-name {
-  font-size:11px;
-  font-weight:850;
-}
-
-.identity-pct {
-  font-size:11px;
-  font-weight:850;
-  color:var(--accent);
-}
-
-.identity-main {
-  font-size:12px;
-  font-weight:700;
-  line-height:1.35;
-  margin-top:6px;
-}
-
-.identity-foot {
-  font-size:9px;
-  color:var(--muted);
-  margin-top:4px;
+.header p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 14px;
 }
 
 /* CARDS */
 
-.card,
-.salah-card,
-.domain-card,
-.energy-card,
-.utility-card,
-.chart-card {
-  background:var(--card);
-  border:1px solid var(--border);
-  border-radius:18px;
-  padding:15px;
+.card {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 22px;
+  padding: 17px;
+  margin-bottom: 14px;
+  box-shadow: 0 3px 14px rgba(0,0,0,.025);
 }
 
-.salah-card {
-  margin-bottom:12px;
+.section-label {
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 8px;
 }
 
-.section-head {
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  margin-bottom:9px;
+.card-title {
+  font-size: 21px;
+  font-weight: 800;
+  letter-spacing: -.5px;
 }
 
-.section-title {
-  font-size:14px;
-  font-weight:850;
-}
-
-.section-sub {
-  font-size:10px;
-  color:var(--muted);
-  margin-top:3px;
+.subtitle {
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.45;
+  margin-top: 5px;
 }
 
 /* SALAH */
 
+.salah-card {
+  background: var(--black);
+  color: white;
+  border: none;
+}
+
+.salah-card .section-label {
+  color: #aaa;
+}
+
+.salah-message {
+  font-size: 14px;
+  line-height: 1.45;
+  margin: 4px 0 15px;
+}
+
 .salah-grid {
-  display:grid;
-  grid-template-columns:repeat(5,1fr);
-  gap:7px;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 7px;
 }
 
-.salah-item {
-  border:1px solid var(--border);
-  border-radius:11px;
-  background:var(--panel);
-  padding:8px;
+.salah {
+  border: 1px solid #373737;
+  background: #202020;
+  color: white;
+  border-radius: 13px;
+  min-height: 68px;
+  padding: 7px 3px;
 }
 
-.salah-btn {
-  width:100%;
-  min-height:43px;
-  border:0;
-  background:transparent;
-  color:var(--text);
-  font-weight:800;
-  font-size:11px;
-  border-radius:8px;
+.salah-name {
+  font-size: 11px;
+  font-weight: 700;
 }
 
-.salah-btn.done {
-  background:#e8f1eb;
-  color:var(--earned);
+.salah-status {
+  font-size: 9px;
+  color: #aaa;
+  margin-top: 5px;
 }
 
-.salah-btn.missed {
-  background:#f8ebe9;
-  color:var(--spent);
+.salah.prayed {
+  background: var(--green);
+  border-color: var(--green);
 }
 
-.salah-btn.corrected {
-  background:#f5eee4;
-  color:var(--penalty);
+.salah.missed {
+  background: var(--red);
+  border-color: var(--red);
 }
 
-.salah-options {
-  display:none;
-  gap:4px;
-  margin-top:5px;
-}
-
-.salah-item.open .salah-options {
-  display:grid;
-}
-
-.salah-options button {
-  border:1px solid var(--border);
-  background:#fff;
-  border-radius:7px;
-  padding:7px 5px;
-  font-size:9px;
-  font-weight:750;
-}
-
-.legendline {
-  display:flex;
-  gap:9px;
-  flex-wrap:wrap;
-  margin-top:8px;
-  font-size:9px;
-  color:var(--muted);
-}
-
-/* DOMAINS */
-
-.domains {
-  display:grid;
-  grid-template-columns:repeat(3,minmax(0,1fr));
-  gap:12px;
-}
-
-.domain-head {
-  margin-bottom:13px;
-}
-
-.domain-title {
-  font-size:17px;
-  font-weight:850;
-}
-
-.domain-sub {
-  font-size:10px;
-  color:var(--muted);
-  line-height:1.45;
-  margin-top:4px;
-}
-
-.stage {
-  padding-top:11px;
-  margin-top:11px;
-  border-top:1px solid #edede7;
-}
-
-.stage:first-of-type {
-  padding-top:0;
-  margin-top:0;
-  border-top:0;
-}
-
-.stage-head {
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  margin-bottom:8px;
-}
-
-.stage-title {
-  font-size:11px;
-  font-weight:850;
-}
-
-.status {
-  font-size:9px;
-  padding:5px 7px;
-  border-radius:999px;
-  background:var(--panel);
-  color:var(--muted);
-  font-weight:850;
-}
-
-.status.open,
-.status.complete {
-  background:var(--accent-bg);
-  color:var(--accent);
+.salah.qadha {
+  background: #6d542f;
+  border-color: #6d542f;
 }
 
 /* TASKS */
 
-.task {
-  display:grid;
-  grid-template-columns:28px minmax(0,1fr) auto;
-  gap:9px;
-  align-items:center;
-  padding:9px 0;
-  border-top:1px solid #efefe9;
+.domain-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
 }
 
-.task:first-child {
-  border-top:0;
+.stage-pill {
+  background: #f1eee8;
+  color: #5f5b55;
+  padding: 6px 9px;
+  border-radius: 99px;
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: .5px;
+  white-space: nowrap;
+}
+
+.task-list {
+  margin-top: 17px;
+}
+
+.task {
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 12px;
+  margin-bottom: 9px;
+  background: #fff;
+}
+
+.task.completed {
+  border-color: #c7dfd0;
+  background: #f8fcf9;
+}
+
+.task-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
 .check {
-  width:27px;
-  height:27px;
-  border-radius:8px;
-  border:1px solid #c8c8bf;
-  background:#fff;
-  display:grid;
-  place-items:center;
-  color:#fff;
-  font-weight:bold;
+  width: 28px;
+  height: 28px;
+  border-radius: 9px;
+  border: 1.5px solid #c9c5be;
+  background: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: white;
+  font-size: 15px;
+  font-weight: 900;
 }
 
 .check.done {
-  background:var(--earned);
-  border-color:var(--earned);
+  background: var(--green);
+  border-color: var(--green);
+}
+
+.task-info {
+  flex: 1;
+  min-width: 0;
 }
 
 .task-name {
-  font-size:12px;
-  font-weight:750;
+  font-size: 13px;
+  font-weight: 750;
 }
 
-.task-meta {
-  font-size:9px;
-  color:var(--muted);
-  margin-top:2px;
-}
-
-.points {
-  font-size:10px;
-  font-weight:850;
-  color:var(--accent);
-  white-space:nowrap;
+.task-xp {
+  font-size: 10px;
+  color: var(--green);
+  font-weight: 700;
+  margin-top: 2px;
 }
 
 .reason {
-  grid-column:2/-1;
-  width:100%;
-  padding:5px 7px;
-  border-radius:8px;
-  font-size:8px;
-  color:var(--reason);
-  background:#fff7ef;
-  border:1px solid #edc7a9;
+  font-size: 8px;
+  color: var(--orange);
+  margin-top: 7px;
+  border: none;
+  background: transparent;
+  padding: 0;
 }
 
-.lockbox {
-  padding:8px 9px;
-  border-radius:9px;
-  background:var(--panel);
-  font-size:10px;
-  color:var(--muted);
-  line-height:1.4;
+.add-area {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 10px;
+  padding-left: 38px;
 }
 
-/* FORMS */
-
-.inline-form {
-  display:grid;
-  grid-template-columns:minmax(0,1fr) auto;
-  gap:6px;
-  margin-top:7px;
+.session-control {
+  display: flex;
+  align-items: center;
+  border: 1px solid var(--line);
+  border-radius: 11px;
+  overflow: hidden;
+  background: white;
 }
 
-.inline-form input,
-.inline-form select,
-.inline-form button {
-  min-height:39px;
+.session-control button {
+  border: none;
+  background: white;
+  width: 34px;
+  height: 30px;
+  font-size: 17px;
+  color: var(--ink);
 }
 
-.inline-form input,
-.inline-form select {
-  padding:8px;
-  border-radius:9px;
-  font-size:11px;
+.session-count {
+  min-width: 35px;
+  text-align: center;
+  font-size: 11px;
+  font-weight: 800;
 }
 
-.primary,
-.secondary {
-  border-radius:9px;
-  padding:9px 11px;
-  font-size:10px;
-  font-weight:800;
+.add-button {
+  border: none;
+  border-radius: 11px;
+  background: var(--green);
+  color: white;
+  padding: 8px 13px;
+  font-size: 11px;
+  font-weight: 800;
 }
 
-.primary {
-  background:var(--accent);
-  color:#fff;
-  border:1px solid var(--accent);
+.add-button:active,
+.check:active,
+.salah:active {
+  transform: scale(.97);
 }
 
-.secondary {
-  background:#fff;
-  color:var(--text);
-  border:1px solid var(--border);
+/* PROGRESSION */
+
+.locked {
+  opacity: .48;
 }
 
-/* LOWER */
-
-.lower-grid {
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:12px;
-  margin-top:12px;
+.unlock-message {
+  margin-top: 11px;
+  padding: 10px 11px;
+  border-radius: 11px;
+  background: #f5f2ed;
+  color: var(--muted);
+  font-size: 10px;
 }
 
-/* ENERGY */
-
-.ring-wrap {
-  display:flex;
-  justify-content:center;
+.next-stage {
+  margin-top: 13px;
+  border-top: 1px solid var(--line);
+  padding-top: 13px;
 }
 
-.ring {
-  width:178px;
-  height:178px;
-  position:relative;
+.next-stage-title {
+  font-size: 10px;
+  font-weight: 800;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 1px;
 }
 
-.ring svg {
-  width:100%;
-  height:100%;
-  transform:rotate(-90deg);
+/* XP */
+
+.energy {
+  display: flex;
+  align-items: center;
+  gap: 18px;
 }
 
-.ring-bg {
-  fill:none;
-  stroke:#ededE7;
-  stroke-width:14;
+.xp-ring {
+  width: 104px;
+  height: 104px;
+  border-radius: 50%;
+  position: relative;
+  flex-shrink: 0;
+  background: conic-gradient(
+    var(--green) var(--earned-angle),
+    #e5e2dc 0deg
+  );
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.ring-earned {
-  fill:none;
-  stroke:var(--earned);
-  stroke-width:14;
-  stroke-linecap:round;
+.xp-ring::after {
+  content: "";
+  position: absolute;
+  width: 76px;
+  height: 76px;
+  border-radius: 50%;
+  background: white;
 }
 
-.ring-spent {
-  fill:none;
-  stroke:var(--spent);
-  stroke-width:14;
-  stroke-linecap:round;
+.xp-ring-inner {
+  position: relative;
+  z-index: 2;
+  text-align: center;
 }
 
-.ring-center {
-  position:absolute;
-  inset:0;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  flex-direction:column;
+.xp-number {
+  font-size: 22px;
+  font-weight: 900;
 }
 
-.balance {
-  font-size:26px;
-  font-weight:850;
+.xp-label {
+  font-size: 8px;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 1px;
 }
 
-.balance-label {
-  font-size:9px;
-  color:var(--muted);
+.energy-details {
+  flex: 1;
 }
 
-.energy-stats {
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:7px;
+.energy-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 5px 0;
+  font-size: 12px;
 }
 
-.energy-stat {
-  border:1px solid var(--border);
-  border-radius:10px;
-  padding:8px;
+.energy-row span:first-child {
+  color: var(--muted);
 }
 
-.energy-stat b {
-  display:block;
-  font-size:15px;
+.positive {
+  color: var(--green);
+  font-weight: 800;
 }
 
-.energy-stat span {
-  font-size:9px;
-  color:var(--muted);
-}
-
-.earned-text {
-  color:var(--earned);
-}
-
-.spent-text {
-  color:var(--spent);
-}
-
-.penalty-text {
-  color:var(--penalty);
-}
-
-.full-stat {
-  margin-top:7px;
-}
-
-.progress-line {
-  display:flex;
-  justify-content:space-between;
-  font-size:9px;
-  color:var(--muted);
-  margin:9px 0 4px;
-}
-
-.progress {
-  height:7px;
-  background:#e8e8e2;
-  border-radius:99px;
-  overflow:hidden;
-}
-
-.progress i {
-  display:block;
-  height:100%;
-  background:var(--accent);
-  border-radius:99px;
+.negative {
+  color: var(--red);
+  font-weight: 800;
 }
 
 /* NUTRITION */
 
 .nutrition-grid {
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:7px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  margin-top: 13px;
 }
 
-.nutri-stat {
-  border:1px solid var(--border);
-  border-radius:11px;
-  padding:10px;
+.nutrition-stat {
+  background: #191919;
+  color: white;
+  border-radius: 13px;
+  padding: 11px 8px;
 }
 
-.nutri-stat strong {
-  display:block;
-  font-size:18px;
+.nutrition-label {
+  font-size: 8px;
+  color: #999;
+  text-transform: uppercase;
 }
 
-.nutri-stat span {
-  font-size:9px;
-  color:var(--muted);
+.nutrition-value {
+  font-size: 16px;
+  font-weight: 850;
+  margin-top: 3px;
 }
 
-.food-grid {
-  display:grid;
-  grid-template-columns:1.7fr .8fr .6fr .6fr;
-  gap:5px;
-  margin-top:8px;
+.nutrition-input {
+  margin-top: 12px;
 }
 
-.food-grid input {
-  min-width:0;
-  padding:8px;
-  border-radius:8px;
-  font-size:10px;
+.nutrition-input input {
+  width: 100%;
+  background: #181818;
+  border: 1px solid #444;
+  color: white;
+  border-radius: 10px;
+  padding: 10px;
+  outline: none;
 }
 
-/* LOGS */
-
-.log-row {
-  display:flex;
-  justify-content:space-between;
-  gap:8px;
-  align-items:center;
-  padding:7px 0;
-  border-top:1px solid #eeeeea;
-  font-size:9px;
+.food-list {
+  margin-top: 9px;
 }
 
-.log-row:first-child {
-  border-top:0;
+.food-item {
+  display: flex;
+  justify-content: space-between;
+  font-size: 10px;
+  padding: 6px 0;
+  border-bottom: 1px solid #eee;
 }
 
-.tag {
-  padding:3px 5px;
-  border-radius:999px;
-  background:#fff0e7;
-  color:var(--spent);
-  margin-left:3px;
+.junk-button {
+  margin-top: 10px;
+  width: 100%;
+  border: 1px solid #e1c4c0;
+  background: var(--red-light);
+  color: var(--red);
+  border-radius: 11px;
+  padding: 9px;
+  font-size: 10px;
+  font-weight: 800;
 }
 
-/* CHART */
+/* REELS / STEPS */
 
-.chart-head {
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:8px;
+.counter-box {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 10px;
+  padding: 11px;
+  background: #f7f5f1;
+  border-radius: 12px;
 }
 
-.chart-select {
-  padding:7px 8px;
-  border-radius:8px;
-  font-size:10px;
+.counter-number {
+  font-size: 18px;
+  font-weight: 900;
 }
+
+.counter-controls {
+  display: flex;
+  gap: 5px;
+}
+
+.counter-controls button {
+  width: 32px;
+  height: 32px;
+  border: 1px solid var(--line);
+  border-radius: 9px;
+  background: white;
+  font-size: 18px;
+}
+
+/* CUSTOM */
+
+.custom-form {
+  display: flex;
+  gap: 7px;
+  margin-top: 10px;
+}
+
+.custom-form input {
+  min-width: 0;
+  flex: 1;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 9px;
+  outline: none;
+}
+
+.custom-form button {
+  border: none;
+  background: var(--black);
+  color: white;
+  border-radius: 10px;
+  padding: 9px 12px;
+}
+
+/* GRAPH */
 
 .chart {
-  width:100%;
-  height:190px;
-  margin-top:5px;
+  height: 130px;
+  display: flex;
+  align-items: flex-end;
+  gap: 7px;
+  padding-top: 15px;
 }
 
-.chart svg {
-  width:100%;
-  height:100%;
+.bar-wrap {
+  flex: 1;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
 }
 
-.axis {
-  stroke:#deded7;
-  stroke-width:1;
+.bar {
+  width: 100%;
+  max-width: 30px;
+  border-radius: 7px 7px 3px 3px;
+  background: var(--green);
+  min-height: 3px;
 }
 
-.main-line {
-  fill:none;
-  stroke:var(--accent);
-  stroke-width:3;
-  stroke-linecap:round;
-  stroke-linejoin:round;
+.bar-label {
+  margin-top: 5px;
+  font-size: 8px;
+  color: var(--muted);
 }
 
-.avg-line {
-  fill:none;
-  stroke:#8d8e87;
-  stroke-width:2;
-  stroke-dasharray:5 4;
+/* MIRROR */
+
+.insight {
+  padding: 12px;
+  border-radius: 13px;
+  background: #f5f2ed;
+  margin-top: 9px;
 }
 
-.bar-earned {
-  fill:var(--earned);
+.insight-title {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 800;
+  color: var(--muted);
 }
 
-.bar-spent {
-  fill:var(--spent);
-}
-
-/* OBSERVATIONS */
-
-.obs {
-  padding:8px 0;
-  border-top:1px solid #eeeeea;
-}
-
-.obs:first-child {
-  border-top:0;
-}
-
-.obs b {
-  font-size:10px;
-}
-
-.obs p {
-  margin:3px 0 0;
-  font-size:9px;
-  color:var(--muted);
-  line-height:1.45;
+.insight-text {
+  font-size: 12px;
+  line-height: 1.45;
+  margin-top: 4px;
 }
 
 /* REFLECTION */
 
-.reflection {
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:8px;
+textarea {
+  width: 100%;
+  min-height: 65px;
+  border: 1px solid var(--line);
+  border-radius: 11px;
+  padding: 10px;
+  resize: vertical;
+  outline: none;
+  margin-top: 7px;
 }
 
-.reflection textarea {
-  min-height:78px;
-  width:100%;
-  padding:9px;
-  border-radius:9px;
-  resize:vertical;
-  font-size:10px;
+.reflection-label {
+  font-size: 10px;
+  font-weight: 750;
+  margin-top: 12px;
 }
 
-.footer {
-  display:flex;
-  justify-content:space-between;
-  gap:8px;
-  align-items:center;
-  flex-wrap:wrap;
-  margin-top:10px;
+/* FOOTER */
+
+.reset-button {
+  width: 100%;
+  border: 1px solid #ddd7ce;
+  background: transparent;
+  color: var(--muted);
+  border-radius: 12px;
+  padding: 11px;
+  font-size: 10px;
 }
 
-.small {
-  font-size:9px;
-  color:var(--muted);
-  line-height:1.4;
+/* MODAL */
+
+.modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.48);
+  display: none;
+  align-items: flex-end;
+  justify-content: center;
+  z-index: 20;
 }
 
-.closed {
-  display:inline-flex;
-  padding:5px 7px;
-  border-radius:999px;
-  background:var(--accent-bg);
-  color:var(--accent);
-  font-size:9px;
-  font-weight:800;
+.modal.show {
+  display: flex;
 }
 
-.pill {
-  display:inline-flex;
-  padding:5px 7px;
-  border-radius:999px;
-  background:var(--panel);
-  border:1px solid var(--border);
-  font-size:9px;
-  color:var(--muted);
-  margin:4px 4px 0 0;
+.modal-content {
+  width: 100%;
+  max-width: 720px;
+  background: white;
+  border-radius: 24px 24px 0 0;
+  padding: 20px;
 }
 
-/* RESPONSIVE */
-
-@media(max-width:960px) {
-  .domains {
-    grid-template-columns:1fr 1fr;
-  }
-
-  .lower-grid {
-    grid-template-columns:1fr;
-  }
+.modal-title {
+  font-size: 18px;
+  font-weight: 850;
 }
 
-@media(max-width:700px) {
-  .dashboard {
-    padding:12px;
-  }
+.modal-subtitle {
+  font-size: 11px;
+  color: var(--muted);
+  margin-top: 4px;
+}
 
-  .topline {
-    flex-direction:column;
-  }
+.modal-options {
+  display: grid;
+  gap: 8px;
+  margin-top: 16px;
+}
 
-  .date-row,
-  .date-row input {
-    width:100%;
-  }
+.modal-option {
+  border: 1px solid var(--line);
+  background: white;
+  border-radius: 13px;
+  padding: 12px;
+  text-align: left;
+  font-size: 12px;
+}
 
-  .identity {
-    grid-template-columns:1fr;
+.modal-close {
+  margin-top: 10px;
+  width: 100%;
+  border: none;
+  background: #eeeae4;
+  border-radius: 12px;
+  padding: 11px;
+}
+
+/* SMALL PHONES */
+
+@media (max-width: 390px) {
+  .app {
+    padding-left: 10px;
+    padding-right: 10px;
   }
 
   .salah-grid {
-    grid-template-columns:repeat(2,1fr);
+    gap: 4px;
   }
 
-  .domains {
-    grid-template-columns:1fr;
+  .salah {
+    min-height: 62px;
   }
 
-  .reflection {
-    grid-template-columns:1fr;
+  .salah-name {
+    font-size: 9px;
   }
 
-  .food-grid {
-    grid-template-columns:1fr 1fr;
+  .card {
+    padding: 14px;
   }
 }
 </style>
@@ -804,2731 +712,1739 @@ textarea {
 
 <body>
 
-<div class="dashboard">
+<div class="app">
 
-<!-- TOP -->
-<section class="top">
+  <header class="header">
+    <div class="eyebrow">Dream Self Dashboard</div>
+    <h1>Proof over promises.</h1>
+    <p>This is how I'm becoming.</p>
+  </header>
 
-  <div class="topline">
+  <!-- SALAH -->
 
-    <div>
-      <div class="eyebrow">The person you are becoming</div>
+  <section class="card salah-card">
+    <div class="section-label">Non-negotiable</div>
 
-      <div class="title">
-        Proof over promises.
-      </div>
-
-      <div class="subtitle">
-        Show up for what matters most. Build evidence through repetition,
-        then use your earned energy deliberately.
-      </div>
+    <div class="salah-message">
+      Connect yourself with Allah with the acts He loves the most.
     </div>
 
-    <div class="date-row">
-      <span class="small">Day</span>
-      <input type="date" id="date">
-    </div>
-
-  </div>
-
-  <div class="identity" id="identity"></div>
-
-</section>
-
-
-<!-- SALAH -->
-<section class="salah-card">
-
-  <div class="section-head">
-
-    <div>
-      <div class="section-title">
-        🕌 Salah — Non-Negotiable
-      </div>
-
-      <div class="section-sub">
-        Connect yourself with Allah with the acts He loves the most.
-      </div>
-    </div>
-
-    <div class="status" id="salahCount">
-      0 / 5
-    </div>
-
-  </div>
-
-  <div class="salah-grid" id="salahGrid"></div>
-
-  <div class="legendline">
-    <span>🟢 Prayed +1 XP</span>
-    <span>🔴 Missed −1 XP</span>
-    <span>🟠 Qadha + Tawbah −0.25 XP</span>
-  </div>
-
-</section>
-
-
-<!-- THREE DOMAINS -->
-<div class="domains">
+    <div class="salah-grid" id="salahGrid"></div>
+  </section>
 
   <!-- QURAN -->
-  <section class="domain-card">
 
-    <div class="domain-head">
-
-      <div class="domain-title">
-        📖 Awwal - Qur'an First
-      </div>
-
-      <div class="domain-sub">
-        Become the Hafidh of the Qur'an and rise closer to Allah and His Messenger (S).
-      </div>
-
-    </div>
-
-    <div class="stage">
-
-      <div class="stage-head">
-        <div class="stage-title">AWWAL</div>
-        <div class="status open" id="qAStatus">OPEN</div>
-      </div>
-
-      <div id="qA"></div>
-
-    </div>
-
-
-    <div class="stage">
-
-      <div class="stage-head">
-        <div class="stage-title">THANI</div>
-        <div class="status" id="qTStatus">LOCKED</div>
-      </div>
-
-      <div id="qT"></div>
-
-    </div>
-
-
-    <div class="stage">
-
-      <div class="stage-head">
-        <div class="stage-title">MAZEED</div>
-        <div class="status" id="qMStatus">LOCKED</div>
-      </div>
-
-      <div id="qM"></div>
-
-    </div>
-
-  </section>
-
+  <section class="card" id="quranCard"></section>
 
   <!-- BUSINESS -->
-  <section class="domain-card">
 
-    <div class="domain-head">
-
-      <div class="domain-title">
-        💼 Awwal - Business
-      </div>
-
-      <div class="domain-sub">
-        Build your business that pleases Allah &amp; serves the Ummah of the Beloved (S).
-      </div>
-
-    </div>
-
-
-    <div class="stage">
-
-      <div class="stage-head">
-        <div class="stage-title">AWWAL</div>
-        <div class="status" id="bAStatus">LOCKED</div>
-      </div>
-
-      <div id="bA"></div>
-
-    </div>
-
-
-    <div class="stage">
-
-      <div class="stage-head">
-        <div class="stage-title">THANI</div>
-        <div class="status" id="bTStatus">LOCKED</div>
-      </div>
-
-      <div id="bT"></div>
-
-    </div>
-
-
-    <div class="stage">
-
-      <div class="stage-head">
-        <div class="stage-title">MAZEED</div>
-        <div class="status" id="bMStatus">LOCKED</div>
-      </div>
-
-      <div id="bM"></div>
-
-    </div>
-
-  </section>
-
+  <section class="card" id="businessCard"></section>
 
   <!-- FITNESS -->
-  <section class="domain-card">
 
-    <div class="domain-head">
+  <section class="card" id="fitnessCard"></section>
 
-      <div class="domain-title">
-        🏋️ Awwal - Fitness
+  <!-- DAILY ENERGY -->
+
+  <section class="card">
+    <div class="section-label">Daily Energy</div>
+
+    <div class="energy">
+
+      <div class="xp-ring" id="xpRing">
+        <div class="xp-ring-inner">
+          <div class="xp-number" id="xpTotal">0</div>
+          <div class="xp-label">XP</div>
+        </div>
       </div>
 
-      <div class="domain-sub">
-        The Prophet (S) said a strong believer is better than a weak believer
+      <div class="energy-details">
+        <div class="energy-row">
+          <span>Earned</span>
+          <span class="positive" id="xpEarned">+0 XP</span>
+        </div>
+
+        <div class="energy-row">
+          <span>Spent</span>
+          <span class="negative" id="xpSpent">0 XP</span>
+        </div>
+
+        <div class="energy-row">
+          <span>Net energy</span>
+          <strong id="xpNet">0 XP</strong>
+        </div>
+
+        <div class="energy-row">
+          <span>Day</span>
+          <strong id="todayLabel"></strong>
+        </div>
       </div>
 
     </div>
-
-
-    <div class="stage">
-
-      <div class="stage-head">
-        <div class="stage-title">AWWAL</div>
-        <div class="status" id="fAStatus">LOCKED</div>
-      </div>
-
-      <div id="fA"></div>
-
-    </div>
-
-
-    <div class="stage">
-
-      <div class="stage-head">
-        <div class="stage-title">THANI</div>
-        <div class="status" id="fTStatus">LOCKED</div>
-      </div>
-
-      <div id="fT"></div>
-
-    </div>
-
-
-    <div class="stage">
-
-      <div class="stage-head">
-        <div class="stage-title">MAZEED</div>
-        <div class="status" id="fMStatus">LOCKED</div>
-      </div>
-
-      <div id="fM"></div>
-
-    </div>
-
   </section>
+
+  <!-- NUTRITION -->
+
+  <section class="card">
+    <div class="section-label">Fitness · Nutrition</div>
+    <div class="card-title">Fuel the body.</div>
+    <div class="subtitle">
+      Track your nutrition manually. This HUD monitors the inputs that support your stronger self.
+    </div>
+
+    <div class="nutrition-grid">
+      <div class="nutrition-stat">
+        <div class="nutrition-label">Calories</div>
+        <div class="nutrition-value">2,000</div>
+      </div>
+
+      <div class="nutrition-stat">
+        <div class="nutrition-label">Protein</div>
+        <div class="nutrition-value">160g</div>
+      </div>
+
+      <div class="nutrition-stat">
+        <div class="nutrition-label">Fat</div>
+        <div class="nutrition-value">88g</div>
+      </div>
+
+      <div class="nutrition-stat">
+        <div class="nutrition-label">Carbs</div>
+        <div class="nutrition-value">142g</div>
+      </div>
+    </div>
+
+    <div class="nutrition-input">
+      <input
+        id="foodInput"
+        placeholder="Log food manually..."
+        onkeydown="if(event.key==='Enter') addFood()"
+      >
+
+      <div class="food-list" id="foodList"></div>
+
+      <button class="junk-button" onclick="addJunk()">
+        + Log junk / late-night food · −0.5 XP
+      </button>
+    </div>
+  </section>
+
+  <!-- TRAJECTORY -->
+
+  <section class="card">
+    <div class="section-label">Trajectory</div>
+    <div class="card-title">Your last 7 days.</div>
+    <div class="subtitle">
+      The goal isn't perfection. It's becoming someone who keeps showing up.
+    </div>
+
+    <div class="chart" id="chart"></div>
+  </section>
+
+  <!-- MIRROR -->
+
+  <section class="card">
+    <div class="section-label">Mirror + Strategist</div>
+
+    <div class="insight">
+      <div class="insight-title">What you actually did</div>
+      <div class="insight-text" id="mirrorText"></div>
+    </div>
+
+    <div class="insight">
+      <div class="insight-title">Pattern</div>
+      <div class="insight-text" id="patternText"></div>
+    </div>
+
+    <div class="insight">
+      <div class="insight-title">Strategist</div>
+      <div class="insight-text" id="strategyText"></div>
+    </div>
+  </section>
+
+  <!-- REFLECTION -->
+
+  <section class="card">
+    <div class="section-label">Daily Reflection</div>
+    <div class="card-title">Close the loop.</div>
+
+    <div class="reflection-label">What went well?</div>
+    <textarea id="wellInput" placeholder="What are you proud of today?"></textarea>
+
+    <div class="reflection-label">What got in the way?</div>
+    <textarea id="wayInput" placeholder="Be honest. No shame."></textarea>
+
+    <div class="reflection-label">What will I do tomorrow?</div>
+    <textarea id="tomorrowInput" placeholder="One clear move."></textarea>
+  </section>
+
+  <button class="reset-button" onclick="resetToday()">
+    Reset today's dashboard
+  </button>
 
 </div>
 
+<!-- SALAH MODAL -->
 
-<!-- ENERGY + NUTRITION -->
-<div class="lower-grid">
+<div class="modal" id="salahModal">
+  <div class="modal-content">
 
-  <!-- ENERGY -->
-  <section class="energy-card">
+    <div class="modal-title" id="modalTitle">Salah</div>
 
-    <h2>⚡ Daily Energy</h2>
-
-    <div class="ring-wrap">
-
-      <div class="ring">
-
-        <svg viewBox="0 0 200 200">
-
-          <circle
-            class="ring-bg"
-            cx="100"
-            cy="100"
-            r="76">
-          </circle>
-
-          <circle
-            id="earnedArc"
-            class="ring-earned"
-            cx="100"
-            cy="100"
-            r="76">
-          </circle>
-
-          <circle
-            id="spentArc"
-            class="ring-spent"
-            cx="100"
-            cy="100"
-            r="76">
-          </circle>
-
-        </svg>
-
-        <div class="ring-center">
-
-          <div class="balance" id="balance">
-            0
-          </div>
-
-          <div class="balance-label">
-            XP balance
-          </div>
-
-        </div>
-
-      </div>
-
+    <div class="modal-subtitle">
+      Record what happened. The XP adjusts automatically.
     </div>
 
+    <div class="modal-options">
 
-    <div class="energy-stats">
+      <button class="modal-option" onclick="setSalah('prayed')">
+        ✓ Prayed · +1 XP
+      </button>
 
-      <div class="energy-stat">
-        <b class="earned-text" id="earned">+0</b>
-        <span>earned from actions</span>
-      </div>
+      <button class="modal-option" onclick="setSalah('missed')">
+        Missed · −1 XP
+      </button>
 
-      <div class="energy-stat">
-        <b class="spent-text" id="spent">−0</b>
-        <span>spent on entertainment</span>
-      </div>
-
-    </div>
-
-
-    <div class="energy-stat full-stat">
-
-      <b class="penalty-text" id="penalty">
-        −0
-      </b>
-
-      <span>
-        penalties: missed salah, junk/late-night food,
-        unintended scrolling
-      </span>
-
-    </div>
-
-
-    <div class="progress-line">
-
-      <span>
-        All Awwal commitments
-      </span>
-
-      <span id="requiredPct">
-        0%
-      </span>
-
-    </div>
-
-    <div class="progress">
-      <i id="requiredBar" style="width:0%"></i>
-    </div>
-
-
-    <div>
-      <span class="pill" id="streak">
-        🔥 Streak: 0
-      </span>
-
-      <span class="pill">
-        Protected: 0
-      </span>
-    </div>
-
-
-    <div style="margin-top:12px">
-
-      <h2>🎬 Spend Energy</h2>
-
-      <div class="inline-form">
-
-        <input
-          id="entName"
-          placeholder="Netflix, Halo, Instagram…">
-
-        <select id="entMode">
-          <option value="intentional">
-            Intentional
-          </option>
-
-          <option value="unintentional">
-            Unintentional scrolling
-          </option>
-        </select>
-
-        <input
-          id="entMin"
-          type="number"
-          min="1"
-          placeholder="Min">
-
-        <button
-          class="primary"
-          id="addEnt">
-          Spend
-        </button>
-
-      </div>
-
-      <div id="entList"></div>
-
-    </div>
-
-  </section>
-
-
-  <!-- NUTRITION -->
-  <section class="utility-card">
-
-    <h2>🍽 Nutrition HUD</h2>
-
-    <div class="nutrition-grid">
-
-      <div class="nutri-stat">
-        <strong id="cal">0</strong>
-        <span>/ 2,000 kcal</span>
-      </div>
-
-      <div class="nutri-stat">
-        <strong id="protein">0g</strong>
-        <span>/ 160g protein</span>
-      </div>
-
-      <div class="nutri-stat">
-        <strong id="fat">0g</strong>
-        <span>/ 88g fat</span>
-      </div>
-
-      <div class="nutri-stat">
-        <strong id="carbs">0g</strong>
-        <span>/ 142g carbs</span>
-      </div>
-
-    </div>
-
-
-    <div class="progress-line">
-      <span>Calories</span>
-      <span id="calPct">0%</span>
-    </div>
-
-    <div class="progress">
-      <i id="calBar" style="width:0%"></i>
-    </div>
-
-
-    <div class="small" style="margin-top:8px">
-      Manual food logging. Each junk-food or late-night-food
-      event costs −0.5 XP.
-    </div>
-
-
-    <div class="food-grid">
-
-      <input id="foodName" placeholder="Food">
-
-      <input
-        id="foodCal"
-        type="number"
-        placeholder="kcal">
-
-      <input
-        id="foodPro"
-        type="number"
-        placeholder="P">
-
-      <input
-        id="foodFat"
-        type="number"
-        placeholder="F">
-
-    </div>
-
-
-    <div class="food-grid">
-
-      <input
-        id="foodCarb"
-        type="number"
-        placeholder="Carbs">
-
-      <div>
-        <label class="small">
-          <input id="foodJunk" type="checkbox">
-          junk
-        </label>
-
-        <label class="small">
-          <input id="foodLate" type="checkbox">
-          late-night
-        </label>
-      </div>
-
-      <button
-        class="primary"
-        id="addFood">
-        Add food
+      <button class="modal-option" onclick="setSalah('qadha')">
+        Qadha + Tawbah · −0.25 XP
       </button>
 
     </div>
 
-
-    <div id="foodList"></div>
-
-  </section>
-
-</div>
-
-
-<!-- CHART + STRATEGIST -->
-<div class="lower-grid">
-
-  <section class="chart-card">
-
-    <div class="chart-head">
-
-      <h2>📈 Your Trajectory</h2>
-
-      <select id="chartMode" class="chart-select">
-
-        <option value="consistency">
-          Awwal completion + 7-day average
-        </option>
-
-        <option value="energy">
-          XP earned vs spent
-        </option>
-
-        <option value="domains">
-          Deen / Business / Fitness
-        </option>
-
-      </select>
-
-    </div>
-
-    <div class="chart" id="chart"></div>
-
-    <div class="chart-note small" id="chartNote">
-      Close days to build your evidence history.
-    </div>
-
-  </section>
-
-
-  <section class="utility-card">
-
-    <h2>🔎 Mirror + Strategist</h2>
-
-    <div id="observations"></div>
-
-  </section>
-
-</div>
-
-
-<!-- REFLECTION -->
-
-<section class="utility-card" style="margin-top:12px">
-
-  <h2>📝 Daily Reflection</h2>
-
-  <div class="reflection">
-
-    <div>
-      <div class="small">What went well?</div>
-      <textarea
-        id="well"
-        placeholder="Capture the evidence…">
-      </textarea>
-    </div>
-
-    <div>
-      <div class="small">What got in the way?</div>
-      <textarea
-        id="way"
-        placeholder="What affected the day?">
-      </textarea>
-    </div>
-
-    <div>
-      <div class="small">What did I miss?</div>
-      <textarea
-        id="missed"
-        placeholder="Tasks, prayers, habits…">
-      </textarea>
-    </div>
-
-    <div>
-      <div class="small">What would I change tomorrow?</div>
-      <textarea
-        id="tomorrow"
-        placeholder="One adjustment…">
-      </textarea>
-    </div>
-
-  </div>
-
-
-  <div class="footer">
-
-    <span id="closeStatus" class="small">
-      Close the day when your record is final.
-    </span>
-
-    <button
-      class="primary"
-      id="closeDay">
-      Close Day &amp; Save
+    <button class="modal-close" onclick="closeModal()">
+      Cancel
     </button>
 
   </div>
-
-</section>
-
 </div>
-
 
 <script>
 
 /* =========================================================
-   DREAM SELF DASHBOARD
-   ========================================================= */
+   DATA
+========================================================= */
 
-const STORAGE_KEY = "dream-self-dashboard-v1";
+const STORAGE_KEY = "dream-self-dashboard-v5";
 
-let database =
-  JSON.parse(localStorage.getItem(STORAGE_KEY)) || {};
+const defaultState = {
+  date: todayKey(),
 
-let currentDate =
-  new Date().toISOString().split("T")[0];
+  salah: {
+    Fajr: null,
+    Dhuhr: null,
+    Asr: null,
+    Maghrib: null,
+    Isha: null
+  },
 
+  quran: {
+    juz: false,
+    memorizeSessions: 0,
+    revisionSessions: 0
+  },
+
+  business: {
+    reels: 0,
+    linkedin: false,
+    reachouts: false,
+    carousel: false
+  },
+
+  fitness: {
+    gym: false,
+    steps: 0,
+    nutritionDone: false
+  },
+
+  foods: [],
+  junkCount: 0,
+
+  reflection: {
+    well: "",
+    way: "",
+    tomorrow: ""
+  }
+};
+
+let state = loadState();
+let selectedSalah = null;
 
 /* =========================================================
-   DATA
-   ========================================================= */
+   DATE / STORAGE
+========================================================= */
 
-function blankDay() {
+function todayKey() {
+  const d = new Date();
 
-  return {
-
-    salah: {
-      Fajr:null,
-      Dhuhr:null,
-      Asr:null,
-      Maghrib:null,
-      Isha:null
-    },
-
-    juz:false,
-
-    memorizeMin:0,
-    revisionMin:0,
-
-    reels:0,
-    linkedin:false,
-    reachouts:false,
-    carousel:false,
-
-    gym:false,
-    steps:0,
-    nutritionDone:false,
-
-    foods:[],
-    entertainment:[],
-
-    custom: {
-      quran:[],
-      business:[],
-      fitness:[]
-    },
-
-    reasons:{},
-
-    reflection:{
-      well:"",
-      way:"",
-      missed:"",
-      tomorrow:""
-    },
-
-    closed:false
-  };
-
+  return new Intl.DateTimeFormat("en-CA", {
+    timeZone: "America/Toronto",
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit"
+  }).format(d);
 }
 
+function loadState() {
 
-function day() {
+  const saved = localStorage.getItem(STORAGE_KEY);
 
-  if (!database[currentDate]) {
-
-    database[currentDate] =
-      blankDay();
-
+  if (!saved) {
+    return structuredClone(defaultState);
   }
 
-  return database[currentDate];
+  try {
 
+    const parsed = JSON.parse(saved);
+
+    if (parsed.date !== todayKey()) {
+      return structuredClone(defaultState);
+    }
+
+    return {
+      ...structuredClone(defaultState),
+      ...parsed,
+      salah: {
+        ...defaultState.salah,
+        ...(parsed.salah || {})
+      },
+      quran: {
+        ...defaultState.quran,
+        ...(parsed.quran || {})
+      },
+      business: {
+        ...defaultState.business,
+        ...(parsed.business || {})
+      },
+      fitness: {
+        ...defaultState.fitness,
+        ...(parsed.fitness || {})
+      },
+      reflection: {
+        ...defaultState.reflection,
+        ...(parsed.reflection || {})
+      }
+    };
+
+  } catch {
+    return structuredClone(defaultState);
+  }
 }
-
 
 function save() {
-
-  localStorage.setItem(
-    STORAGE_KEY,
-    JSON.stringify(database)
-  );
-
+  state.date = todayKey();
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
 }
-
 
 /* =========================================================
    XP
-   ========================================================= */
+========================================================= */
 
-function calculateXP(x) {
+function salahXP() {
 
-  let earned = 0;
-  let spent = 0;
-  let penalty = 0;
+  let xp = 0;
 
+  Object.values(state.salah).forEach(status => {
 
-  /* Salah */
-
-  Object.values(x.salah).forEach(value => {
-
-    if (value === "done")
-      earned += 1;
-
-    if (value === "miss")
-      penalty += 1;
-
-    if (value === "corrected")
-      penalty += .25;
+    if (status === "prayed") xp += 1;
+    if (status === "missed") xp -= 1;
+    if (status === "qadha") xp -= 0.25;
 
   });
 
-
-  /* Qur'an */
-
-  if (x.juz)
-    earned += 1;
-
-  earned +=
-    Math.floor(x.memorizeMin / 27);
-
-  earned +=
-    Math.floor(x.revisionMin / 27);
-
-
-  /* Business */
-
-  earned += x.reels * .5;
-
-  if (x.linkedin)
-    earned += .5;
-
-  if (x.reachouts)
-    earned += .25;
-
-  if (x.carousel)
-    earned += .25;
-
-
-  /* Fitness */
-
-  if (x.gym)
-    earned += 1;
-
-  if (x.steps >= 5000)
-    earned += .5;
-
-
-  /* Mazeed */
-
-  ["quran","business","fitness"].forEach(domain => {
-
-    x.custom[domain].forEach(task => {
-
-      earned += Number(task.xp);
-
-    });
-
-  });
-
-
-  /* Entertainment */
-
-  x.entertainment.forEach(item => {
-
-    spent += item.cost;
-
-  });
-
-
-  /* Food */
-
-  x.foods.forEach(food => {
-
-    if (food.junk)
-      penalty += .5;
-
-    if (food.late)
-      penalty += .5;
-
-  });
-
-
-  return {
-
-    earned,
-    spent,
-    penalty,
-
-    balance:
-      earned - spent - penalty
-
-  };
-
+  return xp;
 }
 
+function quranXP() {
+
+  return (
+    (state.quran.juz ? 1 : 0) +
+    state.quran.memorizeSessions * 1 +
+    state.quran.revisionSessions * 1
+  );
+}
+
+function businessXP() {
+
+  return (
+    state.business.reels * 0.5 +
+    (state.business.linkedin ? 0.5 : 0) +
+    (state.business.reachouts ? 0.25 : 0) +
+    (state.business.carousel ? 0.25 : 0)
+  );
+}
+
+function fitnessXP() {
+
+  return (
+    (state.fitness.gym ? 1 : 0) +
+    (state.fitness.steps >= 5000 ? 0.5 : 0)
+  );
+}
+
+function junkXP() {
+  return state.junkCount * -0.5;
+}
+
+function totalXP() {
+
+  return (
+    salahXP() +
+    quranXP() +
+    businessXP() +
+    fitnessXP() +
+    junkXP()
+  );
+}
+
+function earnedXP() {
+
+  return (
+    Object.values(state.salah)
+      .filter(x => x === "prayed")
+      .length +
+
+    (state.quran.juz ? 1 : 0) +
+    state.quran.memorizeSessions +
+    state.quran.revisionSessions +
+
+    state.business.reels * 0.5 +
+    (state.business.linkedin ? 0.5 : 0) +
+    (state.business.reachouts ? 0.25 : 0) +
+    (state.business.carousel ? 0.25 : 0) +
+
+    (state.fitness.gym ? 1 : 0) +
+    (state.fitness.steps >= 5000 ? 0.5 : 0)
+  );
+}
+
+function spentXP() {
+
+  return (
+    Object.values(state.salah)
+      .filter(x => x === "missed")
+      .length +
+
+    Object.values(state.salah)
+      .filter(x => x === "qadha")
+      .length * 0.25 +
+
+    state.junkCount * 0.5
+  );
+}
+
+/* =========================================================
+   PROGRESSION
+========================================================= */
+
+/*
+  DOMAIN RULE:
+
+  Qur'an:
+  Awwal = 1 Juz
+  Thani = 27 min memorization
+  Mazeed = 27 min revision, unlimited
+
+  Business:
+  Awwal = 4 reels
+  Thani = LinkedIn + Reachouts + Carousel
+  Mazeed = unlimited custom
+
+  Fitness:
+  Awwal = Gym OR 5,000 steps
+  Thani = Nutrition
+*/
+
+function quranAwwalComplete() {
+  return state.quran.juz;
+}
+
+function quranThaniUnlocked() {
+  return quranAwwalComplete();
+}
+
+function quranThaniComplete() {
+  return state.quran.memorizeSessions >= 1;
+}
+
+function quranMazeedUnlocked() {
+  return quranThaniComplete();
+}
+
+function businessAwwalComplete() {
+  return state.business.reels >= 4;
+}
+
+function businessThaniUnlocked() {
+  return businessAwwalComplete();
+}
+
+function businessThaniComplete() {
+
+  return (
+    state.business.linkedin &&
+    state.business.reachouts &&
+    state.business.carousel
+  );
+}
+
+function businessMazeedUnlocked() {
+  return businessThaniComplete();
+}
+
+function fitnessAwwalComplete() {
+
+  return (
+    state.fitness.gym ||
+    state.fitness.steps >= 5000
+  );
+}
+
+function fitnessThaniUnlocked() {
+  return fitnessAwwalComplete();
+}
+
+function fitnessThaniComplete() {
+  return state.fitness.nutritionDone;
+}
+
+function requiredDayComplete() {
+
+  const salahComplete =
+    Object.values(state.salah)
+      .every(x => x === "prayed" || x === "qadha");
+
+  return (
+    salahComplete &&
+    quranAwwalComplete() &&
+    businessAwwalComplete() &&
+    fitnessAwwalComplete()
+  );
+}
+
+/* =========================================================
+   HELPERS
+========================================================= */
+
+function xpText(value) {
+
+  if (Number.isInteger(value)) {
+    return value + " XP";
+  }
+
+  return value.toFixed(2).replace(/0$/, "") + " XP";
+}
+
+function checkButton(done, onclick) {
+
+  return `
+    <button
+      class="check ${done ? "done" : ""}"
+      onclick="${onclick}"
+      aria-label="Toggle task"
+    >
+      ${done ? "✓" : ""}
+    </button>
+  `;
+}
 
 /* =========================================================
    SALAH
-   ========================================================= */
-
-const salahNames = [
-  "Fajr",
-  "Dhuhr",
-  "Asr",
-  "Maghrib",
-  "Isha"
-];
-
+========================================================= */
 
 function renderSalah() {
 
-  const x = day();
+  const names = ["Fajr", "Dhuhr", "Asr", "Maghrib", "Isha"];
 
-  const grid =
-    document.getElementById("salahGrid");
+  document.getElementById("salahGrid").innerHTML =
+    names.map(name => {
 
-  grid.innerHTML = "";
+      const status = state.salah[name];
 
-  let completed = 0;
+      let label = "Tap";
 
+      if (status === "prayed") label = "Prayed";
+      if (status === "missed") label = "Missed";
+      if (status === "qadha") label = "Qadha";
 
-  salahNames.forEach(name => {
+      return `
+        <button
+          class="salah ${status || ""}"
+          onclick="openSalah('${name}')"
+        >
+          <div class="salah-name">${name}</div>
+          <div class="salah-status">${label}</div>
+        </button>
+      `;
 
-    const item =
-      document.createElement("div");
-
-    item.className = "salah-item";
-
-
-    const button =
-      document.createElement("button");
-
-    button.className =
-      "salah-btn " + (x.salah[name] || "");
-
-    button.textContent =
-      name +
-      (
-        x.salah[name] === "done"
-          ? " ✓"
-          : x.salah[name] === "miss"
-          ? " • missed"
-          : x.salah[name] === "corrected"
-          ? " • qadha ✓"
-          : ""
-      );
-
-
-    button.onclick = () => {
-
-      const existing =
-        item.querySelector(".salah-options");
-
-      if (existing)
-        existing.remove();
-
-      const options =
-        document.createElement("div");
-
-      options.className =
-        "salah-options";
-
-
-      [
-        ["Prayed","done"],
-        ["Missed","miss"],
-        ["Qadha + Tawbah","corrected"]
-      ].forEach(([label,value]) => {
-
-        const option =
-          document.createElement("button");
-
-        option.textContent = label;
-
-        option.onclick = () => {
-
-          x.salah[name] = value;
-
-          save();
-
-          render();
-
-        };
-
-        options.appendChild(option);
-
-      });
-
-
-      item.appendChild(options);
-
-      item.classList.toggle("open");
-
-    };
-
-
-    item.appendChild(button);
-
-    grid.appendChild(item);
-
-
-    if (
-      x.salah[name] === "done" ||
-      x.salah[name] === "corrected"
-    ) {
-
-      completed++;
-
-    }
-
-  });
-
-
-  document.getElementById("salahCount")
-    .textContent =
-      `${completed} / 5`;
-
+    }).join("");
 }
 
+function openSalah(name) {
 
-/* =========================================================
-   TASK COMPONENT
-   ========================================================= */
+  selectedSalah = name;
 
-function task({
-  name,
-  meta,
-  points,
-  done,
-  toggle,
-  reasonId
-}) {
+  document.getElementById("modalTitle").textContent = name;
 
-  const row =
-    document.createElement("div");
-
-  row.className = "task";
-
-
-  const check =
-    document.createElement("button");
-
-  check.className =
-    "check " + (done ? "done" : "");
-
-  check.textContent =
-    done ? "✓" : "";
-
-  check.onclick = toggle;
-
-
-  const copy =
-    document.createElement("div");
-
-  copy.innerHTML = `
-    <div class="task-name">
-      ${name}
-    </div>
-
-    <div class="task-meta">
-      ${meta || ""}
-    </div>
-  `;
-
-
-  const pointsEl =
-    document.createElement("div");
-
-  pointsEl.className = "points";
-
-  pointsEl.textContent =
-    points !== ""
-      ? "+" + points + " XP"
-      : "";
-
-
-  row.append(
-    check,
-    copy,
-    pointsEl
-  );
-
-
-  if (reasonId) {
-
-    const select =
-      document.createElement("select");
-
-    select.className = "reason";
-
-    select.innerHTML = `
-      <option value="">
-        Why not completed?
-      </option>
-
-      <option>Ran out of time</option>
-      <option>Tired</option>
-      <option>Distracted</option>
-      <option>Family / social obligation</option>
-      <option>Unexpected event</option>
-      <option>Task was unclear</option>
-      <option>Task was too difficult</option>
-      <option>Low energy</option>
-      <option>Didn't feel like it</option>
-      <option>Other</option>
-    `;
-
-    select.value =
-      day().reasons[reasonId] || "";
-
-    select.onchange = () => {
-
-      day().reasons[reasonId] =
-        select.value;
-
-      save();
-
-    };
-
-    row.appendChild(select);
-
-  }
-
-
-  return row;
-
+  document
+    .getElementById("salahModal")
+    .classList.add("show");
 }
 
+function closeModal() {
+
+  selectedSalah = null;
+
+  document
+    .getElementById("salahModal")
+    .classList.remove("show");
+}
+
+function setSalah(status) {
+
+  if (!selectedSalah) return;
+
+  state.salah[selectedSalah] = status;
+
+  closeModal();
+
+  save();
+  renderAll();
+}
 
 /* =========================================================
    QURAN
-   ========================================================= */
+========================================================= */
 
 function renderQuran() {
 
-  const x = day();
+  const q = state.quran;
 
-  const a = document.getElementById("qA");
-  const t = document.getElementById("qT");
-  const m = document.getElementById("qM");
+  document.getElementById("quranCard").innerHTML = `
 
-  a.innerHTML = "";
-  t.innerHTML = "";
-  m.innerHTML = "";
+    <div class="domain-header">
 
+      <div>
+        <div class="section-label">Qur'an</div>
+        <div class="card-title">Awwal - Qur'an</div>
 
-  /* AWWAL */
+        <div class="subtitle">
+          Become the Hafidh of the Qur'an and rise closer to Allah and His Messenger (S).
+        </div>
+      </div>
 
-  a.appendChild(
-    task({
+      <div class="stage-pill">
+        ${quranMazeedUnlocked() ? "MAZEED" :
+          quranThaniComplete() ? "THANI" : "AWWAL"}
+      </div>
 
-      name:"Read 1 Juz",
+    </div>
 
-      meta:"Complete this to unlock Thani.",
+    <div class="task-list">
 
-      points:"1",
+      <div class="task ${q.juz ? "completed" : ""}">
 
-      done:x.juz,
+        <div class="task-row">
 
-      toggle:() => {
+          ${checkButton(q.juz, "toggleQuranJuz()")}
 
-        x.juz = !x.juz;
+          <div class="task-info">
 
-        save();
-        render();
+            <div class="task-name">
+              Read 1 Juz
+            </div>
 
-      },
+            <div class="task-xp">
+              +1 XP
+            </div>
 
-      reasonId:"qJuz"
+          </div>
 
-    })
-  );
+        </div>
 
+        ${
+          q.juz
+          ? `
+            <div class="add-area">
 
-  const qAStatus =
-    document.getElementById("qAStatus");
+              <button class="add-button"
+                      onclick="addQuranJuz()">
+                Add
+              </button>
 
+              <span style="font-size:9px;color:#777;">
+                1 session · +1 XP
+              </span>
 
-  qAStatus.textContent =
-    x.juz ? "COMPLETE" : "OPEN";
+            </div>
+          `
+          : ""
+        }
 
-  qAStatus.className =
-    "status " +
-    (x.juz ? "complete" : "open");
+      </div>
 
+      ${
+        quranThaniUnlocked()
+        ? `
 
-  /* THANI */
+          <div class="next-stage">
 
-  if (!x.juz) {
+            <div class="next-stage-title">
+              Thani
+            </div>
 
-    t.innerHTML =
-      `<div class="lockbox">
-        Read 1 Juz to unlock Thani.
-      </div>`;
+            <div class="task">
 
-    m.innerHTML =
-      `<div class="lockbox">
-        Complete Thani to unlock Mazeed.
-      </div>`;
+              <div class="task-row">
 
-    return;
+                ${checkButton(
+                  q.memorizeSessions > 0,
+                  "toggleMemorizeTask()"
+                )}
 
+                <div class="task-info">
+
+                  <div class="task-name">
+                    Memorize · 27 minutes
+                  </div>
+
+                  <div class="task-xp">
+                    +1 XP per 27-minute session
+                  </div>
+
+                </div>
+
+              </div>
+
+              ${
+                q.memorizeSessions > 0
+                ? `
+                  <div class="add-area">
+
+                    <div class="session-control">
+
+                      <button onclick="changeMemorize(-1)">
+                        −
+                      </button>
+
+                      <div class="session-count">
+                        ${q.memorizeSessions}
+                      </div>
+
+                      <button onclick="changeMemorize(1)">
+                        +
+                      </button>
+
+                    </div>
+
+                    <button
+                      class="add-button"
+                      onclick="addMemorize()"
+                    >
+                      Add
+                    </button>
+
+                    <span style="font-size:9px;color:#777;">
+                      ${xpText(q.memorizeSessions)} total
+                    </span>
+
+                  </div>
+                `
+                : ""
+              }
+
+            </div>
+
+          </div>
+
+        `
+        : `
+          <div class="unlock-message">
+            Complete Awwal to unlock Thani.
+          </div>
+        `
+      }
+
+      ${
+        quranMazeedUnlocked()
+        ? `
+
+          <div class="next-stage">
+
+            <div class="next-stage-title">
+              Mazeed · Unlimited
+            </div>
+
+            <div class="task">
+
+              <div class="task-row">
+
+                <div class="task-info">
+
+                  <div class="task-name">
+                    New Revision · 27 minutes
+                  </div>
+
+                  <div class="task-xp">
+                    +1 XP per 27-minute session · No limit
+                  </div>
+
+                </div>
+
+              </div>
+
+              <div class="add-area">
+
+                <div class="session-control">
+
+                  <button onclick="changeRevision(-1)">
+                    −
+                  </button>
+
+                  <div class="session-count">
+                    ${q.revisionSessions}
+                  </div>
+
+                  <button onclick="changeRevision(1)">
+                    +
+                  </button>
+
+                </div>
+
+                <button
+                  class="add-button"
+                  onclick="addRevision()"
+                >
+                  Add
+                </button>
+
+                <span style="font-size:9px;color:#777;">
+                  ${xpText(q.revisionSessions)} total
+                </span>
+
+              </div>
+
+            </div>
+
+          </div>
+
+        `
+        : ""
+      }
+
+    </div>
+  `;
+}
+
+function toggleQuranJuz() {
+
+  state.quran.juz = !state.quran.juz;
+
+  /*
+    If the task is made incomplete, its associated XP
+    disappears automatically because XP is derived from state.
+  */
+
+  save();
+  renderAll();
+}
+
+function addQuranJuz() {
+
+  state.quran.juz = true;
+
+  save();
+  renderAll();
+}
+
+function toggleMemorizeTask() {
+
+  if (state.quran.memorizeSessions > 0) {
+    state.quran.memorizeSessions = 0;
+  } else {
+    state.quran.memorizeSessions = 1;
   }
 
+  save();
+  renderAll();
+}
 
-  t.appendChild(
-    task({
+function addMemorize() {
 
-      name:"Memorize",
+  state.quran.memorizeSessions++;
 
-      meta:"27 minutes = 1 XP.",
+  save();
+  renderAll();
+}
 
-      points:
-        Math.floor(x.memorizeMin / 27),
+function changeMemorize(amount) {
 
-      done:
-        x.memorizeMin >= 27,
-
-      toggle:() => {
-
-        x.memorizeMin += 27;
-
-        save();
-        render();
-
-      },
-
-      reasonId:"qMem"
-
-    })
-  );
-
-
-  const qTStatus =
-    document.getElementById("qTStatus");
-
-  qTStatus.textContent =
-    x.memorizeMin >= 27
-      ? "COMPLETE"
-      : "OPEN";
-
-  qTStatus.className =
-    "status " +
-    (
-      x.memorizeMin >= 27
-        ? "complete"
-        : "open"
+  state.quran.memorizeSessions =
+    Math.max(
+      0,
+      state.quran.memorizeSessions + amount
     );
 
-
-  /* MAZEED */
-
-  if (x.memorizeMin < 27) {
-
-    m.innerHTML =
-      `<div class="lockbox">
-        Complete Thani to unlock Mazeed.
-      </div>`;
-
-    return;
-
-  }
-
-
-  m.appendChild(
-    task({
-
-      name:"New revision",
-
-      meta:"Every 27 minutes = 1 XP • unlimited.",
-
-      points:
-        Math.floor(x.revisionMin / 27),
-
-      done:
-        x.revisionMin >= 27,
-
-      toggle:() => {
-
-        x.revisionMin += 27;
-
-        save();
-        render();
-
-      },
-
-      reasonId:"qRevision"
-
-    })
-  );
-
-
-  addCustomMazeed(
-    m,
-    "quran"
-  );
-
-
-  document.getElementById("qMStatus")
-    .textContent = "UNLIMITED";
-
-  document.getElementById("qMStatus")
-    .className = "status open";
-
+  save();
+  renderAll();
 }
 
+function addRevision() {
 
-/* =========================================================
-   CUSTOM MAZEED
-   ========================================================= */
+  state.quran.revisionSessions++;
 
-function addCustomMazeed(
-  container,
-  domain
-) {
-
-  const form =
-    document.createElement("div");
-
-  form.className =
-    "inline-form";
-
-
-  const input =
-    document.createElement("input");
-
-  input.placeholder =
-    "Mazeed task";
-
-
-  const xp =
-    document.createElement("select");
-
-  xp.innerHTML = `
-    <option value=".25">0.25 XP</option>
-    <option value=".5">0.5 XP</option>
-    <option value="1">1 XP</option>
-  `;
-
-
-  const button =
-    document.createElement("button");
-
-  button.className = "primary";
-
-  button.textContent = "Add";
-
-
-  button.onclick = () => {
-
-    if (!input.value.trim())
-      return;
-
-
-    day().custom[domain].push({
-
-      name:input.value.trim(),
-
-      xp:Number(xp.value)
-
-    });
-
-
-    save();
-
-    render();
-
-  };
-
-
-  form.append(
-    input,
-    xp,
-    button
-  );
-
-
-  container.appendChild(form);
-
-
-  day().custom[domain].forEach(item => {
-
-    const row =
-      document.createElement("div");
-
-    row.className = "log-row";
-
-    row.innerHTML = `
-      <span>${item.name}</span>
-      <b class="earned-text">
-        +${item.xp} XP
-      </b>
-    `;
-
-    container.appendChild(row);
-
-  });
-
+  save();
+  renderAll();
 }
 
+function changeRevision(amount) {
+
+  state.quran.revisionSessions =
+    Math.max(
+      0,
+      state.quran.revisionSessions + amount
+    );
+
+  save();
+  renderAll();
+}
 
 /* =========================================================
    BUSINESS
-   ========================================================= */
+========================================================= */
 
 function renderBusiness() {
 
-  const x = day();
+  const b = state.business;
 
-  const a =
-    document.getElementById("bA");
+  document.getElementById("businessCard").innerHTML = `
 
-  const t =
-    document.getElementById("bT");
+    <div class="domain-header">
 
-  const m =
-    document.getElementById("bM");
+      <div>
 
-  a.innerHTML = "";
-  t.innerHTML = "";
-  m.innerHTML = "";
+        <div class="section-label">Business</div>
 
+        <div class="card-title">
+          Awwal - Business
+        </div>
 
-  const complete =
-    x.reels >= 4;
+        <div class="subtitle">
+          Build your business that pleases Allah & serves the Ummah of the Beloved (S)
+        </div>
 
+      </div>
 
-  a.appendChild(
-    task({
+      <div class="stage-pill">
+        ${businessMazeedUnlocked() ? "MAZEED" :
+          businessThaniComplete() ? "THANI" : "AWWAL"}
+      </div>
 
-      name:"Post 4 Reels",
+    </div>
 
-      meta:
-        `${x.reels} / 4 • 0.5 XP each`,
+    <div class="task-list">
 
-      points:
-        (x.reels * .5).toFixed(2),
+      <div class="task ${b.reels >= 4 ? "completed" : ""}">
 
-      done:complete,
+        <div class="task-row">
 
-      toggle:() => {
+          ${checkButton(
+            b.reels >= 4,
+            "toggleBusinessReels()"
+          )}
 
-        x.reels++;
+          <div class="task-info">
 
-        save();
-        render();
+            <div class="task-name">
+              Post 4 Reels
+            </div>
 
-      },
+            <div class="task-xp">
+              +0.5 XP per Reel · 4 Reels = +2 XP
+            </div>
 
-      reasonId:"businessReels"
+          </div>
 
-    })
-  );
+        </div>
 
+        <div class="counter-box">
 
-  if (!complete) {
+          <div>
+            <div style="font-size:9px;color:#777;">
+              Reels posted
+            </div>
 
-    t.innerHTML =
-      `<div class="lockbox">
-        Post all 4 Reels to unlock Thani.
-      </div>`;
+            <div class="counter-number">
+              ${b.reels} / 4
+            </div>
+          </div>
 
-    m.innerHTML =
-      `<div class="lockbox">
-        Complete Thani to unlock Mazeed.
-      </div>`;
+          <div class="counter-controls">
 
-    return;
+            <button onclick="changeReels(-1)">
+              −
+            </button>
 
-  }
+            <button onclick="changeReels(1)">
+              +
+            </button>
 
+          </div>
 
-  t.append(
-    task({
-      name:"LinkedIn Post",
-      meta:"Thani • 0.5 XP",
-      points:".5",
-      done:x.linkedin,
-      toggle:() => {
-        x.linkedin=!x.linkedin;
-        save();
-        render();
-      },
-      reasonId:"linkedin"
-    }),
+        </div>
 
-    task({
-      name:"Reach out to 5 people",
-      meta:"Thani • 0.25 XP",
-      points:".25",
-      done:x.reachouts,
-      toggle:() => {
-        x.reachouts=!x.reachouts;
-        save();
-        render();
-      },
-      reasonId:"reachouts"
-    }),
+      </div>
 
-    task({
-      name:"Post Carousel",
-      meta:"Thani • 0.25 XP",
-      points:".25",
-      done:x.carousel,
-      toggle:() => {
-        x.carousel=!x.carousel;
-        save();
-        render();
-      },
-      reasonId:"carousel"
-    })
-  );
+      ${
+        businessThaniUnlocked()
+        ? `
 
+          <div class="next-stage">
 
-  const taniComplete =
-    x.linkedin &&
-    x.reachouts &&
-    x.carousel;
+            <div class="next-stage-title">
+              Thani
+            </div>
 
+            ${businessBinaryTask(
+              "LinkedIn Post",
+              "+0.5 XP",
+              b.linkedin,
+              "toggleBusiness('linkedin')"
+            )}
 
-  if (!taniComplete) {
+            ${businessBinaryTask(
+              "Reach out to 5 people",
+              "+0.25 XP",
+              b.reachouts,
+              "toggleBusiness('reachouts')"
+            )}
 
-    m.innerHTML =
-      `<div class="lockbox">
-        Complete all Thani tasks to unlock Mazeed.
-      </div>`;
+            ${businessBinaryTask(
+              "Post Carousel",
+              "+0.25 XP",
+              b.carousel,
+              "toggleBusiness('carousel')"
+            )}
 
-    return;
+          </div>
 
-  }
+        `
+        : `
+          <div class="unlock-message">
+            Complete 4 Reels to unlock Thani.
+          </div>
+        `
+      }
 
+      ${
+        businessMazeedUnlocked()
+        ? `
+          <div class="next-stage">
 
-  addCustomMazeed(
-    m,
-    "business"
-  );
+            <div class="next-stage-title">
+              Mazeed · Unlimited
+            </div>
 
+            <div class="subtitle">
+              Open space for whatever moves the business forward today.
+            </div>
+
+            <div class="custom-form">
+
+              <input
+                id="customBusiness"
+                placeholder="What did you work on?"
+              >
+
+              <button onclick="addCustomBusiness()">
+                Add
+              </button>
+
+            </div>
+
+          </div>
+        `
+        : ""
+      }
+
+    </div>
+  `;
 }
 
+function businessBinaryTask(
+  name,
+  xp,
+  done,
+  onclick
+) {
+
+  return `
+
+    <div class="task ${done ? "completed" : ""}">
+
+      <div class="task-row">
+
+        ${checkButton(done, onclick)}
+
+        <div class="task-info">
+
+          <div class="task-name">
+            ${name}
+          </div>
+
+          <div class="task-xp">
+            ${xp}
+          </div>
+
+        </div>
+
+      </div>
+
+      ${
+        done
+        ? `
+          <div class="add-area">
+
+            <button
+              class="add-button"
+              onclick="${onclick}"
+            >
+              Add
+            </button>
+
+          </div>
+        `
+        : ""
+      }
+
+    </div>
+  `;
+}
+
+function changeReels(amount) {
+
+  state.business.reels =
+    Math.max(
+      0,
+      Math.min(4, state.business.reels + amount)
+    );
+
+  save();
+  renderAll();
+}
+
+function toggleBusinessReels() {
+
+  /*
+    Tapping the completed checkbox makes the task incomplete.
+    We remove all four reels because the task's completed
+    state is based on the actual reel count.
+  */
+
+  if (state.business.reels >= 4) {
+    state.business.reels = 0;
+  } else {
+    state.business.reels = 4;
+  }
+
+  save();
+  renderAll();
+}
+
+function toggleBusiness(key) {
+
+  state.business[key] = !state.business[key];
+
+  save();
+  renderAll();
+}
+
+function addCustomBusiness() {
+
+  const input =
+    document.getElementById("customBusiness");
+
+  if (!input || !input.value.trim()) return;
+
+  alert(
+    "Mazeed activity recorded: " +
+    input.value.trim()
+  );
+
+  input.value = "";
+}
 
 /* =========================================================
    FITNESS
-   ========================================================= */
+========================================================= */
 
 function renderFitness() {
 
-  const x = day();
+  const f = state.fitness;
 
-  const a =
-    document.getElementById("fA");
+  const awwalComplete =
+    fitnessAwwalComplete();
 
-  const t =
-    document.getElementById("fT");
+  document.getElementById("fitnessCard").innerHTML = `
 
-  const m =
-    document.getElementById("fM");
+    <div class="domain-header">
 
-  a.innerHTML = "";
-  t.innerHTML = "";
-  m.innerHTML = "";
+      <div>
 
+        <div class="section-label">Fitness</div>
 
-  a.appendChild(
-    task({
+        <div class="card-title">
+          Awwal - Fitness
+        </div>
 
-      name:"Go to the Gym",
+        <div class="subtitle">
+          The Prophet (S) said a strong believer is better than a weak believer
+        </div>
 
-      meta:
-        "Awwal • showing up is the input.",
+      </div>
 
-      points:"1",
+      <div class="stage-pill">
+        ${fitnessThaniComplete() ? "THANI" : "AWWAL"}
+      </div>
 
-      done:x.gym,
+    </div>
 
-      toggle:() => {
+    <div class="task-list">
 
-        x.gym=!x.gym;
+      <div class="task ${f.gym ? "completed" : ""}">
 
-        save();
-        render();
+        <div class="task-row">
 
-      },
+          ${checkButton(
+            f.gym,
+            "toggleGym()"
+          )}
 
-      reasonId:"gym"
+          <div class="task-info">
 
-    })
-  );
+            <div class="task-name">
+              Go to the Gym
+            </div>
 
+            <div class="task-xp">
+              +1 XP
+            </div>
 
-  if (!x.gym) {
+          </div>
 
-    t.innerHTML =
-      `<div class="lockbox">
-        Go to the gym to unlock Thani.
-      </div>`;
+        </div>
 
-    m.innerHTML =
-      `<div class="lockbox">
-        Complete Thani to unlock Mazeed.
-      </div>`;
+        ${
+          f.gym
+          ? `
+            <div class="add-area">
 
-    return;
+              <button
+                class="add-button"
+                onclick="toggleGym()"
+              >
+                Add
+              </button>
 
-  }
+              <span style="font-size:9px;color:#777;">
+                +1 XP
+              </span>
 
+            </div>
+          `
+          : ""
+        }
 
-  t.append(
+      </div>
 
-    task({
+      <div class="task ${f.steps >= 5000 ? "completed" : ""}">
 
-      name:"Walk 5,000 steps",
+        <div class="task-row">
 
-      meta:
-        `${x.steps} / 5,000 • 0.5 XP`,
+          ${checkButton(
+            f.steps >= 5000,
+            "toggleSteps()"
+          )}
 
-      points:".5",
+          <div class="task-info">
 
-      done:x.steps >= 5000,
+            <div class="task-name">
+              Walk 5,000 Steps
+            </div>
 
-      toggle:() => {
+            <div class="task-xp">
+              +0.5 XP
+            </div>
 
-        x.steps = 5000;
+          </div>
 
-        save();
-        render();
+        </div>
 
-      },
+        <div class="counter-box">
 
-      reasonId:"steps"
+          <div>
 
-    }),
+            <div style="font-size:9px;color:#777;">
+              Steps
+            </div>
 
+            <div class="counter-number">
+              ${f.steps.toLocaleString()} / 5,000
+            </div>
 
-    task({
+          </div>
 
-      name:"Nutritional goals",
+          <div class="counter-controls">
 
-      meta:
-        "Review Nutrition HUD and mark complete.",
+            <button onclick="changeSteps(-500)">
+              −
+            </button>
 
-      points:"",
+            <button onclick="changeSteps(500)">
+              +
+            </button>
 
-      done:x.nutritionDone,
+          </div>
 
-      toggle:() => {
+        </div>
 
-        x.nutritionDone =
-          !x.nutritionDone;
+      </div>
 
-        save();
-        render();
+      ${
+        fitnessThaniUnlocked()
+        ? `
 
-      },
+          <div class="next-stage">
 
-      reasonId:"nutrition"
+            <div class="next-stage-title">
+              Thani
+            </div>
 
-    })
+            <div class="task ${f.nutritionDone ? "completed" : ""}">
 
-  );
+              <div class="task-row">
 
+                ${checkButton(
+                  f.nutritionDone,
+                  "toggleNutrition()"
+                )}
 
-  const complete =
-    x.steps >= 5000 &&
-    x.nutritionDone;
+                <div class="task-info">
 
+                  <div class="task-name">
+                    Hit nutritional goals
+                  </div>
 
-  if (!complete) {
+                  <div class="task-xp">
+                    Track your nutrition consistently
+                  </div>
 
-    m.innerHTML =
-      `<div class="lockbox">
-        Complete all Thani tasks to unlock Mazeed.
-      </div>`;
+                </div>
 
-    return;
+              </div>
 
-  }
+            </div>
 
+          </div>
 
-  addCustomMazeed(
-    m,
-    "fitness"
-  );
+        `
+        : `
+          <div class="unlock-message">
+            Complete either Gym or 5,000 Steps to unlock Thani.
+          </div>
+        `
+      }
 
+    </div>
+  `;
 }
 
+function toggleGym() {
 
-/* =========================================================
-   ENERGY
-   ========================================================= */
+  state.fitness.gym =
+    !state.fitness.gym;
 
-function renderEnergy() {
+  save();
+  renderAll();
+}
 
-  const x = day();
+function toggleSteps() {
 
-  const xp =
-    calculateXP(x);
+  if (state.fitness.steps >= 5000) {
+    state.fitness.steps = 0;
+  } else {
+    state.fitness.steps = 5000;
+  }
 
+  save();
+  renderAll();
+}
 
-  document.getElementById("earned")
-    .textContent =
-      "+" + xp.earned.toFixed(2);
+function changeSteps(amount) {
 
-  document.getElementById("spent")
-    .textContent =
-      "−" + xp.spent.toFixed(2);
-
-  document.getElementById("penalty")
-    .textContent =
-      "−" + xp.penalty.toFixed(2);
-
-  document.getElementById("balance")
-    .textContent =
-      xp.balance.toFixed(2);
-
-
-  const total =
+  state.fitness.steps =
     Math.max(
-      .001,
-      xp.earned + xp.spent
+      0,
+      Math.min(
+        5000,
+        state.fitness.steps + amount
+      )
     );
 
-
-  const circumference =
-    2 * Math.PI * 76;
-
-
-  const earnedLength =
-    circumference *
-    (xp.earned / total);
-
-
-  const spentLength =
-    circumference *
-    (xp.spent / total);
-
-
-  const earnedArc =
-    document.getElementById("earnedArc");
-
-  const spentArc =
-    document.getElementById("spentArc");
-
-
-  earnedArc.style.strokeDasharray =
-    `${earnedLength} ${circumference}`;
-
-  spentArc.style.strokeDasharray =
-    `${spentLength} ${circumference}`;
-
-  spentArc.style.strokeDashoffset =
-    -earnedLength;
-
-
-  let progress = 0;
-
-
-  const salahComplete =
-    Object.values(x.salah)
-      .every(v =>
-        v === "done" ||
-        v === "corrected"
-      );
-
-
-  if (salahComplete)
-    progress += 25;
-
-  if (x.juz)
-    progress += 25;
-
-  progress +=
-    Math.min(x.reels,4) / 4 * 25;
-
-  if (x.gym)
-    progress += 25;
-
-
-  progress =
-    Math.round(progress);
-
-
-  document.getElementById("requiredPct")
-    .textContent =
-      progress + "%";
-
-  document.getElementById("requiredBar")
-    .style.width =
-      progress + "%";
-
-
-  document.getElementById("streak")
-    .textContent =
-      "🔥 Streak: " +
-      calculateStreak();
-
+  save();
+  renderAll();
 }
 
+function toggleNutrition() {
 
-/* =========================================================
-   ENTERTAINMENT
-   ========================================================= */
+  state.fitness.nutritionDone =
+    !state.fitness.nutritionDone;
 
-document
-  .getElementById("addEnt")
-  .onclick = () => {
-
-    const x = day();
-
-    const name =
-      document
-        .getElementById("entName")
-        .value.trim() ||
-      "Entertainment";
-
-
-    const mode =
-      document
-        .getElementById("entMode")
-        .value;
-
-
-    const minutes =
-      Number(
-        document
-          .getElementById("entMin")
-          .value
-      );
-
-
-    if (!minutes)
-      return;
-
-
-    const multiplier =
-      mode === "unintentional"
-        ? 1.5
-        : 1;
-
-
-    x.entertainment.push({
-
-      name,
-
-      minutes,
-
-      cost:
-        minutes / 30 *
-        multiplier
-
-    });
-
-
-    document.getElementById("entName")
-      .value = "";
-
-    document.getElementById("entMin")
-      .value = "";
-
-
-    save();
-    render();
-
-  };
-
-
-function renderEntertainment() {
-
-  const box =
-    document.getElementById("entList");
-
-  box.innerHTML = "";
-
-
-  day().entertainment.forEach(item => {
-
-    const row =
-      document.createElement("div");
-
-    row.className = "log-row";
-
-    row.innerHTML = `
-      <span>
-        ${item.name}
-        • ${item.minutes} min
-      </span>
-
-      <b class="spent-text">
-        −${item.cost.toFixed(2)} XP
-      </b>
-    `;
-
-    box.appendChild(row);
-
-  });
-
+  save();
+  renderAll();
 }
-
 
 /* =========================================================
    FOOD
-   ========================================================= */
+========================================================= */
 
-document
-  .getElementById("addFood")
-  .onclick = () => {
+function addFood() {
 
-    const x = day();
+  const input =
+    document.getElementById("foodInput");
 
-    const name =
-      document
-        .getElementById("foodName")
-        .value.trim() ||
-      "Food";
+  const value =
+    input.value.trim();
 
+  if (!value) return;
 
-    const food = {
+  state.foods.push(value);
 
-      name,
+  input.value = "";
 
-      calories:Number(
-        document.getElementById("foodCal").value
-      ) || 0,
-
-      protein:Number(
-        document.getElementById("foodPro").value
-      ) || 0,
-
-      fat:Number(
-        document.getElementById("foodFat").value
-      ) || 0,
-
-      carbs:Number(
-        document.getElementById("foodCarb").value
-      ) || 0,
-
-      junk:
-        document.getElementById("foodJunk").checked,
-
-      late:
-        document.getElementById("foodLate").checked
-
-    };
-
-
-    x.foods.push(food);
-
-    save();
-
-    render();
-
-  };
-
+  save();
+  renderFood();
+}
 
 function renderFood() {
-
-  const x = day();
-
-  let calories = 0;
-  let protein = 0;
-  let fat = 0;
-  let carbs = 0;
-
-
-  x.foods.forEach(food => {
-
-    calories += food.calories;
-    protein += food.protein;
-    fat += food.fat;
-    carbs += food.carbs;
-
-  });
-
-
-  document.getElementById("cal")
-    .textContent =
-      Math.round(calories);
-
-  document.getElementById("protein")
-    .textContent =
-      Math.round(protein) + "g";
-
-  document.getElementById("fat")
-    .textContent =
-      Math.round(fat) + "g";
-
-  document.getElementById("carbs")
-    .textContent =
-      Math.round(carbs) + "g";
-
-
-  const pct =
-    Math.min(
-      100,
-      calories / 2000 * 100
-    );
-
-
-  document.getElementById("calPct")
-    .textContent =
-      Math.round(pct) + "%";
-
-  document.getElementById("calBar")
-    .style.width =
-      pct + "%";
-
 
   const list =
     document.getElementById("foodList");
 
-  list.innerHTML = "";
+  list.innerHTML =
+    state.foods.map(
+      (food, index) => `
+        <div class="food-item">
 
+          <span>${food}</span>
 
-  x.foods.forEach(food => {
+          <button
+            style="
+              border:none;
+              background:none;
+              color:#999;
+              font-size:10px;
+            "
+            onclick="removeFood(${index})"
+          >
+            ×
+          </button>
 
-    const row =
-      document.createElement("div");
-
-    row.className = "log-row";
-
-    let tags = "";
-
-    if (food.junk)
-      tags +=
-        `<span class="tag">junk −0.5</span>`;
-
-    if (food.late)
-      tags +=
-        `<span class="tag">late −0.5</span>`;
-
-
-    row.innerHTML = `
-      <span>
-        ${food.name}
-      </span>
-
-      <span>
-        ${Math.round(food.calories)} kcal
-        ${tags}
-      </span>
-    `;
-
-
-    list.appendChild(row);
-
-  });
-
+        </div>
+      `
+    ).join("");
 }
 
+function removeFood(index) {
 
-/* =========================================================
-   STREAK
-   ========================================================= */
+  state.foods.splice(index, 1);
 
-function calculateStreak() {
-
-  const dates =
-    Object.keys(database)
-      .filter(date =>
-        database[date].closed
-      )
-      .sort()
-      .reverse();
-
-
-  let streak = 0;
-
-
-  for (const date of dates) {
-
-    const x =
-      database[date];
-
-
-    const salah =
-      Object.values(x.salah)
-        .every(v =>
-          v === "done" ||
-          v === "corrected"
-        );
-
-
-    if (
-      salah &&
-      x.juz &&
-      x.reels >= 4 &&
-      x.gym
-    ) {
-
-      streak++;
-
-    } else {
-
-      break;
-
-    }
-
-  }
-
-
-  return streak;
-
+  save();
+  renderFood();
 }
 
+function addJunk() {
 
-/* =========================================================
-   IDENTITY
-   ========================================================= */
+  state.junkCount++;
 
-function renderIdentity() {
-
-  const dates =
-    Object.keys(database)
-      .filter(date =>
-        database[date].closed
-      )
-      .sort()
-      .slice(-30);
-
-
-  const total =
-    dates.length || 1;
-
-
-  const quran =
-    dates.filter(date =>
-      database[date].juz
-    ).length;
-
-
-  const business =
-    dates.filter(date =>
-      database[date].reels >= 4
-    ).length;
-
-
-  const fitness =
-    dates.filter(date =>
-      database[date].gym
-    ).length;
-
-
-  document.getElementById("identity")
-    .innerHTML = `
-
-      <div class="identity-card">
-
-        <div class="identity-head">
-
-          <div class="identity-name">
-            📖 QUR'AN
-          </div>
-
-          <div class="identity-pct">
-            ${Math.round(quran/total*100)}%
-          </div>
-
-        </div>
-
-        <div class="identity-main">
-          ${quran}/${total}
-          tracked days with 1 Juz completed.
-        </div>
-
-        <div class="identity-foot">
-          30-day evidence window.
-        </div>
-
-      </div>
-
-
-      <div class="identity-card">
-
-        <div class="identity-head">
-
-          <div class="identity-name">
-            💼 BUSINESS
-          </div>
-
-          <div class="identity-pct">
-            ${Math.round(business/total*100)}%
-          </div>
-
-        </div>
-
-        <div class="identity-main">
-          ${business}/${total}
-          tracked days with the 4-Reel Awwal completed.
-        </div>
-
-        <div class="identity-foot">
-          30-day evidence window.
-        </div>
-
-      </div>
-
-
-      <div class="identity-card">
-
-        <div class="identity-head">
-
-          <div class="identity-name">
-            🏋️ FITNESS
-          </div>
-
-          <div class="identity-pct">
-            ${Math.round(fitness/total*100)}%
-          </div>
-
-        </div>
-
-        <div class="identity-main">
-          ${fitness}/${total}
-          tracked days with a gym session.
-        </div>
-
-        <div class="identity-foot">
-          30-day evidence window.
-        </div>
-
-      </div>
-    `;
-
+  save();
+  renderAll();
 }
 
-
 /* =========================================================
-   OBSERVATIONS
-   ========================================================= */
+   DAILY ANALYSIS
+========================================================= */
 
-function renderObservations() {
+function renderEnergy() {
 
-  const box =
-    document.getElementById("observations");
+  const earned =
+    earnedXP();
 
-  box.innerHTML = "";
+  const spent =
+    spentXP();
 
+  const net =
+    totalXP();
 
-  const dates =
-    Object.keys(database)
-      .filter(date =>
-        database[date].closed
-      )
-      .sort()
-      .slice(-14);
+  document.getElementById("xpEarned")
+    .textContent = "+" + xpText(earned);
 
+  document.getElementById("xpSpent")
+    .textContent = "-" + xpText(spent);
 
-  if (dates.length < 3) {
+  document.getElementById("xpNet")
+    .textContent = xpText(net);
 
-    box.innerHTML = `
-      <div class="small">
-        Keep closing days. The strategist needs
-        repeated evidence before identifying patterns.
-      </div>
-    `;
+  document.getElementById("xpTotal")
+    .textContent = net.toFixed(2).replace(/\.00$/, "");
 
-    return;
-
-  }
-
-
-  const days =
-    dates.map(date =>
-      database[date]
+  const angle =
+    Math.min(
+      360,
+      Math.max(0, earned * 20)
     );
 
+  document
+    .getElementById("xpRing")
+    .style
+    .setProperty(
+      "--earned-angle",
+      angle + "deg"
+    );
 
-  const businessMisses =
-    days.filter(x =>
-      x.reels < 4
-    ).length;
-
-
-  const gymMisses =
-    days.filter(x =>
-      !x.gym
-    ).length;
-
-
-  const observations = [];
-
-
-  if (businessMisses >= 3) {
-
-    observations.push([
-      "Business friction",
-      `You missed the 4-Reel Awwal on
-       ${businessMisses} of the last
-       ${days.length} closed days.`
-    ]);
-
-  }
-
-
-  if (gymMisses >= 3) {
-
-    observations.push([
-      "Fitness friction",
-      `You missed the gym Awwal on
-       ${gymMisses} of the last
-       ${days.length} closed days.`
-    ]);
-
-  }
-
-
-  const reasons = {};
-
-
-  days.forEach(x => {
-
-    Object.values(x.reasons)
-      .forEach(reason => {
-
-        if (!reason)
-          return;
-
-        reasons[reason] =
-          (reasons[reason] || 0) + 1;
-
-      });
-
-  });
-
-
-  const mostCommon =
-    Object.entries(reasons)
-      .sort((a,b) => b[1] - a[1])[0];
-
-
-  if (
-    mostCommon &&
-    mostCommon[1] >= 2
-  ) {
-
-    observations.push([
-      "Recurring friction reason",
-
-      `"${mostCommon[0]}"
-       is your most repeated logged reason
-       (${mostCommon[1]} times).`
-    ]);
-
-  }
-
-
-  if (!observations.length) {
-
-    observations.push([
-      "Pattern scan",
-      "No strong recurring pattern yet. Keep collecting evidence."
-    ]);
-
-  }
-
-
-  observations.forEach(([title,text]) => {
-
-    const row =
-      document.createElement("div");
-
-    row.className = "obs";
-
-    row.innerHTML = `
-      <b>${title}</b>
-      <p>${text}</p>
-    `;
-
-    box.appendChild(row);
-
-  });
-
+  document.getElementById("todayLabel")
+    .textContent = todayKey();
 }
-
-
-/* =========================================================
-   CHART
-   ========================================================= */
-
-document
-  .getElementById("chartMode")
-  .onchange = renderChart;
-
 
 function renderChart() {
 
   const chart =
     document.getElementById("chart");
 
-  chart.innerHTML = "";
+  /*
+    This simple implementation shows today's energy
+    plus six placeholder previous-day bars until
+    historical daily records are added.
+  */
 
+  const values = [0, 0, 0, 0, 0, 0, totalXP()];
 
-  const dates =
-    Object.keys(database)
-      .filter(date =>
-        database[date].closed
-      )
-      .sort()
-      .slice(-14);
-
-
-  if (!dates.length) {
-
-    chart.innerHTML = `
-      <div
-        class="small"
-        style="
-          padding:55px 10px;
-          text-align:center;
-        ">
-        Close your first day to start
-        the trajectory.
-      </div>
-    `;
-
-    return;
-
-  }
-
-
-  const mode =
-    document.getElementById("chartMode").value;
-
-
-  const W = 680;
-  const H = 190;
-
-  const pad = {
-    left:30,
-    right:12,
-    top:12,
-    bottom:25
-  };
-
-
-  const innerW =
-    W - pad.left - pad.right;
-
-  const innerH =
-    H - pad.top - pad.bottom;
-
-
-  const svg =
-    document.createElementNS(
-      "http://www.w3.org/2000/svg",
-      "svg"
+  const max =
+    Math.max(
+      1,
+      ...values.map(v => Math.abs(v))
     );
 
+  chart.innerHTML =
+    values.map((value, i) => {
 
-  svg.setAttribute(
-    "viewBox",
-    `0 0 ${W} ${H}`
-  );
-
-
-  if (mode === "consistency") {
-
-    const values =
-      dates.map(date => {
-
-        const x =
-          database[date];
-
-        const salah =
-          Object.values(x.salah)
-            .every(v =>
-              v === "done" ||
-              v === "corrected"
-            );
-
-        return (
-          salah &&
-          x.juz &&
-          x.reels >= 4 &&
-          x.gym
-        )
-          ? 100
-          : 0;
-
-      });
-
-
-    drawLine(
-      svg,
-      values,
-      "main-line",
-      W,
-      H,
-      pad,
-      100
-    );
-
-
-    document.getElementById("chartNote")
-      .textContent =
-        "Solid line = daily completion of required Awwal commitments.";
-
-  }
-
-
-  if (mode === "energy") {
-
-    const values =
-      dates.map(date =>
-        calculateXP(
-          database[date]
-        )
-      );
-
-
-    const max =
-      Math.max(
-        1,
-        ...values.map(x =>
-          Math.max(
-            x.earned,
-            x.spent
+      const height =
+        Math.max(
+          3,
+          Math.min(
+            95,
+            Math.abs(value) / max * 95
           )
-        )
-      );
-
-
-    values.forEach((value,i) => {
-
-      const x =
-        pad.left +
-        i /
-        Math.max(
-          1,
-          values.length - 1
-        ) *
-        innerW;
-
-
-      const width =
-        Math.max(
-          4,
-          innerW / values.length * .4
         );
 
+      return `
+        <div class="bar-wrap">
 
-      const earnedY =
-        pad.top +
-        innerH -
-        value.earned/max*innerH;
+          <div
+            class="bar"
+            style="height:${height}px"
+          ></div>
 
+          <div class="bar-label">
+            ${i === 6 ? "Today" : "—"}
+          </div>
 
-      const spentY =
-        pad.top +
-        innerH -
-        value.spent/max*innerH;
+        </div>
+      `;
 
+    }).join("");
+}
 
-      svg.appendChild(
-        rect(
-          x-width,
-          earnedY,
-          width,
-          H-pad.bottom-earnedY,
-          "bar-earned"
-        )
-      );
+function renderMirror() {
 
+  const reels =
+    state.business.reels;
 
-      svg.appendChild(
-        rect(
-          x,
-          spentY,
-          width,
-          H-pad.bottom-spentY,
-          "bar-spent"
-        )
-      );
+  const memorize =
+    state.quran.memorizeSessions;
 
-    });
+  const revision =
+    state.quran.revisionSessions;
 
+  const gym =
+    state.fitness.gym;
 
-    document.getElementById("chartNote")
-      .textContent =
-        "Green = earned XP. Red = entertainment spent.";
+  const steps =
+    state.fitness.steps;
+
+  const salahCount =
+    Object.values(state.salah)
+      .filter(x =>
+        x === "prayed" ||
+        x === "qadha"
+      ).length;
+
+  document.getElementById("mirrorText")
+    .textContent =
+      `Today you showed up for ${salahCount}/5 salah, ` +
+      `${reels} reels, ${memorize} Quran memorization session(s), ` +
+      `${revision} Quran revision session(s), ` +
+      `${gym ? "the gym" : "no gym"}, and ` +
+      `${steps.toLocaleString()} steps.`;
+
+  let pattern =
+    "Your data is still building. Keep showing up so the dashboard can see your patterns.";
+
+  if (
+    quranAwwalComplete() &&
+    businessAwwalComplete() &&
+    fitnessAwwalComplete()
+  ) {
+
+    pattern =
+      "Your Awwal inputs are all present today. This is evidence of the identity you're building.";
+
+  } else if (!businessAwwalComplete()) {
+
+    pattern =
+      "Business is the unfinished Awwal input today. Four reels completes the daily business minimum.";
+
+  } else if (!quranAwwalComplete()) {
+
+    pattern =
+      "Qur'an Awwal is still open. One Juz completes the daily Qur'an minimum.";
+
+  } else if (!fitnessAwwalComplete()) {
+
+    pattern =
+      "Fitness Awwal is still open. Gym OR 5,000 steps completes it.";
 
   }
 
+  document.getElementById("patternText")
+    .textContent = pattern;
 
-  const axis =
-    document.createElementNS(
-      "http://www.w3.org/2000/svg",
-      "line"
-    );
+  let strategy =
+    "Don't add more complexity. Finish the Awwal inputs first.";
 
+  if (totalXP() < 0) {
 
-  axis.setAttribute("x1",pad.left);
-  axis.setAttribute("x2",W-pad.right);
-  axis.setAttribute("y1",H-pad.bottom);
-  axis.setAttribute("y2",H-pad.bottom);
-  axis.setAttribute("class","axis");
+    strategy =
+      "Your net energy is negative today. The response is not shame — reduce friction and return to the next Awwal action.";
 
+  } else if (
+    quranMazeedUnlocked() &&
+    businessMazeedUnlocked()
+  ) {
 
-  svg.appendChild(axis);
+    strategy =
+      "Your core gates are open. Use Mazeed deliberately rather than turning extra work into pressure.";
 
-  chart.appendChild(svg);
+  } else if (businessAwwalComplete()) {
 
+    strategy =
+      "Business Awwal is done. Use the unlocked Thani actions only if they serve today's actual priorities.";
+
+  }
+
+  document.getElementById("strategyText")
+    .textContent = strategy;
 }
-
-
-function drawLine(
-  svg,
-  values,
-  className,
-  W,
-  H,
-  pad,
-  max
-) {
-
-  const innerW =
-    W-pad.left-pad.right;
-
-  const innerH =
-    H-pad.top-pad.bottom;
-
-
-  const points =
-    values.map((value,i) => {
-
-      const x =
-        pad.left +
-        i /
-        Math.max(
-          1,
-          values.length-1
-        ) *
-        innerW;
-
-
-      const y =
-        pad.top +
-        innerH -
-        value/max*innerH;
-
-
-      return `${x},${y}`;
-
-    }).join(" ");
-
-
-  const line =
-    document.createElementNS(
-      "http://www.w3.org/2000/svg",
-      "polyline"
-    );
-
-
-  line.setAttribute(
-    "points",
-    points
-  );
-
-  line.setAttribute(
-    "class",
-    className
-  );
-
-
-  svg.appendChild(line);
-
-}
-
-
-function rect(
-  x,
-  y,
-  width,
-  height,
-  className
-) {
-
-  const el =
-    document.createElementNS(
-      "http://www.w3.org/2000/svg",
-      "rect"
-    );
-
-  el.setAttribute("x",x);
-  el.setAttribute("y",y);
-  el.setAttribute("width",width);
-  el.setAttribute("height",height);
-  el.setAttribute("class",className);
-
-  return el;
-
-}
-
 
 /* =========================================================
    REFLECTION
-   ========================================================= */
-
-const reflectionFields = [
-  ["well","well"],
-  ["way","way"],
-  ["missed","missed"],
-  ["tomorrow","tomorrow"]
-];
-
-
-reflectionFields.forEach(([id,key]) => {
-
-  document.getElementById(id)
-    .addEventListener("input",event => {
-
-      day().reflection[key] =
-        event.target.value;
-
-      save();
-
-    });
-
-});
-
+========================================================= */
 
 function renderReflection() {
 
-  const reflection =
-    day().reflection;
+  document.getElementById("wellInput").value =
+    state.reflection.well || "";
 
+  document.getElementById("wayInput").value =
+    state.reflection.way || "";
 
-  reflectionFields.forEach(([id,key]) => {
-
-    document.getElementById(id)
-      .value =
-        reflection[key] || "";
-
-  });
-
-
-  document.getElementById("closeStatus")
-    .innerHTML =
-      day().closed
-        ? `<span class="closed">
-             ✓ Day closed and saved
-           </span>`
-        : "Close the day when your record is final.";
-
+  document.getElementById("tomorrowInput").value =
+    state.reflection.tomorrow || "";
 }
 
+function bindReflection() {
+
+  document.getElementById("wellInput")
+    .oninput = e => {
+
+      state.reflection.well =
+        e.target.value;
+
+      save();
+    };
+
+  document.getElementById("wayInput")
+    .oninput = e => {
+
+      state.reflection.way =
+        e.target.value;
+
+      save();
+    };
+
+  document.getElementById("tomorrowInput")
+    .oninput = e => {
+
+      state.reflection.tomorrow =
+        e.target.value;
+
+      save();
+    };
+}
 
 /* =========================================================
-   CLOSE DAY
-   ========================================================= */
+   RESET
+========================================================= */
 
-document
-  .getElementById("closeDay")
-  .onclick = () => {
+function resetToday() {
 
-    day().closed = true;
+  const confirmed =
+    confirm(
+      "Reset all of today's progress?"
+    );
 
-    save();
+  if (!confirmed) return;
 
-    render();
+  state =
+    structuredClone(defaultState);
 
-  };
-
-
-/* =========================================================
-   DATE
-   ========================================================= */
-
-const dateInput =
-  document.getElementById("date");
-
-
-dateInput.value =
-  currentDate;
-
-
-dateInput.onchange = event => {
-
-  currentDate =
-    event.target.value;
-
-  render();
-
-};
-
+  save();
+  renderAll();
+}
 
 /* =========================================================
-   MASTER RENDER
-   ========================================================= */
+   RENDER EVERYTHING
+========================================================= */
 
-function render() {
+function renderAll() {
 
   renderSalah();
-
   renderQuran();
-
   renderBusiness();
-
   renderFitness();
-
   renderEnergy();
-
-  renderEntertainment();
-
   renderFood();
-
-  renderIdentity();
-
   renderChart();
-
-  renderObservations();
-
+  renderMirror();
   renderReflection();
+  bindReflection();
 
 }
-
 
 /* =========================================================
    START
-   ========================================================= */
+========================================================= */
 
-render();
+renderAll();
 
 </script>
 
