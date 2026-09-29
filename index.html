@@ -2,3547 +2,803 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport"
-      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
 <title>Dream Self Dashboard</title>
-
 <style>
-:root {
-  --bg: #f5f3ee;
-  --card: #ffffff;
-  --ink: #161616;
-  --muted: #77736c;
-  --line: #e7e3dc;
-  --green: #285c45;
-  --green-light: #e5f0e9;
-  --red: #a94338;
-  --red-light: #f8e9e7;
-  --orange: #DB904B;
-  --black: #151515;
-}
-
-* {
-  box-sizing: border-box;
-  -webkit-tap-highlight-color: transparent;
-}
-
-body {
-  margin: 0;
-  background: var(--bg);
-  color: var(--ink);
-  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display",
-               "SF Pro Text", Inter, sans-serif;
-}
-
-button,
-input,
-select,
-textarea {
-  font: inherit;
-}
-
-button {
-  cursor: pointer;
-}
-
-.app {
-  width: 100%;
-  max-width: 720px;
-  margin: auto;
-  padding: 18px 14px 60px;
-}
-
-/* HEADER */
-
-.header {
-  padding: 18px 4px 20px;
-}
-
-.eyebrow {
-  font-size: 11px;
-  letter-spacing: 1.5px;
-  text-transform: uppercase;
-  color: var(--muted);
-  font-weight: 700;
-}
-
-.header h1 {
-  margin: 7px 0 5px;
-  font-size: 31px;
-  line-height: 1.05;
-  letter-spacing: -1.2px;
-}
-
-.header p {
-  margin: 0;
-  color: var(--muted);
-  font-size: 14px;
-}
-
-/* CARDS */
-
-.card {
-  background: var(--card);
-  border: 1px solid var(--line);
-  border-radius: 22px;
-  padding: 17px;
-  margin-bottom: 14px;
-  box-shadow: 0 3px 14px rgba(0,0,0,.025);
-}
-
-.section-label {
-  font-size: 10px;
-  font-weight: 800;
-  letter-spacing: 1.5px;
-  text-transform: uppercase;
-  color: var(--muted);
-  margin-bottom: 8px;
-}
-
-.card-title {
-  font-size: 21px;
-  font-weight: 800;
-  letter-spacing: -.5px;
-}
-
-.subtitle {
-  color: var(--muted);
-  font-size: 12px;
-  line-height: 1.45;
-  margin-top: 5px;
-}
-
-/* SALAH */
-
-.salah-card {
-  background: var(--black);
-  color: white;
-  border: none;
-}
-
-.salah-card .section-label {
-  color: #aaa;
-}
-
-.salah-message {
-  font-size: 14px;
-  line-height: 1.45;
-  margin: 4px 0 15px;
-}
-
-.salah-grid {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 7px;
-}
-
-.salah {
-  border: 1px solid #373737;
-  background: #202020;
-  color: white;
-  border-radius: 13px;
-  min-height: 68px;
-  padding: 7px 3px;
-}
-
-.salah-name {
-  font-size: 11px;
-  font-weight: 700;
-}
-
-.salah-status {
-  font-size: 9px;
-  color: #aaa;
-  margin-top: 5px;
-}
-
-.salah.prayed {
-  background: var(--green);
-  border-color: var(--green);
-}
-
-.salah.missed {
-  background: var(--red);
-  border-color: var(--red);
-}
-
-.salah.qadha {
-  background: #6d542f;
-  border-color: #6d542f;
-}
-
-/* DOMAIN */
-
-.domain-top {
-  display: flex;
-  justify-content: space-between;
-  gap: 12px;
-}
-
-.domain-header {
-  flex: 1;
-}
-
-.stage-pill {
-  background: #f1eee8;
-  color: #5f5b55;
-  padding: 6px 9px;
-  border-radius: 99px;
-  font-size: 9px;
-  font-weight: 800;
-  letter-spacing: .5px;
-  white-space: nowrap;
-  height: fit-content;
-}
-
-/* TASKS */
-
-.task-list {
-  margin-top: 17px;
-}
-
-.task {
-  border: 1px solid var(--line);
-  border-radius: 16px;
-  padding: 12px;
-  margin-bottom: 9px;
-  background: #fff;
-}
-
-.task.completed {
-  border-color: #c7dfd0;
-  background: #f8fcf9;
-}
-
-.task-row {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.check {
-  width: 28px;
-  height: 28px;
-  border-radius: 9px;
-  border: 1.5px solid #c9c5be;
-  background: white;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-  color: white;
-  font-size: 15px;
-  font-weight: 900;
-}
-
-.check.done {
-  background: var(--green);
-  border-color: var(--green);
-}
-
-.task-info {
-  flex: 1;
-  min-width: 0;
-}
-
-.task-name {
-  font-size: 13px;
-  font-weight: 750;
-}
-
-.task-xp {
-  font-size: 10px;
-  color: var(--green);
-  font-weight: 700;
-  margin-top: 2px;
-}
-
-.add-area {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  margin-top: 10px;
-  padding-left: 38px;
-  flex-wrap: wrap;
-}
-
-.add-button {
-  border: none;
-  border-radius: 11px;
-  background: var(--green);
-  color: white;
-  padding: 8px 15px;
-  font-size: 11px;
-  font-weight: 800;
-}
-
-.add-button:active,
-.check:active,
-.salah:active,
-.counter-controls button:active {
-  transform: scale(.97);
-}
-
-.session-control {
-  display: flex;
-  align-items: center;
-  border: 1px solid var(--line);
-  border-radius: 11px;
-  overflow: hidden;
-  background: white;
-}
-
-.session-control button {
-  border: none;
-  background: white;
-  width: 34px;
-  height: 30px;
-  font-size: 17px;
-  color: var(--ink);
-}
-
-.session-count {
-  min-width: 38px;
-  text-align: center;
-  font-size: 11px;
-  font-weight: 800;
-}
-
-.session-total {
-  font-size: 9px;
-  color: var(--muted);
-}
-
-/* PROGRESSION */
-
-.unlock-message {
-  margin-top: 11px;
-  padding: 10px 11px;
-  border-radius: 11px;
-  background: #f5f2ed;
-  color: var(--muted);
-  font-size: 10px;
-}
-
-.next-stage {
-  margin-top: 13px;
-  border-top: 1px solid var(--line);
-  padding-top: 13px;
-}
-
-.next-stage-title {
-  font-size: 10px;
-  font-weight: 800;
-  color: var(--muted);
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  margin-bottom: 9px;
-}
-
-/* COUNTERS */
-
-.counter-box {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-top: 10px;
-  padding: 11px;
-  background: #f7f5f1;
-  border-radius: 12px;
-}
-
-.counter-number {
-  font-size: 18px;
-  font-weight: 900;
-}
-
-.counter-sub {
-  font-size: 9px;
-  color: var(--muted);
-  margin-top: 2px;
-}
-
-.counter-controls {
-  display: flex;
-  gap: 5px;
-}
-
-.counter-controls button {
-  width: 34px;
-  height: 34px;
-  border: 1px solid var(--line);
-  border-radius: 9px;
-  background: white;
-  font-size: 18px;
-}
-
-/* XP */
-
-.energy-card {
-  position: relative;
-}
-
-.energy-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  gap: 12px;
-}
-
-.net-xp {
-  text-align: right;
-  min-width: 105px;
-}
-
-.net-xp-label {
-  font-size: 9px;
-  color: var(--muted);
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  font-weight: 800;
-}
-
-.net-xp-number {
-  font-size: 31px;
-  line-height: 1;
-  font-weight: 950;
-  letter-spacing: -1px;
-  margin-top: 3px;
-}
-
-.net-xp-number.positive {
-  color: var(--green);
-}
-
-.net-xp-number.negative {
-  color: var(--red);
-}
-
-.energy {
-  display: flex;
-  align-items: center;
-  gap: 18px;
-  margin-top: 16px;
-}
-
-.xp-ring {
-  width: 92px;
-  height: 92px;
-  border-radius: 50%;
-  position: relative;
-  flex-shrink: 0;
-  background: conic-gradient(
-    var(--green) var(--earned-angle),
-    #e5e2dc 0deg
-  );
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.xp-ring::after {
-  content: "";
-  position: absolute;
-  width: 67px;
-  height: 67px;
-  border-radius: 50%;
-  background: white;
-}
-
-.xp-ring-inner {
-  position: relative;
-  z-index: 2;
-  text-align: center;
-}
-
-.xp-number {
-  font-size: 19px;
-  font-weight: 900;
-}
-
-.xp-label {
-  font-size: 7px;
-  color: var(--muted);
-  text-transform: uppercase;
-  letter-spacing: 1px;
-}
-
-.energy-details {
-  flex: 1;
-}
-
-.energy-row {
-  display: flex;
-  justify-content: space-between;
-  padding: 4px 0;
-  font-size: 11px;
-}
-
-.energy-row span:first-child {
-  color: var(--muted);
-}
-
-.positive {
-  color: var(--green);
-  font-weight: 800;
-}
-
-.negative {
-  color: var(--red);
-  font-weight: 800;
-}
-
-/* NUTRITION */
-
-.nutrition-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 7px;
-  margin-top: 13px;
-}
-
-.nutrition-stat {
-  background: #191919;
-  color: white;
-  border-radius: 13px;
-  padding: 10px 7px;
-}
-
-.nutrition-label {
-  font-size: 7px;
-  color: #999;
-  text-transform: uppercase;
-}
-
-.nutrition-value {
-  font-size: 14px;
-  font-weight: 850;
-  margin-top: 3px;
-}
-
-.nutrition-input {
-  margin-top: 12px;
-}
-
-.nutrition-input input {
-  width: 100%;
-  background: #181818;
-  border: 1px solid #444;
-  color: white;
-  border-radius: 10px;
-  padding: 10px;
-  outline: none;
-}
-
-.food-list {
-  margin-top: 9px;
-}
-
-.food-item {
-  display: flex;
-  justify-content: space-between;
-  font-size: 10px;
-  padding: 6px 0;
-  border-bottom: 1px solid #eee;
-}
-
-.junk-button {
-  margin-top: 10px;
-  width: 100%;
-  border: 1px solid #e1c4c0;
-  background: var(--red-light);
-  color: var(--red);
-  border-radius: 11px;
-  padding: 9px;
-  font-size: 10px;
-  font-weight: 800;
-}
-
-/* GRAPH */
-
-.chart {
-  height: 130px;
-  display: flex;
-  align-items: flex-end;
-  gap: 7px;
-  padding-top: 15px;
-}
-
-.bar-wrap {
-  flex: 1;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  align-items: center;
-}
-
-.bar {
-  width: 100%;
-  max-width: 30px;
-  border-radius: 7px 7px 3px 3px;
-  background: var(--green);
-  min-height: 3px;
-}
-
-.bar-label {
-  margin-top: 5px;
-  font-size: 8px;
-  color: var(--muted);
-}
-
-/* MIRROR */
-
-.insight {
-  padding: 12px;
-  border-radius: 13px;
-  background: #f5f2ed;
-  margin-top: 9px;
-}
-
-.insight-title {
-  font-size: 10px;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  font-weight: 800;
-  color: var(--muted);
-}
-
-.insight-text {
-  font-size: 12px;
-  line-height: 1.45;
-  margin-top: 4px;
-}
-
-/* REFLECTION */
-
-textarea {
-  width: 100%;
-  min-height: 65px;
-  border: 1px solid var(--line);
-  border-radius: 11px;
-  padding: 10px;
-  resize: vertical;
-  outline: none;
-  margin-top: 7px;
-}
-
-.reflection-label {
-  font-size: 10px;
-  font-weight: 750;
-  margin-top: 12px;
-}
-
-.reset-button {
-  width: 100%;
-  border: 1px solid #ddd7ce;
-  background: transparent;
-  color: var(--muted);
-  border-radius: 12px;
-  padding: 11px;
-  font-size: 10px;
-}
-
-/* MODAL */
-
-.modal {
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,.48);
-  display: none;
-  align-items: flex-end;
-  justify-content: center;
-  z-index: 20;
-}
-
-.modal.show {
-  display: flex;
-}
-
-.modal-content {
-  width: 100%;
-  max-width: 720px;
-  background: white;
-  border-radius: 24px 24px 0 0;
-  padding: 20px;
-}
-
-.modal-title {
-  font-size: 18px;
-  font-weight: 850;
-}
-
-.modal-subtitle {
-  font-size: 11px;
-  color: var(--muted);
-  margin-top: 4px;
-}
-
-.modal-options {
-  display: grid;
-  gap: 8px;
-  margin-top: 16px;
-}
-
-.modal-option {
-  border: 1px solid var(--line);
-  background: white;
-  border-radius: 13px;
-  padding: 12px;
-  text-align: left;
-  font-size: 12px;
-}
-
-.modal-close {
-  margin-top: 10px;
-  width: 100%;
-  border: none;
-  background: #eeeae4;
-  border-radius: 12px;
-  padding: 11px;
-}
-
-/* MOBILE */
-
-@media (max-width: 390px) {
-
-  .app {
-    padding-left: 10px;
-    padding-right: 10px;
-  }
-
-  .card {
-    padding: 14px;
-  }
-
-  .salah-grid {
-    gap: 4px;
-  }
-
-  .salah {
-    min-height: 62px;
-  }
-
-  .salah-name {
-    font-size: 9px;
-  }
-
-  .nutrition-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  .net-xp-number {
-    font-size: 27px;
-  }
+:root{--bg:#f5f3ee;--card:#fff;--ink:#161616;--muted:#77736c;--line:#e7e3dc;--green:#285c45;--red:#a94338;--orange:#DB904B;--black:#151515}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","SF Pro Text",Inter,sans-serif}button,input,textarea{font:inherit}button{cursor:pointer}.app{max-width:720px;margin:auto;padding:18px 14px 60px}
+.header{padding:18px 4px 20px}.eyebrow,.section-label{font-size:10px;letter-spacing:1.5px;text-transform:uppercase;font-weight:800;color:var(--muted)}.header h1{margin:7px 0 5px;font-size:31px;line-height:1.05;letter-spacing:-1.2px}.header p{margin:0;color:var(--muted);font-size:14px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:17px;margin-bottom:14px;box-shadow:0 3px 14px rgba(0,0,0,.025)}
+.salah-card{background:var(--black);color:#fff;border:none}.salah-card .section-label{color:#aaa}.salah-message{font-size:14px;line-height:1.45;margin:4px 0 15px}.salah-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:7px}.salah{border:1px solid #373737;background:#202020;color:#fff;border-radius:13px;min-height:68px;padding:7px 3px}.salah.prayed{background:var(--green);border-color:var(--green)}.salah.missed{background:var(--red);border-color:var(--red)}.salah.qadha{background:#6d542f;border-color:#6d542f}.salah-name{font-size:11px;font-weight:700}.salah-status{font-size:9px;color:#aaa;margin-top:5px}
+.domain-head{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}.domain-info{flex:1}.title-row{display:flex;align-items:center;gap:9px}.card-title{font-size:21px;font-weight:850;letter-spacing:-.5px}.category-xp{font-size:20px;font-weight:950;color:var(--green);white-space:nowrap;letter-spacing:-.5px}.subtitle{color:var(--muted);font-size:12px;line-height:1.45;margin-top:5px}.stage-pill{background:#f1eee8;color:#5f5b55;padding:6px 9px;border-radius:99px;font-size:9px;font-weight:800;white-space:nowrap}
+.task-list{margin-top:17px}.task{border:1px solid var(--line);border-radius:16px;padding:12px;margin-bottom:9px;background:#fff}.task.completed{border-color:#c7dfd0;background:#f8fcf9}.task-row{display:flex;align-items:center;gap:10px}.check{width:28px;height:28px;border-radius:9px;border:1.5px solid #c9c5be;background:#fff;display:flex;align-items:center;justify-content:center;flex-shrink:0;color:#fff;font-size:15px;font-weight:900}.check.done{background:var(--green);border-color:var(--green)}.task-info{flex:1;min-width:0}.task-name{font-size:13px;font-weight:750}.task-xp{font-size:10px;color:var(--muted);margin-top:2px}.task-earned{font-size:20px;font-weight:950;color:var(--green);white-space:nowrap}.add-area{display:flex;align-items:center;gap:6px;margin-top:10px;padding-left:38px;flex-wrap:wrap}.add-button{border:none;border-radius:11px;background:var(--green);color:#fff;padding:8px 15px;font-size:11px;font-weight:800}.session-control{display:flex;align-items:center;border:1px solid var(--line);border-radius:11px;overflow:hidden;background:#fff}.session-control button{border:none;background:#fff;width:34px;height:30px;font-size:17px}.session-count{min-width:38px;text-align:center;font-size:11px;font-weight:800}.session-total{font-size:9px;color:var(--muted)}.counter-box{display:flex;align-items:center;justify-content:space-between;margin-top:10px;padding:11px;background:#f7f5f1;border-radius:12px}.counter-number{font-size:18px;font-weight:900}.counter-sub{font-size:9px;color:var(--muted);margin-top:2px}.counter-controls{display:flex;gap:5px}.counter-controls button{width:34px;height:34px;border:1px solid var(--line);border-radius:9px;background:#fff;font-size:18px}.next-stage{margin-top:13px;border-top:1px solid var(--line);padding-top:13px}.next-stage-title{font-size:10px;font-weight:800;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:9px}.unlock-message{margin-top:11px;padding:10px 11px;border-radius:11px;background:#f5f2ed;color:var(--muted);font-size:10px}
+.energy-head{display:flex;justify-content:space-between;align-items:flex-start}.net-xp{text-align:right}.net-label{font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:1px;font-weight:800}.net-number{font-size:32px;line-height:1;font-weight:950;color:var(--green);margin-top:3px}.net-number.negative{color:var(--red)}.energy{display:flex;align-items:center;gap:18px;margin-top:16px}.xp-ring{width:92px;height:92px;border-radius:50%;background:conic-gradient(var(--green) var(--angle),#e5e2dc 0);display:flex;align-items:center;justify-content:center;position:relative;flex-shrink:0}.xp-ring:after{content:"";position:absolute;width:67px;height:67px;border-radius:50%;background:#fff}.xp-ring-inner{position:relative;z-index:2;text-align:center}.xp-number{font-size:19px;font-weight:900}.xp-label{font-size:7px;color:var(--muted);text-transform:uppercase;letter-spacing:1px}.energy-details{flex:1}.energy-row{display:flex;justify-content:space-between;padding:4px 0;font-size:11px}.positive{color:var(--green);font-weight:800}.negative{color:var(--red);font-weight:800}
+.insight{padding:12px;border-radius:13px;background:#f5f2ed;margin-top:9px}.insight-title{font-size:10px;text-transform:uppercase;letter-spacing:1px;font-weight:800;color:var(--muted)}.insight-text{font-size:12px;line-height:1.45;margin-top:4px}textarea{width:100%;min-height:65px;border:1px solid var(--line);border-radius:11px;padding:10px;resize:vertical;outline:none;margin-top:7px}.reflection-label{font-size:10px;font-weight:750;margin-top:12px}.reset-button{width:100%;border:1px solid #ddd7ce;background:transparent;color:var(--muted);border-radius:12px;padding:11px;font-size:10px}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.48);display:none;align-items:flex-end;justify-content:center;z-index:20}.modal.show{display:flex}.modal-content{width:100%;max-width:720px;background:#fff;border-radius:24px 24px 0 0;padding:20px}.modal-title{font-size:18px;font-weight:850}.modal-subtitle{font-size:11px;color:var(--muted);margin-top:4px}.modal-options{display:grid;gap:8px;margin-top:16px}.modal-option,.modal-close{border:1px solid var(--line);background:#fff;border-radius:13px;padding:12px;text-align:left;font-size:12px}.modal-close{margin-top:10px;width:100%;text-align:center;background:#eeeae4}
+.spend-form{display:grid;gap:8px;margin-top:13px}.spend-form input,.spend-form select{width:100%;background:#f7f5f1;border:1px solid var(--line);color:var(--ink);border-radius:11px;padding:10px;outline:none}.spend-row{display:grid;grid-template-columns:1fr auto;gap:7px}.spend-row .add-button{padding-left:13px;padding-right:13px}.spend-hint{font-size:9px;color:var(--muted);margin-top:2px}.entertainment-item{display:flex;align-items:center;justify-content:space-between;gap:10px;border-top:1px solid #eeeae4;padding:9px 0}.entertainment-main{min-width:0}.entertainment-name{font-size:11px;font-weight:800;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.entertainment-meta{font-size:9px;color:var(--muted);margin-top:2px}.entertainment-cost{font-size:12px;font-weight:900;color:var(--red);white-space:nowrap}.delete-spend{border:0;background:none;color:#999;font-size:16px;padding:2px 0 2px 4px}.empty-spend{font-size:10px;color:var(--muted);padding-top:10px}
+button:active{transform:scale(.97)}
+@media(max-width:390px){.app{padding-left:10px;padding-right:10px}.card{padding:14px}.salah-grid{gap:4px}.salah-name{font-size:9px}.category-xp{font-size:17px}.task-earned{font-size:18px}}
+
+.tabs{display:grid;grid-template-columns:1fr 1fr;gap:7px;background:#e9e5de;padding:4px;border-radius:14px;margin:0 0 14px}
+.tab-button{border:0;background:transparent;color:var(--muted);border-radius:10px;padding:10px;font-size:11px;font-weight:850}
+.tab-button.active{background:#fff;color:var(--ink);box-shadow:0 2px 7px rgba(0,0,0,.06)}
+.edit-banner{display:none;align-items:center;justify-content:space-between;gap:10px;background:#191919;color:#fff;border-radius:15px;padding:11px 12px;margin-bottom:14px}
+.edit-banner.show{display:flex}
+.edit-banner-text{font-size:10px;line-height:1.35}
+.edit-banner-title{font-weight:900;font-size:11px}
+.edit-banner-sub{color:#bcbcbc;margin-top:2px}
+.small-action{border:1px solid #444;background:#242424;color:#fff;border-radius:9px;padding:8px 10px;font-size:10px;font-weight:800;white-space:nowrap}
+.day-done{width:100%;margin-top:4px;border:0;background:var(--green);color:#fff;border-radius:15px;padding:14px 12px;font-size:12px;font-weight:900;letter-spacing:.1px}
+.day-done.logged{background:#e8f3eb;color:var(--green);border:1px solid #c7dfd0}
+.history-list{display:grid;gap:10px}
+.history-card{border:1px solid var(--line);border-radius:16px;padding:14px;background:#fff}
+.history-head{display:flex;align-items:flex-start;justify-content:space-between;gap:10px}
+.history-date{font-size:14px;font-weight:900}
+.history-status{font-size:9px;color:var(--muted);margin-top:3px}
+.history-status.logged{color:var(--green);font-weight:800}
+.history-status.auto{color:#786746}
+.history-net{text-align:right}
+.history-net-label{font-size:8px;text-transform:uppercase;letter-spacing:1px;color:var(--muted);font-weight:800}
+.history-net-number{font-size:20px;font-weight:950;color:var(--green);margin-top:2px}
+.history-net-number.negative{color:var(--red)}
+.history-metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-top:12px}
+.history-metric{background:#f7f5f1;border-radius:10px;padding:8px 6px}
+.history-metric-label{font-size:7px;color:var(--muted);text-transform:uppercase;letter-spacing:.7px}
+.history-metric-value{font-size:11px;font-weight:850;margin-top:2px}
+.history-edit{margin-top:10px;width:100%;border:1px solid var(--line);background:#fff;border-radius:11px;padding:9px;font-size:10px;font-weight:850}
+.history-empty{padding:18px;text-align:center;color:var(--muted);font-size:11px;background:#f7f5f1;border-radius:13px}
+.spend-select{width:100%;background:#f7f5f1;border:1px solid var(--line);color:var(--ink);border-radius:11px;padding:10px;outline:none}
+.other-entry{display:none}
+.other-entry.show{display:block}
+@media(max-width:390px){
+  .history-metrics{grid-template-columns:repeat(2,1fr)}
 }
 </style>
 </head>
-
 <body>
 
 <div class="app">
+<header class="header">
+  <div class="eyebrow">Dream Self Dashboard</div>
+  <h1>Proof over promises.</h1>
+  <p>This is how I'm becoming.</p>
+</header>
 
-  <!-- HEADER -->
+<div class="tabs">
+  <button class="tab-button active" id="todayTab" onclick="showTab('today')">Today</button>
+  <button class="tab-button" id="historyTab" onclick="showTab('history')">Last 7 Days</button>
+</div>
 
-  <header class="header">
-    <div class="eyebrow">Dream Self Dashboard</div>
-    <h1>Proof over promises.</h1>
-    <p>This is how I'm becoming.</p>
-  </header>
+<div class="edit-banner" id="editBanner">
+  <div class="edit-banner-text">
+    <div class="edit-banner-title" id="editBannerTitle">Editing a past day</div>
+    <div class="edit-banner-sub">Any changes are saved to that day.</div>
+  </div>
+  <button class="small-action" onclick="returnToToday()">Back to Today</button>
+</div>
 
-  <!-- SALAH -->
+<div id="todayView">
 
-  <section class="card salah-card">
+<section class="card salah-card">
+  <div class="section-label">Non-negotiable</div>
+  <div class="salah-message">Connect yourself with Allah with the acts He loves the most.</div>
+  <div class="salah-grid" id="salahGrid"></div>
+</section>
 
-    <div class="section-label">Non-negotiable</div>
+<section class="card" id="quranCard"></section>
+<section class="card" id="businessCard"></section>
+<section class="card" id="fitnessCard"></section>
 
-    <div class="salah-message">
-      Connect yourself with Allah with the acts He loves the most.
+<section class="card">
+  <div class="energy-head">
+    <div><div class="section-label">Daily Energy</div><div class="card-title">Your energy today.</div></div>
+    <div class="net-xp"><div class="net-label">Net XP</div><div class="net-number" id="netXPBig">0 XP</div></div>
+  </div>
+  <div class="energy">
+    <div class="xp-ring" id="xpRing"><div class="xp-ring-inner"><div class="xp-number" id="xpTotal">0</div><div class="xp-label">Net</div></div></div>
+    <div class="energy-details">
+      <div class="energy-row"><span>Earned</span><span class="positive" id="xpEarned">+0 XP</span></div>
+      <div class="energy-row"><span>Spent</span><span class="negative" id="xpSpent">0 XP</span></div>
+      <div class="energy-row"><span>Date</span><strong id="todayLabel"></strong></div>
+    </div>
+  </div>
+</section>
+
+<section class="card">
+  <div class="section-label">XP Budget</div>
+  <div class="card-title">Spend Your XP</div>
+  <div class="subtitle">Choose what you spent energy on. Intentional entertainment costs 2 XP per 30 minutes; unintentional scrolling costs 4 XP per 30 minutes.</div>
+
+  <div class="spend-form">
+    <select id="entertainmentCategory" class="spend-select" onchange="toggleOtherEntry()">
+      <option value="">Choose Entertainment</option>
+      <option value="Netflix">Netflix</option>
+      <option value="Halo">Halo</option>
+      <option value="Social Media">Social Media</option>
+      <option value="Friends">Friends</option>
+      <option value="Other">Other</option>
+    </select>
+
+    <div class="other-entry" id="otherEntry">
+      <input id="entertainmentOther" placeholder="What was the activity?">
     </div>
 
-    <div class="salah-grid" id="salahGrid"></div>
+    <select id="entertainmentType" class="spend-select">
+      <option value="intentional">Intentional Entertainment · 2 XP / 30 min</option>
+      <option value="unintentional">Unintentional Scrolling · 4 XP / 30 min</option>
+    </select>
 
-  </section>
-
-  <!-- QURAN -->
-
-  <section class="card" id="quranCard"></section>
-
-  <!-- BUSINESS -->
-
-  <section class="card" id="businessCard"></section>
-
-  <!-- FITNESS -->
-
-  <section class="card" id="fitnessCard"></section>
-
-  <!-- ENERGY -->
-
-  <section class="card energy-card">
-
-    <div class="energy-header">
-
-      <div>
-        <div class="section-label">Daily Energy</div>
-        <div class="card-title">Your energy today.</div>
-      </div>
-
-      <div class="net-xp">
-        <div class="net-xp-label">Net XP</div>
-        <div class="net-xp-number" id="netXPBig">
-          0
-        </div>
-      </div>
-
+    <div class="spend-row">
+      <input id="entertainmentMinutes" type="number" min="15" step="15" placeholder="Minutes (15-min blocks)">
+      <button class="add-button" onclick="addEntertainment()">Log Spend</button>
     </div>
-
-    <div class="energy">
-
-      <div class="xp-ring" id="xpRing">
-
-        <div class="xp-ring-inner">
-
-          <div class="xp-number" id="xpTotal">
-            0
-          </div>
-
-          <div class="xp-label">
-            Net
-          </div>
-
-        </div>
-
-      </div>
-
-      <div class="energy-details">
-
-        <div class="energy-row">
-          <span>Earned</span>
-          <span class="positive" id="xpEarned">
-            +0 XP
-          </span>
-        </div>
-
-        <div class="energy-row">
-          <span>Spent</span>
-          <span class="negative" id="xpSpent">
-            0 XP
-          </span>
-        </div>
-
-        <div class="energy-row">
-          <span>Today</span>
-          <strong id="todayLabel"></strong>
-        </div>
-
-      </div>
-
-    </div>
-
-  </section>
-
-  <!-- NUTRITION -->
-
-  <section class="card">
-
-    <div class="section-label">
-      Fitness · Nutrition
-    </div>
-
-    <div class="card-title">
-      Fuel the body.
-    </div>
-
-    <div class="subtitle">
-      Track your nutrition manually. This HUD monitors the inputs that support your stronger self.
-    </div>
-
-    <div class="nutrition-grid">
-
-      <div class="nutrition-stat">
-        <div class="nutrition-label">Calories</div>
-        <div class="nutrition-value">2,000</div>
-      </div>
-
-      <div class="nutrition-stat">
-        <div class="nutrition-label">Protein</div>
-        <div class="nutrition-value">160g</div>
-      </div>
-
-      <div class="nutrition-stat">
-        <div class="nutrition-label">Fat</div>
-        <div class="nutrition-value">88g</div>
-      </div>
-
-      <div class="nutrition-stat">
-        <div class="nutrition-label">Carbs</div>
-        <div class="nutrition-value">142g</div>
-      </div>
-
-    </div>
-
-    <div class="nutrition-input">
-
-      <input
-        id="foodInput"
-        placeholder="Log food manually..."
-        onkeydown="if(event.key==='Enter') addFood()"
-      >
-
-      <div class="food-list" id="foodList"></div>
-
-      <button
-        class="junk-button"
-        onclick="addJunk()"
-      >
-        + Log junk / late-night food · −0.5 XP
-      </button>
-
-    </div>
-
-  </section>
-
-  <!-- TRAJECTORY -->
-
-  <section class="card">
-
-    <div class="section-label">
-      Trajectory
-    </div>
-
-    <div class="card-title">
-      Your last 7 days.
-    </div>
-
-    <div class="subtitle">
-      The goal isn't perfection. It's becoming someone who keeps showing up.
-    </div>
-
-    <div class="chart" id="chart"></div>
-
-  </section>
-
-  <!-- MIRROR -->
-
-  <section class="card">
-
-    <div class="section-label">
-      Mirror + Strategist
-    </div>
-
-    <div class="insight">
-
-      <div class="insight-title">
-        What you actually did
-      </div>
-
-      <div
-        class="insight-text"
-        id="mirrorText"
-      ></div>
-
-    </div>
-
-    <div class="insight">
-
-      <div class="insight-title">
-        Pattern
-      </div>
-
-      <div
-        class="insight-text"
-        id="patternText"
-      ></div>
-
-    </div>
-
-    <div class="insight">
-
-      <div class="insight-title">
-        Strategist
-      </div>
-
-      <div
-        class="insight-text"
-        id="strategyText"
-      ></div>
-
-    </div>
-
-  </section>
-
-  <!-- REFLECTION -->
-
-  <section class="card">
-
-    <div class="section-label">
-      Daily Reflection
-    </div>
-
-    <div class="card-title">
-      Close the loop.
-    </div>
-
-    <div class="reflection-label">
-      What went well?
-    </div>
-
-    <textarea
-      id="wellInput"
-      placeholder="What are you proud of today?"
-    ></textarea>
-
-    <div class="reflection-label">
-      What got in the way?
-    </div>
-
-    <textarea
-      id="wayInput"
-      placeholder="Be honest. No shame."
-    ></textarea>
-
-    <div class="reflection-label">
-      What will I do tomorrow?
-    </div>
-
-    <textarea
-      id="tomorrowInput"
-      placeholder="One clear move."
-    ></textarea>
-
-  </section>
-
-  <button
-    class="reset-button"
-    onclick="resetToday()"
-  >
-    Reset today's dashboard
-  </button>
+    <div class="spend-hint">Minutes are rounded to the nearest 15-minute block.</div>
+  </div>
+
+  <div id="entertainmentList"></div>
+</section>
+
+<section class="card">
+  <div class="section-label">Mirror + Strategist</div>
+  <div class="insight"><div class="insight-title">What you actually did</div><div class="insight-text" id="mirrorText"></div></div>
+  <div class="insight"><div class="insight-title">Pattern</div><div class="insight-text" id="patternText"></div></div>
+  <div class="insight"><div class="insight-title">Strategist</div><div class="insight-text" id="strategyText"></div></div>
+</section>
+
+<section class="card">
+  <div class="section-label">Daily Reflection</div>
+  <div class="card-title">Close the loop.</div>
+  <div class="reflection-label">What went well?</div>
+  <textarea id="wellInput" placeholder="What are you proud of today?"></textarea>
+  <div class="reflection-label">What got in the way?</div>
+  <textarea id="wayInput" placeholder="Be honest. No shame."></textarea>
+  <div class="reflection-label">What will I do tomorrow?</div>
+  <textarea id="tomorrowInput" placeholder="One clear move."></textarea>
+</section>
+
+<button class="day-done" id="dayDoneButton" onclick="logDay()">Alhamdulillah, Day's Done</button>
+<button type="button" class="reset-button" id="resetButton" onclick="resetCurrentDay(); return false;">Reset today's dashboard</button>
 
 </div>
 
+<div id="historyView" style="display:none">
+  <section class="card">
+    <div class="section-label">History</div>
+    <div class="card-title">Last 7 Days</div>
+    <div class="subtitle">Review what you actually did and edit any day you forgot to log.</div>
+    <div class="history-list" id="historyList" style="margin-top:14px"></div>
+  </section>
+</div>
 
-<!-- SALAH MODAL -->
+</div>
 
-<div
-  class="modal"
-  id="salahModal"
->
-
+<div class="modal" id="salahModal">
   <div class="modal-content">
-
-    <div
-      class="modal-title"
-      id="modalTitle"
-    >
-      Salah
-    </div>
-
-    <div class="modal-subtitle">
-      Record what happened. The XP adjusts automatically.
-    </div>
-
+    <div class="modal-title" id="modalTitle">Salah</div>
+    <div class="modal-subtitle">Record what happened. The XP adjusts automatically.</div>
     <div class="modal-options">
-
-      <button
-        class="modal-option"
-        onclick="setSalah('prayed')"
-      >
-        ✓ Prayed · +1 XP
-      </button>
-
-      <button
-        class="modal-option"
-        onclick="setSalah('missed')"
-      >
-        Missed · −1 XP
-      </button>
-
-      <button
-        class="modal-option"
-        onclick="setSalah('qadha')"
-      >
-        Qadha + Tawbah · −0.25 XP
-      </button>
-
+      <button class="modal-option" onclick="setSalah('prayed')">✓ Prayed · +1 XP</button>
+      <button class="modal-option" onclick="setSalah('missed')">Missed · −1 XP</button>
+      <button class="modal-option" onclick="setSalah('qadha')">Qadha + Tawbah · −0.25 XP</button>
     </div>
-
-    <button
-      class="modal-close"
-      onclick="closeModal()"
-    >
-      Cancel
-    </button>
-
+    <button class="modal-close" onclick="closeModal()">Cancel</button>
   </div>
-
 </div>
 
 
 <script>
+const KEY="dream-self-dashboard-v11";
+const OLD_KEY="dream-self-dashboard-v7";
 
-/* =========================================================
-   STORAGE
-========================================================= */
-
-const STORAGE_KEY =
-  "dream-self-dashboard-v6";
-
-function todayKey() {
-
-  const d = new Date();
-
-  return new Intl.DateTimeFormat(
-    "en-CA",
-    {
-      timeZone: "America/Toronto",
-      year: "numeric",
-      month: "2-digit",
-      day: "2-digit"
-    }
-  ).format(d);
+function todayKey(){
+  return new Intl.DateTimeFormat("en-CA",{timeZone:"America/Toronto",year:"numeric",month:"2-digit",day:"2-digit"}).format(new Date());
+}
+function dayOffsetKey(offset){
+  const now=new Date();
+  const d=new Date(now.getFullYear(),now.getMonth(),now.getDate()+offset,12,0,0,0);
+  return new Intl.DateTimeFormat("en-CA",{timeZone:"America/Toronto",year:"numeric",month:"2-digit",day:"2-digit"}).format(d);
+}
+function humanDate(key){
+  const [y,m,d]=key.split("-").map(Number);
+  const date=new Date(y,m-1,d,12);
+  return new Intl.DateTimeFormat("en-CA",{weekday:"short",month:"short",day:"numeric"}).format(date);
+}
+function longDate(key){
+  const [y,m,d]=key.split("-").map(Number);
+  const date=new Date(y,m-1,d,12);
+  return new Intl.DateTimeFormat("en-US",{weekday:"long",month:"long",day:"numeric",year:"numeric"}).format(date);
 }
 
+const blank=()=>({
+  date:todayKey(),
+  logged:false,
+  loggedAt:null,
+  autoLogged:false,
+  salah:{Fajr:null,Dhuhr:null,Asr:null,Maghrib:null,Isha:null},
+  quran:{juzSessions:0,memorizeSessions:0,revisionSessions:0},
+  business:{reels:0,carouselSessions:0,reachoutSessions:0,linkedinSessions:0},
+  fitness:{gymDone:false,steps:0},
+  entertainment:[],
+  reflection:{well:"",way:"",tomorrow:""}
+});
 
-/*
-  IMPORTANT:
+function normalizeDay(p,dateOverride){
+  const d=blank();
+  d.date=dateOverride||p.date||todayKey();
+  const q=p.quran||{}, b=p.business||{}, f=p.fitness||{};
+  d.logged=!!p.logged;
+  d.loggedAt=p.loggedAt||null;
+  d.autoLogged=!!p.autoLogged;
+  d.salah={...d.salah,...(p.salah||{})};
+  d.quran={
+    juzSessions:Number.isFinite(q.juzSessions)?q.juzSessions:(q.juzDone?1:0),
+    memorizeSessions:Number.isFinite(q.memorizeSessions)?q.memorizeSessions:(q.memorizeDone?1:0),
+    revisionSessions:Number.isFinite(q.revisionSessions)?q.revisionSessions:(q.revisionDone?1:0)
+  };
+  d.business={
+    reels:Number.isFinite(b.reels)?Math.max(0,b.reels):0,
+    carouselSessions:Number.isFinite(b.carouselSessions)?Math.max(0,b.carouselSessions):(b.carouselDone?1:0),
+    reachoutSessions:Number.isFinite(b.reachoutSessions)?Math.max(0,b.reachoutSessions):(b.reachoutsDone?1:0),
+    linkedinSessions:Number.isFinite(b.linkedinSessions)?Math.max(0,b.linkedinSessions):(b.linkedinDone?1:0)
+  };
+  d.fitness={
+    gymDone:!!(f.gymDone||Number(f.gymSessions||0)>0),
+    steps:Math.max(0,Math.floor(Number(f.steps||0)/2500)*2500)
+  };
+  d.entertainment=Array.isArray(p.entertainment)?p.entertainment:[];
+  d.reflection={...d.reflection,...(p.reflection||{})};
+  return d;
+}
 
-  The app now keeps COMPLETION separate from
-  XP SESSION COUNTS.
-
-  This means:
-
-  ✓ Marking something complete
-      = tells the dashboard the task happened.
-
-  ✓ Pressing Add
-      = records the XP-producing session.
-
-  ✓ Pressing −
-      = removes an incorrectly added session.
-
-  ✓ Unchecking a task
-      = removes its sessions/XP.
-*/
-
-
-const defaultState = {
-
-  date: todayKey(),
-
-  salah: {
-    Fajr: null,
-    Dhuhr: null,
-    Asr: null,
-    Maghrib: null,
-    Isha: null
-  },
-
-  quran: {
-
-    juzDone: false,
-    juzSessions: 0,
-
-    memorizeDone: false,
-    memorizeSessions: 0,
-
-    revisionSessions: 0
-
-  },
-
-  business: {
-
-    reels: 0,
-
-    carouselDone: false,
-    carouselSessions: 0,
-
-    reachoutsDone: false,
-    reachoutSessions: 0,
-
-    linkedinDone: false,
-    linkedinSessions: 0
-
-  },
-
-  fitness: {
-
-    gymDone: false,
-    gymSessions: 0,
-
-    steps: 0,
-
-    nutritionDone: false
-
-  },
-
-  foods: [],
-
-  junkCount: 0,
-
-  reflection: {
-
-    well: "",
-    way: "",
-    tomorrow: ""
-
-  }
-
-};
-
-
-let state =
-  loadState();
-
-let selectedSalah =
-  null;
-
-
-/* =========================================================
-   LOAD / SAVE
-========================================================= */
-
-function loadState() {
-
-  const saved =
-    localStorage.getItem(STORAGE_KEY);
-
-  if (!saved) {
-
-    return structuredClone(
-      defaultState
-    );
-
-  }
-
-  try {
-
-    const parsed =
-      JSON.parse(saved);
-
-    if (
-      parsed.date !==
-      todayKey()
-    ) {
-
-      return structuredClone(
-        defaultState
-      );
-
-    }
-
-    return {
-
-      ...structuredClone(
-        defaultState
-      ),
-
-      ...parsed,
-
-      salah: {
-        ...defaultState.salah,
-        ...(parsed.salah || {})
-      },
-
-      quran: {
-        ...defaultState.quran,
-        ...(parsed.quran || {})
-      },
-
-      business: {
-        ...defaultState.business,
-        ...(parsed.business || {})
-      },
-
-      fitness: {
-        ...defaultState.fitness,
-        ...(parsed.fitness || {})
-      },
-
-      reflection: {
-        ...defaultState.reflection,
-        ...(parsed.reflection || {})
+function loadDB(){
+  const raw=localStorage.getItem(KEY);
+  if(raw){
+    try{
+      const db=JSON.parse(raw);
+      if(db && db.days){
+        db.days=db.days||{};
+        db.activeDate=todayKey();
+        return db;
       }
-
-    };
-
-  } catch {
-
-    return structuredClone(
-      defaultState
-    );
-
+    }catch(e){}
   }
 
-}
-
-
-function save() {
-
-  state.date =
-    todayKey();
-
-  localStorage.setItem(
-    STORAGE_KEY,
-    JSON.stringify(state)
-  );
-
-}
-
-
-/* =========================================================
-   XP
-========================================================= */
-
-function salahXP() {
-
-  let xp = 0;
-
-  Object.values(
-    state.salah
-  ).forEach(status => {
-
-    if (status === "prayed")
-      xp += 1;
-
-    if (status === "missed")
-      xp -= 1;
-
-    if (status === "qadha")
-      xp -= 0.25;
-
-  });
-
-  return xp;
-}
-
-
-function quranXP() {
-
-  return (
-
-    state.quran.juzSessions * 1 +
-
-    state.quran.memorizeSessions * 1 +
-
-    state.quran.revisionSessions * 1
-
-  );
-
-}
-
-
-function businessXP() {
-
-  return (
-
-    state.business.reels * 0.5 +
-
-    state.business.carouselSessions * 0.5 +
-
-    state.business.reachoutSessions * 0.25 +
-
-    state.business.linkedinSessions * 0.5
-
-  );
-
-}
-
-
-function fitnessXP() {
-
-  /*
-    Every completed 2,500-step block
-    is worth 0.25 XP.
-
-    No upper limit.
-  */
-
-  const stepBlocks =
-    Math.floor(
-      state.fitness.steps / 2500
-    );
-
-  return (
-
-    state.fitness.gymSessions * 1 +
-
-    stepBlocks * 0.25
-
-  );
-
-}
-
-
-function junkXP() {
-
-  return (
-    state.junkCount * -0.5
-  );
-
-}
-
-
-function totalXP() {
-
-  return (
-
-    salahXP() +
-
-    quranXP() +
-
-    businessXP() +
-
-    fitnessXP() +
-
-    junkXP()
-
-  );
-
-}
-
-
-function earnedXP() {
-
-  let xp = 0;
-
-  Object.values(
-    state.salah
-  ).forEach(status => {
-
-    if (status === "prayed")
-      xp += 1;
-
-  });
-
-  xp += quranXP();
-
-  xp += businessXP();
-
-  xp += fitnessXP();
-
-  return xp;
-
-}
-
-
-function spentXP() {
-
-  return (
-
-    Object.values(
-      state.salah
-    ).filter(
-      x => x === "missed"
-    ).length +
-
-    Object.values(
-      state.salah
-    ).filter(
-      x => x === "qadha"
-    ).length * 0.25 +
-
-    state.junkCount * 0.5
-
-  );
-
-}
-
-
-/* =========================================================
-   PROGRESSION
-========================================================= */
-
-function quranAwwalComplete() {
-
-  return (
-    state.quran.juzDone
-  );
-
-}
-
-
-function quranThaniUnlocked() {
-
-  return quranAwwalComplete();
-
-}
-
-
-function quranThaniComplete() {
-
-  return (
-    state.quran.memorizeDone
-  );
-
-}
-
-
-function quranMazeedUnlocked() {
-
-  return quranThaniComplete();
-
-}
-
-
-function businessAwwalComplete() {
-
-  return (
-    state.business.reels >= 4
-  );
-
-}
-
-
-function businessThaniUnlocked() {
-
-  return businessAwwalComplete();
-
-}
-
-
-function businessThaniComplete() {
-
-  return (
-
-    state.business.carouselDone &&
-
-    state.business.reachoutsDone &&
-
-    state.business.linkedinDone
-
-  );
-
-}
-
-
-function businessMazeedUnlocked() {
-
-  return businessThaniComplete();
-
-}
-
-
-function fitnessAwwalComplete() {
-
-  return (
-
-    state.fitness.gymDone ||
-
-    state.fitness.steps >= 10000
-
-  );
-
-}
-
-
-function fitnessThaniUnlocked() {
-
-  return fitnessAwwalComplete();
-
-}
-
-
-function fitnessThaniComplete() {
-
-  return state.fitness.nutritionDone;
-
-}
-
-
-function xpText(value) {
-
-  if (
-    Number.isInteger(value)
-  ) {
-
-    return value + " XP";
-
+  const db={version:11,days:{},activeDate:todayKey(),lastSeenDate:todayKey()};
+  const oldRaw=localStorage.getItem("dream-self-dashboard-v10") || localStorage.getItem(OLD_KEY);
+  if(oldRaw){
+    try{
+      const old=JSON.parse(oldRaw);
+      if(old && old.date){
+        db.days[old.date]=normalizeDay(old,old.date);
+      }
+    }catch(e){}
   }
-
-  return (
-    value
-      .toFixed(2)
-      .replace(/0$/, "") +
-    " XP"
-  );
-
+  if(!db.days[todayKey()]) db.days[todayKey()]=blank();
+  return db;
 }
 
+let db=loadDB();
+let activeDate=todayKey();
+let selectedSalah=null;
 
-function checkButton(
-  done,
-  onclick
-) {
-
-  return `
-
-    <button
-      class="check ${done ? "done" : ""}"
-      onclick="${onclick}"
-    >
-      ${done ? "✓" : ""}
-    </button>
-
-  `;
-
+function ensureDay(date){
+  if(!db.days[date]) db.days[date]=normalizeDay({...blank(),date},date);
+  db.days[date].date=date;
+  return db.days[date];
+}
+function getState(){return ensureDay(activeDate)}
+function saveDB(){
+  db.activeDate=activeDate;
+  db.lastSeenDate=todayKey();
+  localStorage.setItem(KEY,JSON.stringify(db));
 }
 
-
-/* =========================================================
-   SALAH
-========================================================= */
-
-function renderSalah() {
-
-  const names = [
-    "Fajr",
-    "Dhuhr",
-    "Asr",
-    "Maghrib",
-    "Isha"
-  ];
-
-  document
-    .getElementById("salahGrid")
-    .innerHTML =
-
-    names.map(name => {
-
-      const status =
-        state.salah[name];
-
-      let label =
-        "Tap";
-
-      if (status === "prayed")
-        label = "Prayed";
-
-      if (status === "missed")
-        label = "Missed";
-
-      if (status === "qadha")
-        label = "Qadha";
-
-      return `
-
-        <button
-          class="salah ${status || ""}"
-          onclick="openSalah('${name}')"
-        >
-
-          <div class="salah-name">
-            ${name}
-          </div>
-
-          <div class="salah-status">
-            ${label}
-          </div>
-
-        </button>
-
-      `;
-
-    }).join("");
-
+function bootstrapDates(){
+  const today=todayKey();
+  const last=db.lastSeenDate||today;
+  if(last!==today){
+    let cursor=last;
+    while(cursor<today){
+      const next=addDateKey(cursor,1);
+      if(!db.days[next]){
+        const empty=normalizeDay({...blank(),date:next},next);
+        empty.logged=true;
+        empty.autoLogged=true;
+        empty.loggedAt=new Date().toISOString();
+        db.days[next]=empty;
+      } else if(!db.days[next].logged){
+        db.days[next].logged=true;
+        db.days[next].autoLogged=true;
+        db.days[next].loggedAt=new Date().toISOString();
+      }
+      cursor=next;
+    }
+  }
+  ensureDay(today);
+  db.lastSeenDate=today;
+  saveDB();
+}
+function addDateKey(key,delta){
+  const [y,m,d]=key.split("-").map(Number);
+  const date=new Date(y,m-1,d,12);
+  date.setDate(date.getDate()+delta);
+  return new Intl.DateTimeFormat("en-CA",{timeZone:"America/Toronto",year:"numeric",month:"2-digit",day:"2-digit"}).format(date);
 }
 
-
-function openSalah(name) {
-
-  selectedSalah =
-    name;
-
-  document
-    .getElementById("modalTitle")
-    .textContent = name;
-
-  document
-    .getElementById("salahModal")
-    .classList.add("show");
-
+function fmt(n){
+  const v=Number(n)||0;
+  return Number.isInteger(v)?`${v} XP`:`${v.toFixed(2).replace(/0$/,"")} XP`;
 }
 
+function salahXP(state=getState()){
+  return Object.values(state.salah).reduce((x,s)=>x+(s==="prayed"?1:s==="missed"?-1:s==="qadha"?-.25:0),0);
+}
+function quranXP(state=getState()){
+  const q=state.quran;
+  return q.juzSessions+q.memorizeSessions+q.revisionSessions;
+}
+function businessXP(state=getState()){
+  const b=state.business;
+  return b.reels*.5+b.carouselSessions*.5+b.reachoutSessions*.25+b.linkedinSessions*.5;
+}
+function fitnessXP(state=getState()){
+  const f=state.fitness;
+  return (f.gymDone?1:0)+Math.floor(f.steps/2500)*.25;
+}
+function entertainmentXP(state=getState()){
+  return state.entertainment.reduce((sum,item)=>sum+Number(item.xp||0),0);
+}
+function earnedXP(state=getState()){
+  return Object.values(state.salah).filter(x=>x==="prayed").length+quranXP(state)+businessXP(state)+fitnessXP(state);
+}
+function spentXP(state=getState()){
+  return Object.values(state.salah).filter(x=>x==="missed").length+
+         Object.values(state.salah).filter(x=>x==="qadha").length*.25+
+         entertainmentXP(state);
+}
+function totalXP(state=getState()){return earnedXP(state)-spentXP(state);}
 
-function closeModal() {
+function qA(state=getState()){return state.quran.juzSessions>=1}
+function qT(state=getState()){return state.quran.memorizeSessions>=1}
+function qM(state=getState()){return qT(state)}
+function bA(state=getState()){return state.business.reels>=4}
+function bT(state=getState()){return state.business.carouselSessions>=1&&state.business.reachoutSessions>=1&&state.business.linkedinSessions>=1}
+function bM(state=getState()){return bT(state)}
+function fA(state=getState()){return state.fitness.gymDone||state.fitness.steps>=10000}
 
-  selectedSalah =
-    null;
-
-  document
-    .getElementById("salahModal")
-    .classList.remove("show");
-
+function check(done,fn){
+  return `<button class="check ${done?"done":""}" onclick="${fn}">${done?"✓":""}</button>`;
 }
 
-
-function setSalah(status) {
-
-  if (!selectedSalah)
-    return;
-
-  state.salah[
-    selectedSalah
-  ] = status;
-
+function renderSalah(){
+  const state=getState();
+  document.getElementById("salahGrid").innerHTML=["Fajr","Dhuhr","Asr","Maghrib","Isha"].map(n=>{
+    const s=state.salah[n];
+    const label=s==="prayed"?"Prayed":s==="missed"?"Missed":s==="qadha"?"Qadha":"Tap";
+    return `<button class="salah ${s||""}" onclick="openSalah('${n}')"><div class="salah-name">${n}</div><div class="salah-status">${label}</div></button>`;
+  }).join("");
+}
+function openSalah(n){
+  selectedSalah=n;
+  document.getElementById("modalTitle").textContent=n;
+  document.getElementById("salahModal").classList.add("show");
+}
+function closeModal(){
+  selectedSalah=null;
+  document.getElementById("salahModal").classList.remove("show");
+}
+function setSalah(s){
+  if(!selectedSalah)return;
+  getState().salah[selectedSalah]=s;
   closeModal();
-
-  save();
+  saveDB();
   renderAll();
-
 }
 
-
-/* =========================================================
-   QURAN
-========================================================= */
-
-function renderQuran() {
-
-  const q =
-    state.quran;
-
-  document
-    .getElementById("quranCard")
-    .innerHTML = `
-
-    <div class="domain-top">
-
-      <div class="domain-header">
-
-        <div class="section-label">
-          Qur'an
-        </div>
-
-        <div class="card-title">
-          Awwal - Qur'an
-        </div>
-
-        <div class="subtitle">
-          Become the Hafidh of the Qur'an and rise closer to Allah and His Messenger (S).
-        </div>
-
-      </div>
-
-      <div class="stage-pill">
-
-        ${
-          quranMazeedUnlocked()
-            ? "MAZEED"
-            : quranThaniComplete()
-              ? "THANI"
-              : "AWWAL"
-        }
-
-      </div>
-
+function qTask(name,sessions,xp,minus,plus,toggle){
+  const active=sessions>0;
+  return `<div class="task ${active?"completed":""}">
+    <div class="task-row">
+      ${check(active,toggle)}
+      <div class="task-info"><div class="task-name">${name}</div><div class="task-xp">${xp}</div></div>
+      <div class="task-earned">${fmt(sessions)}</div>
     </div>
-
-
-    <div class="task-list">
-
-
-      <!-- JUZZ -->
-
-      <div
-        class="task ${
-          q.juzDone
-            ? "completed"
-            : ""
-        }"
-      >
-
-        <div class="task-row">
-
-          ${checkButton(
-            q.juzDone,
-            "toggleJuz()"
-          )}
-
-          <div class="task-info">
-
-            <div class="task-name">
-              Read 1 Juz
-            </div>
-
-            <div class="task-xp">
-              +1 XP
-            </div>
-
-          </div>
-
-        </div>
-
-
-        ${
-          q.juzDone
-          ? `
-
-            <div class="add-area">
-
-              <div class="session-control">
-
-                <button
-                  onclick="changeJuz(-1)"
-                >
-                  −
-                </button>
-
-                <div class="session-count">
-                  ${q.juzSessions}
-                </div>
-
-                <button
-                  onclick="changeJuz(1)"
-                >
-                  +
-                </button>
-
-              </div>
-
-              <button
-                class="add-button"
-                onclick="addJuz()"
-              >
-                Add
-              </button>
-
-              <span class="session-total">
-                ${xpText(q.juzSessions)} total
-              </span>
-
-            </div>
-
-          `
-          : ""
-        }
-
-      </div>
-
-
-      <!-- THANI -->
-
-      ${
-        quranThaniUnlocked()
-        ? `
-
-          <div class="next-stage">
-
-            <div class="next-stage-title">
-              Thani
-            </div>
-
-
-            <div
-              class="task ${
-                q.memorizeDone
-                  ? "completed"
-                  : ""
-              }"
-            >
-
-              <div class="task-row">
-
-                ${checkButton(
-                  q.memorizeDone,
-                  "toggleMemorize()"
-                )}
-
-                <div class="task-info">
-
-                  <div class="task-name">
-                    Memorize · 27 minutes
-                  </div>
-
-                  <div class="task-xp">
-                    +1 XP per 27-minute session
-                  </div>
-
-                </div>
-
-              </div>
-
-
-              ${
-                q.memorizeDone
-                ? `
-
-                  <div class="add-area">
-
-                    <div class="session-control">
-
-                      <button
-                        onclick="changeMemorize(-1)"
-                      >
-                        −
-                      </button>
-
-                      <div class="session-count">
-                        ${q.memorizeSessions}
-                      </div>
-
-                      <button
-                        onclick="changeMemorize(1)"
-                      >
-                        +
-                      </button>
-
-                    </div>
-
-                    <button
-                      class="add-button"
-                      onclick="addMemorize()"
-                    >
-                      Add
-                    </button>
-
-                    <span class="session-total">
-                      ${xpText(q.memorizeSessions)} total
-                    </span>
-
-                  </div>
-
-                `
-                : ""
-              }
-
-            </div>
-
-          </div>
-
-        `
-        : `
-          <div class="unlock-message">
-            Complete Awwal to unlock Thani.
-          </div>
-        `
-      }
-
-
-      <!-- MAZEED -->
-
-      ${
-        quranMazeedUnlocked()
-        ? `
-
-          <div class="next-stage">
-
-            <div class="next-stage-title">
-              Mazeed · Unlimited
-            </div>
-
-            <div class="task">
-
-              <div class="task-row">
-
-                <div class="task-info">
-
-                  <div class="task-name">
-                    New Revision · 27 minutes
-                  </div>
-
-                  <div class="task-xp">
-                    +1 XP per 27-minute session · No limit
-                  </div>
-
-                </div>
-
-              </div>
-
-
-              <div class="add-area">
-
-                <div class="session-control">
-
-                  <button
-                    onclick="changeRevision(-1)"
-                  >
-                    −
-                  </button>
-
-                  <div class="session-count">
-                    ${q.revisionSessions}
-                  </div>
-
-                  <button
-                    onclick="changeRevision(1)"
-                  >
-                    +
-                  </button>
-
-                </div>
-
-                <button
-                  class="add-button"
-                  onclick="addRevision()"
-                >
-                  Add
-                </button>
-
-                <span class="session-total">
-                  ${xpText(q.revisionSessions)} total
-                </span>
-
-              </div>
-
-            </div>
-
-          </div>
-
-        `
-        : ""
-      }
-
+    <div class="add-area">
+      <div class="session-control"><button onclick="${minus}">−</button><div class="session-count">${sessions}</div><button onclick="${plus}">+</button></div>
     </div>
-
-  `;
-
+  </div>`;
 }
-
-
-/* =========================================================
-   QURAN ACTIONS
-========================================================= */
-
-function toggleJuz() {
-
-  state.quran.juzDone =
-    !state.quran.juzDone;
-
-  /*
-    If unchecked:
-    remove all Juz XP sessions.
-  */
-
-  if (!state.quran.juzDone) {
-
-    state.quran.juzSessions =
-      0;
-
-  }
-
-  save();
-  renderAll();
-
-}
-
-
-function addJuz() {
-
-  /*
-    The Add button now has a real,
-    direct action: +1 Juz session.
-  */
-
-  state.quran.juzSessions++;
-
-  save();
-  renderAll();
-
-}
-
-
-function changeJuz(amount) {
-
-  state.quran.juzSessions =
-    Math.max(
-      0,
-      state.quran.juzSessions +
-      amount
-    );
-
-  save();
-  renderAll();
-
-}
-
-
-function toggleMemorize() {
-
-  state.quran.memorizeDone =
-    !state.quran.memorizeDone;
-
-  if (
-    !state.quran.memorizeDone
-  ) {
-
-    state.quran.memorizeSessions =
-      0;
-
-  }
-
-  save();
-  renderAll();
-
-}
-
-
-function addMemorize() {
-
-  state.quran.memorizeSessions++;
-
-  save();
-  renderAll();
-
-}
-
-
-function changeMemorize(amount) {
-
-  state.quran.memorizeSessions =
-    Math.max(
-      0,
-      state.quran.memorizeSessions +
-      amount
-    );
-
-  save();
-  renderAll();
-
-}
-
-
-function addRevision() {
-
-  state.quran.revisionSessions++;
-
-  save();
-  renderAll();
-
-}
-
-
-function changeRevision(amount) {
-
-  state.quran.revisionSessions =
-    Math.max(
-      0,
-      state.quran.revisionSessions +
-      amount
-    );
-
-  save();
-  renderAll();
-
-}
-
-
-/* =========================================================
-   BUSINESS
-========================================================= */
-
-function renderBusiness() {
-
-  const b =
-    state.business;
-
-  document
-    .getElementById("businessCard")
-    .innerHTML = `
-
-    <div class="domain-top">
-
-      <div class="domain-header">
-
-        <div class="section-label">
-          Business
-        </div>
-
-        <div class="card-title">
-          Awwal - Business
-        </div>
-
-        <div class="subtitle">
-          Build your business that pleases Allah & serves the Ummah of the Beloved (S)
-        </div>
-
-      </div>
-
-      <div class="stage-pill">
-        ${
-          businessMazeedUnlocked()
-            ? "MAZEED"
-            : businessThaniComplete()
-              ? "THANI"
-              : "AWWAL"
-        }
-      </div>
-
+function renderQuran(){
+  const q=getState().quran;
+  document.getElementById("quranCard").innerHTML=`<div class="domain-head">
+    <div class="domain-info">
+      <div class="section-label">Qur'an</div>
+      <div class="title-row"><div class="card-title">Awwal - Qur'an</div><div class="category-xp">${fmt(quranXP())}</div></div>
+      <div class="subtitle">Become the Hafidh of the Qur'an and rise closer to Allah and His Messenger (S).</div>
     </div>
+    <div class="stage-pill">${qM()?"MAZEED":qT()?"THANI":"AWWAL"}</div>
+  </div>
+  <div class="task-list">
+    ${qTask("Read 1 Juz",q.juzSessions,"+1 XP per Juz","changeJuz(-1)","changeJuz(1)","toggleJuz()")}
+    ${qA()?`<div class="next-stage"><div class="next-stage-title">Thani</div>${qTask("Memorize · 27 minutes",q.memorizeSessions,"+1 XP per 27-minute session","changeMem(-1)","changeMem(1)","toggleMem()")}</div>`:`<div class="unlock-message">Complete Awwal to unlock Thani.</div>`}
+    ${qM()?`<div class="next-stage"><div class="next-stage-title">Mazeed · Unlimited</div>${qTask("New Revision · 27 minutes",q.revisionSessions,"+1 XP per 27-minute session","changeRev(-1)","changeRev(1)","toggleRev()")}</div>`:""}
+  </div>`;
+}
+function toggleJuz(){const s=getState();s.quran.juzSessions=s.quran.juzSessions===0?1:0;saveDB();renderAll()}
+function changeJuz(n){const s=getState();s.quran.juzSessions=Math.max(0,s.quran.juzSessions+n);saveDB();renderAll()}
+function toggleMem(){const s=getState();s.quran.memorizeSessions=s.quran.memorizeSessions===0?1:0;saveDB();renderAll()}
+function changeMem(n){const s=getState();s.quran.memorizeSessions=Math.max(0,s.quran.memorizeSessions+n);saveDB();renderAll()}
+function toggleRev(){const s=getState();s.quran.revisionSessions=s.quran.revisionSessions===0?1:0;saveDB();renderAll()}
+function changeRev(n){const s=getState();s.quran.revisionSessions=Math.max(0,s.quran.revisionSessions+n);saveDB();renderAll()}
 
-
-    <div class="task-list">
-
-
-      <!-- REELS -->
-
-      <div
-        class="task ${
-          b.reels >= 4
-            ? "completed"
-            : ""
-        }"
-      >
-
-        <div class="task-row">
-
-          ${checkButton(
-            b.reels >= 4,
-            "toggleReelsCompletion()"
-          )}
-
-          <div class="task-info">
-
-            <div class="task-name">
-              Post Reels
-            </div>
-
-            <div class="task-xp">
-              +0.5 XP per Reel · 4 Reels completes Awwal
-            </div>
-
-          </div>
-
-        </div>
-
-
-        <div class="counter-box">
-
-          <div>
-
-            <div
-              style="
-                font-size:9px;
-                color:#777;
-              "
-            >
-              Reels posted
-            </div>
-
-            <div class="counter-number">
-              ${b.reels}
-            </div>
-
-            <div class="counter-sub">
-              ${xpText(b.reels * 0.5)}
-            </div>
-
-          </div>
-
-
-          <div class="counter-controls">
-
-            <button
-              onclick="changeReels(-1)"
-            >
-              −
-            </button>
-
-            <button
-              onclick="changeReels(1)"
-            >
-              +
-            </button>
-
-          </div>
-
-        </div>
-
-      </div>
-
-
-      <!-- THANI -->
-
-      ${
-        businessThaniUnlocked()
-        ? `
-
-          <div class="next-stage">
-
-            <div class="next-stage-title">
-              Thani
-            </div>
-
-
-            <!-- CAROUSEL FIRST -->
-
-            ${renderBusinessSessionTask(
-              "Post Carousel",
-              "+0.5 XP",
-              b.carouselDone,
-              b.carouselSessions,
-              "toggleCarousel()",
-              "addCarousel()",
-              "changeCarousel"
-            )}
-
-
-            <!-- REACH OUT SECOND -->
-
-            ${renderBusinessSessionTask(
-              "Reach Out to 4 People",
-              "+0.25 XP per session",
-              b.reachoutsDone,
-              b.reachoutSessions,
-              "toggleReachouts()",
-              "addReachouts()",
-              "changeReachouts"
-            )}
-
-
-            <!-- LINKEDIN THIRD -->
-
-            ${renderBusinessSessionTask(
-              "LinkedIn Post",
-              "+0.5 XP",
-              b.linkedinDone,
-              b.linkedinSessions,
-              "toggleLinkedin()",
-              "addLinkedin()",
-              "changeLinkedin"
-            )}
-
-          </div>
-
-        `
-        : `
-          <div class="unlock-message">
-            Complete 4 Reels to unlock Thani.
-          </div>
-        `
-      }
-
-
-      <!-- MAZEED -->
-
-      ${
-        businessMazeedUnlocked()
-        ? `
-
-          <div class="next-stage">
-
-            <div class="next-stage-title">
-              Mazeed · Unlimited
-            </div>
-
-            <div class="subtitle">
-              Open space for whatever moves the business forward today.
-            </div>
-
-          </div>
-
-        `
-        : ""
-      }
-
+function bTask(name,sessions,xp,earned,minus,plus,toggle){
+  const active=sessions>0;
+  return `<div class="task ${active?"completed":""}">
+    <div class="task-row">
+      ${check(active,toggle)}
+      <div class="task-info"><div class="task-name">${name}</div><div class="task-xp">${xp}</div></div>
+      <div class="task-earned">${fmt(earned)}</div>
     </div>
-
-  `;
-
-}
-
-
-function renderBusinessSessionTask(
-  name,
-  xp,
-  done,
-  sessions,
-  toggleFunction,
-  addFunction,
-  changeFunction
-) {
-
-  return `
-
-    <div
-      class="task ${
-        done
-          ? "completed"
-          : ""
-      }"
-    >
-
-      <div class="task-row">
-
-        ${checkButton(
-          done,
-          toggleFunction
-        )}
-
-        <div class="task-info">
-
-          <div class="task-name">
-            ${name}
-          </div>
-
-          <div class="task-xp">
-            ${xp}
-          </div>
-
-        </div>
-
-      </div>
-
-
-      ${
-        done
-        ? `
-
-          <div class="add-area">
-
-            <div class="session-control">
-
-              <button
-                onclick="${changeFunction}(-1)"
-              >
-                −
-              </button>
-
-              <div class="session-count">
-                ${sessions}
-              </div>
-
-              <button
-                onclick="${changeFunction}(1)"
-              >
-                +
-              </button>
-
-            </div>
-
-
-            <button
-              class="add-button"
-              onclick="${addFunction}"
-            >
-              Add
-            </button>
-
-
-            <span class="session-total">
-              ${xpText(
-                sessions *
-                parseFloat(
-                  xp.replace(
-                    /[^0-9.]/g,
-                    ""
-                  )
-                )
-              )} total
-            </span>
-
-          </div>
-
-        `
-        : ""
-      }
-
+    <div class="add-area">
+      <div class="session-control"><button onclick="${minus}">−</button><div class="session-count">${sessions}</div><button onclick="${plus}">+</button></div>
     </div>
-
-  `;
-
+  </div>`;
 }
-
-
-/* =========================================================
-   BUSINESS ACTIONS
-========================================================= */
-
-function changeReels(amount) {
-
-  /*
-    NO LIMIT.
-
-    Every reel is worth 0.5 XP.
-    4 reels is only the Awwal gate.
-  */
-
-  state.business.reels =
-    Math.max(
-      0,
-      state.business.reels +
-      amount
-    );
-
-  save();
-  renderAll();
-
-}
-
-
-function toggleReelsCompletion() {
-
-  /*
-    Because Reel completion is automatically
-    based on reaching 4:
-
-    if already complete, tapping the check
-    resets the Reel count.
-
-    Otherwise it takes you directly to 4.
-  */
-
-  if (
-    state.business.reels >= 4
-  ) {
-
-    state.business.reels =
-      0;
-
-  } else {
-
-    state.business.reels =
-      4;
-
-  }
-
-  save();
-  renderAll();
-
-}
-
-
-/* CAROUSEL */
-
-function toggleCarousel() {
-
-  state.business.carouselDone =
-    !state.business.carouselDone;
-
-  if (
-    !state.business.carouselDone
-  ) {
-
-    state.business.carouselSessions =
-      0;
-
-  }
-
-  save();
-  renderAll();
-
-}
-
-
-function addCarousel() {
-
-  state.business.carouselSessions++;
-
-  save();
-  renderAll();
-
-}
-
-
-function changeCarousel(amount) {
-
-  state.business.carouselSessions =
-    Math.max(
-      0,
-      state.business.carouselSessions +
-      amount
-    );
-
-  save();
-  renderAll();
-
-}
-
-
-/* REACH OUT */
-
-function toggleReachouts() {
-
-  state.business.reachoutsDone =
-    !state.business.reachoutsDone;
-
-  if (
-    !state.business.reachoutsDone
-  ) {
-
-    state.business.reachoutSessions =
-      0;
-
-  }
-
-  save();
-  renderAll();
-
-}
-
-
-function addReachouts() {
-
-  state.business.reachoutSessions++;
-
-  save();
-  renderAll();
-
-}
-
-
-function changeReachouts(amount) {
-
-  state.business.reachoutSessions =
-    Math.max(
-      0,
-      state.business.reachoutSessions +
-      amount
-    );
-
-  save();
-  renderAll();
-
-}
-
-
-/* LINKEDIN */
-
-function toggleLinkedin() {
-
-  state.business.linkedinDone =
-    !state.business.linkedinDone;
-
-  if (
-    !state.business.linkedinDone
-  ) {
-
-    state.business.linkedinSessions =
-      0;
-
-  }
-
-  save();
-  renderAll();
-
-}
-
-
-function addLinkedin() {
-
-  /*
-    FIXED:
-    Add directly increments the LinkedIn
-    session and therefore immediately
-    increases XP by 0.5.
-  */
-
-  state.business.linkedinSessions++;
-
-  save();
-  renderAll();
-
-}
-
-
-function changeLinkedin(amount) {
-
-  state.business.linkedinSessions =
-    Math.max(
-      0,
-      state.business.linkedinSessions +
-      amount
-    );
-
-  save();
-  renderAll();
-
-}
-
-
-/* =========================================================
-   FITNESS
-========================================================= */
-
-function renderFitness() {
-
-  const f =
-    state.fitness;
-
-  document
-    .getElementById("fitnessCard")
-    .innerHTML = `
-
-    <div class="domain-top">
-
-      <div class="domain-header">
-
-        <div class="section-label">
-          Fitness
-        </div>
-
-        <div class="card-title">
-          Awwal - Fitness
-        </div>
-
-        <div class="subtitle">
-          The Prophet (S) said a strong believer is better than a weak believer
-        </div>
-
-      </div>
-
-      <div class="stage-pill">
-        ${
-          fitnessThaniComplete()
-            ? "THANI"
-            : "AWWAL"
-        }
-      </div>
-
+function renderBusiness(){
+  const b=getState().business;
+  document.getElementById("businessCard").innerHTML=`<div class="domain-head">
+    <div class="domain-info">
+      <div class="section-label">Business</div>
+      <div class="title-row"><div class="card-title">Awwal - Business</div><div class="category-xp">${fmt(businessXP())}</div></div>
+      <div class="subtitle">Build your business that pleases Allah & serves the Ummah of the Beloved (S)</div>
     </div>
-
-
-    <div class="task-list">
-
-
-      <!-- GYM -->
-
-      <div
-        class="task ${
-          f.gymDone
-            ? "completed"
-            : ""
-        }"
-      >
-
-        <div class="task-row">
-
-          ${checkButton(
-            f.gymDone,
-            "toggleGym()"
-          )}
-
-          <div class="task-info">
-
-            <div class="task-name">
-              Go to the Gym
-            </div>
-
-            <div class="task-xp">
-              +1 XP
-            </div>
-
-          </div>
-
-        </div>
-
-
-        ${
-          f.gymDone
-          ? `
-
-            <div class="add-area">
-
-              <div class="session-control">
-
-                <button
-                  onclick="changeGym(-1)"
-                >
-                  −
-                </button>
-
-                <div class="session-count">
-                  ${f.gymSessions}
-                </div>
-
-                <button
-                  onclick="changeGym(1)"
-                >
-                  +
-                </button>
-
-              </div>
-
-              <button
-                class="add-button"
-                onclick="addGym()"
-              >
-                Add
-              </button>
-
-              <span class="session-total">
-                ${xpText(f.gymSessions)} total
-              </span>
-
-            </div>
-
-          `
-          : ""
-        }
-
-      </div>
-
-
-      <!-- STEPS -->
-
-      <div
-        class="task ${
-          f.steps >= 10000
-            ? "completed"
-            : ""
-        }"
-      >
-
-        <div class="task-row">
-
-          ${checkButton(
-            f.steps >= 10000,
-            "toggleSteps()"
-          )}
-
-          <div class="task-info">
-
-            <div class="task-name">
-              Walk 10,000 Steps
-            </div>
-
-            <div class="task-xp">
-              +0.25 XP per 2,500 steps · No limit
-            </div>
-
-          </div>
-
-        </div>
-
-
-        <div class="counter-box">
-
-          <div>
-
-            <div
-              style="
-                font-size:9px;
-                color:#777;
-              "
-            >
-              Steps
-            </div>
-
-            <div class="counter-number">
-              ${f.steps.toLocaleString()}
-            </div>
-
-            <div class="counter-sub">
-              ${xpText(
-                Math.floor(
-                  f.steps / 2500
-                ) * 0.25
-              )}
-            </div>
-
-          </div>
-
-
-          <div class="counter-controls">
-
-            <button
-              onclick="changeSteps(-2500)"
-            >
-              −
-            </button>
-
-            <button
-              onclick="changeSteps(2500)"
-            >
-              +
-            </button>
-
-          </div>
-
-        </div>
-
-      </div>
-
-
-      <!-- THANI -->
-
-      ${
-        fitnessThaniUnlocked()
-        ? `
-
-          <div class="next-stage">
-
-            <div class="next-stage-title">
-              Thani
-            </div>
-
-            <div
-              class="task ${
-                f.nutritionDone
-                  ? "completed"
-                  : ""
-              }"
-            >
-
-              <div class="task-row">
-
-                ${checkButton(
-                  f.nutritionDone,
-                  "toggleNutrition()"
-                )}
-
-                <div class="task-info">
-
-                  <div class="task-name">
-                    Hit nutritional goals
-                  </div>
-
-                  <div class="task-xp">
-                    Track your nutrition consistently
-                  </div>
-
-                </div>
-
-              </div>
-
-            </div>
-
-          </div>
-
-        `
-        : `
-          <div class="unlock-message">
-            Complete either Gym or 10,000 Steps to unlock Thani.
-          </div>
-        `
-      }
-
+    <div class="stage-pill">${bM()?"MAZEED":bT()?"THANI":"AWWAL"}</div>
+  </div>
+  <div class="task-list">
+    ${bTask("Post Reels",b.reels,"+0.5 XP per Reel · 4 Reels completes Awwal",b.reels*.5,"changeReels(-1)","changeReels(1)","toggleReels()")}
+    ${bA()?`<div class="next-stage"><div class="next-stage-title">Thani</div>
+      ${bTask("Post Carousel",b.carouselSessions,"+0.5 XP per Carousel",b.carouselSessions*.5,"changeCarousel(-1)","changeCarousel(1)","toggleCarousel()")}
+      ${bTask("Reach Out to 4 People",b.reachoutSessions,"+0.25 XP per outreach session",b.reachoutSessions*.25,"changeReachout(-1)","changeReachout(1)","toggleReachout()")}
+      ${bTask("LinkedIn Post",b.linkedinSessions,"+0.5 XP per Post",b.linkedinSessions*.5,"changeLinkedin(-1)","changeLinkedin(1)","toggleLinkedin()")}
+    </div>`:`<div class="unlock-message">Complete 4 Reels to unlock Thani.</div>`}
+  </div>`;
+}
+function toggleReels(){const s=getState();s.business.reels=s.business.reels===0?1:0;saveDB();renderAll()}
+function changeReels(n){const s=getState();s.business.reels=Math.max(0,s.business.reels+n);saveDB();renderAll()}
+function toggleCarousel(){const s=getState();s.business.carouselSessions=s.business.carouselSessions===0?1:0;saveDB();renderAll()}
+function changeCarousel(n){const s=getState();s.business.carouselSessions=Math.max(0,s.business.carouselSessions+n);saveDB();renderAll()}
+function toggleReachout(){const s=getState();s.business.reachoutSessions=s.business.reachoutSessions===0?1:0;saveDB();renderAll()}
+function changeReachout(n){const s=getState();s.business.reachoutSessions=Math.max(0,s.business.reachoutSessions+n);saveDB();renderAll()}
+function toggleLinkedin(){const s=getState();s.business.linkedinSessions=s.business.linkedinSessions===0?1:0;saveDB();renderAll()}
+function changeLinkedin(n){const s=getState();s.business.linkedinSessions=Math.max(0,s.business.linkedinSessions+n);saveDB();renderAll()}
+
+function fTask(name,done,xp,earned,toggle,controls=""){
+  return `<div class="task ${done?"completed":""}">
+    <div class="task-row">
+      ${check(done,toggle)}
+      <div class="task-info"><div class="task-name">${name}</div><div class="task-xp">${xp}</div></div>
+      <div class="task-earned">${fmt(earned)}</div>
     </div>
-
-  `;
-
+    ${controls?`<div class="add-area">${controls}</div>`:""}
+  </div>`;
 }
+function renderFitness(){
+  const f=getState().fitness;
+  const stepXP=Math.floor(f.steps/2500)*.25;
+  document.getElementById("fitnessCard").innerHTML=`<div class="domain-head">
+    <div class="domain-info">
+      <div class="section-label">Fitness</div>
+      <div class="title-row"><div class="card-title">Awwal - Fitness</div><div class="category-xp">${fmt(fitnessXP())}</div></div>
+      <div class="subtitle">The Prophet (S) said a strong believer is better than a weak believer</div>
+    </div>
+    <div class="stage-pill">AWWAL</div>
+  </div>
+  <div class="task-list">
+    ${fTask("Go to the Gym",f.gymDone,"+1 XP",f.gymDone?1:0,"toggleGym()")}
+    ${fTask("Walk 10,000 Steps",f.steps>0,"+0.25 XP per 2,500 steps · No limit",stepXP,"toggleSteps()",`<div class="session-control"><button onclick="changeSteps(-2500)">−</button><div class="session-count">${f.steps.toLocaleString()}</div><button onclick="changeSteps(2500)">+</button></div>`)}
+  </div>`;
+}
+function toggleGym(){const s=getState();s.fitness.gymDone=!s.fitness.gymDone;saveDB();renderAll()}
+function toggleSteps(){const s=getState();s.fitness.steps=s.fitness.steps===0?2500:0;saveDB();renderAll()}
+function changeSteps(n){const s=getState();s.fitness.steps=Math.max(0,Math.floor(s.fitness.steps/2500)*2500+n);saveDB();renderAll()}
 
-
-/* =========================================================
-   FITNESS ACTIONS
-========================================================= */
-
-function toggleGym() {
-
-  state.fitness.gymDone =
-    !state.fitness.gymDone;
-
-  if (
-    !state.fitness.gymDone
-  ) {
-
-    state.fitness.gymSessions =
-      0;
-
-  }
-
-  save();
+function toggleOtherEntry(){
+  const select=document.getElementById("entertainmentCategory");
+  const wrap=document.getElementById("otherEntry");
+  const other=document.getElementById("entertainmentOther");
+  const isOther=select.value==="Other";
+  wrap.classList.toggle("show",isOther);
+  other.required=isOther;
+}
+function escapeHTML(str){
+  return String(str).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+}
+function addEntertainment(){
+  const category=document.getElementById("entertainmentCategory").value;
+  const type=document.getElementById("entertainmentType").value;
+  let minutes=parseInt(document.getElementById("entertainmentMinutes").value,10);
+  const other=document.getElementById("entertainmentOther").value.trim();
+  if(!category || !Number.isFinite(minutes) || minutes<15)return;
+  if(category==="Other" && !other)return;
+  minutes=Math.max(15,Math.round(minutes/15)*15);
+  const name=category==="Other"?other:category;
+  const rate=type==="intentional"?2:4;
+  const xp=(minutes/30)*rate;
+  const s=getState();
+  s.entertainment.unshift({id:Date.now()+Math.random(),name,category,type,minutes,xp});
+  document.getElementById("entertainmentCategory").value="";
+  document.getElementById("entertainmentOther").value="";
+  document.getElementById("entertainmentMinutes").value="";
+  document.getElementById("entertainmentType").value="intentional";
+  toggleOtherEntry();
+  saveDB();
   renderAll();
-
 }
-
-
-function addGym() {
-
-  state.fitness.gymSessions++;
-
-  save();
+function removeEntertainment(id){
+  const s=getState();
+  s.entertainment=s.entertainment.filter(x=>x.id!==id);
+  saveDB();
   renderAll();
-
 }
-
-
-function changeGym(amount) {
-
-  state.fitness.gymSessions =
-    Math.max(
-      0,
-      state.fitness.gymSessions +
-      amount
-    );
-
-  save();
-  renderAll();
-
-}
-
-
-function toggleSteps() {
-
-  if (
-    state.fitness.steps >=
-    10000
-  ) {
-
-    state.fitness.steps =
-      0;
-
-  } else {
-
-    state.fitness.steps =
-      10000;
-
-  }
-
-  save();
-  renderAll();
-
-}
-
-
-function changeSteps(amount) {
-
-  state.fitness.steps =
-    Math.max(
-      0,
-      state.fitness.steps +
-      amount
-    );
-
-  save();
-  renderAll();
-
-}
-
-
-function toggleNutrition() {
-
-  state.fitness.nutritionDone =
-    !state.fitness.nutritionDone;
-
-  save();
-  renderAll();
-
-}
-
-
-/* =========================================================
-   FOOD
-========================================================= */
-
-function addFood() {
-
-  const input =
-    document.getElementById(
-      "foodInput"
-    );
-
-  const value =
-    input.value.trim();
-
-  if (!value)
+function renderEntertainment(){
+  const state=getState();
+  const el=document.getElementById("entertainmentList");
+  if(!state.entertainment.length){
+    el.innerHTML='<div class="empty-spend">No entertainment logged yet.</div>';
     return;
-
-  state.foods.push(value);
-
-  input.value = "";
-
-  save();
-  renderFood();
-
+  }
+  el.innerHTML=state.entertainment.map(item=>`<div class="entertainment-item">
+    <div class="entertainment-main">
+      <div class="entertainment-name">${escapeHTML(item.name)}</div>
+      <div class="entertainment-meta">${item.type==="intentional"?"Intentional":"Unintentional"} · ${item.minutes} min</div>
+    </div>
+    <div style="display:flex;align-items:center;gap:7px">
+      <div class="entertainment-cost">−${fmt(item.xp)}</div>
+      <button class="delete-spend" onclick="removeEntertainment(${JSON.stringify(item.id)})">×</button>
+    </div>
+  </div>`).join("");
 }
 
-
-function renderFood() {
-
-  const list =
-    document.getElementById(
-      "foodList"
-    );
-
-  list.innerHTML =
-
-    state.foods.map(
-      (food, index) => `
-
-        <div class="food-item">
-
-          <span>
-            ${food}
-          </span>
-
-          <button
-            style="
-              border:none;
-              background:none;
-              color:#999;
-              font-size:10px;
-            "
-            onclick="removeFood(${index})"
-          >
-            ×
-          </button>
-
-        </div>
-
-      `
-    ).join("");
-
+function renderEnergy(){
+  const state=getState();
+  const e=earnedXP(state),s=spentXP(state),n=totalXP(state);
+  document.getElementById("netXPBig").textContent=fmt(n);
+  document.getElementById("netXPBig").classList.toggle("negative",n<0);
+  document.getElementById("xpTotal").textContent=n;
+  document.getElementById("xpEarned").textContent="+"+fmt(e);
+  document.getElementById("xpSpent").textContent="-"+fmt(s);
+  document.getElementById("todayLabel").textContent=humanDate(activeDate);
+  document.getElementById("xpRing").style.setProperty("--angle",Math.min(360,Math.max(0,e*20))+"deg");
 }
 
-
-function removeFood(index) {
-
-  state.foods.splice(
-    index,
-    1
-  );
-
-  save();
-  renderFood();
-
+function renderMirror(){
+  const s=getState();
+  const salahCount=Object.values(s.salah).filter(x=>x==="prayed"||x==="qadha").length;
+  document.getElementById("mirrorText").textContent=`Today you showed up for ${salahCount}/5 salah, ${s.business.reels} reels, ${s.quran.memorizeSessions} Quran memorization session(s), ${s.quran.revisionSessions} revision session(s), ${s.fitness.gymDone?"the gym":"no gym"}, and ${s.fitness.steps.toLocaleString()} steps.`;
+  document.getElementById("patternText").textContent=qA(s)&&bA(s)&&fA(s)?"Your Awwal inputs are all present today. This is evidence of the identity you're building.":"Finish the open Awwal inputs first. Extra work still counts.";
+  document.getElementById("strategyText").textContent=totalXP(s)<0?"Your net energy is negative today. No shame — return to the next clear Awwal action.":"Keep the system simple: show up, record the input, and let the accumulated evidence speak.";
 }
 
+function renderReflection(){
+  const s=getState();
+  ["well","way","tomorrow"].forEach(k=>document.getElementById(k+"Input").value=s.reflection[k]||"");
+  ["well","way","tomorrow"].forEach(k=>{
+    document.getElementById(k+"Input").oninput=e=>{getState().reflection[k]=e.target.value;saveDB();};
+  });
+}
 
-function addJunk() {
+function renderDayDone(){
+  const btn=document.getElementById("dayDoneButton");
+  const isToday=activeDate===todayKey();
+  const state=getState();
+  btn.textContent=state.logged?"Day Logged ✓":"Alhamdulillah, Day's Done";
+  btn.classList.toggle("logged",state.logged);
+  btn.disabled=false;
+  btn.onclick=function(event){
+    event.preventDefault();
+    logDay();
+    return false;
+  };
+  btn.style.opacity="1";
+  document.querySelector(".reset-button").textContent=isToday?"Reset today's dashboard":"Reset this day";
+}
 
-  state.junkCount++;
+function logDay(){
+  const s=getState();
+  if(s.logged){
+    // Uncheck Day's Done and return the day to an editable/unlogged state.
+    s.logged=false;
+    s.autoLogged=false;
+    s.loggedAt=null;
+  }else{
+    // Mark the day as manually logged.
+    s.logged=true;
+    s.autoLogged=false;
+    s.loggedAt=new Date().toISOString();
+  }
+  saveDB();
+  renderAll();
+}
 
-  save();
+function resetCurrentDay(){
+  const dateToReset=activeDate;
+
+  // Hard reset with no browser dialog: this is intentionally destructive.
+  // Remove the day's record, create a pristine one, save it, then redraw.
+  delete db.days[dateToReset];
+
+  const fresh=blank();
+  fresh.date=dateToReset;
+  fresh.logged=false;
+  fresh.autoLogged=false;
+  fresh.loggedAt=null;
+
+  db.days[dateToReset]=normalizeDay(fresh,dateToReset);
+  activeDate=dateToReset;
+  saveDB();
+
+  // Clear visible inputs immediately.
+  const category=document.getElementById("entertainmentCategory");
+  const other=document.getElementById("entertainmentOther");
+  const minutes=document.getElementById("entertainmentMinutes");
+  const type=document.getElementById("entertainmentType");
+  const well=document.getElementById("wellInput");
+  const way=document.getElementById("wayInput");
+  const tomorrow=document.getElementById("tomorrowInput");
+
+  if(category) category.value="";
+  if(other) other.value="";
+  if(minutes) minutes.value="";
+  if(type) type.value="intentional";
+  if(well) well.value="";
+  if(way) way.value="";
+  if(tomorrow) tomorrow.value="";
+  toggleOtherEntry();
+
+  // Reload the exact persisted state and repaint everything.
+  db=loadDB();
+  db.days[dateToReset]=normalizeDay({...blank(),date:dateToReset},dateToReset);
+  activeDate=dateToReset;
+  saveDB();
   renderAll();
 
-}
-
-
-/* =========================================================
-   ENERGY DISPLAY
-========================================================= */
-
-function renderEnergy() {
-
-  const earned =
-    earnedXP();
-
-  const spent =
-    spentXP();
-
-  const net =
-    totalXP();
-
-
-  document
-    .getElementById("xpEarned")
-    .textContent =
-      "+" + xpText(earned);
-
-
-  document
-    .getElementById("xpSpent")
-    .textContent =
-      "-" + xpText(spent);
-
-
-  document
-    .getElementById("xpTotal")
-    .textContent =
-      xpText(net)
-        .replace(
-          " XP",
-          ""
-        );
-
-
-  const big =
-    document.getElementById(
-      "netXPBig"
-    );
-
-  big.textContent =
-    xpText(net);
-
-
-  big.classList.remove(
-    "positive",
-    "negative"
-  );
-
-
-  if (net > 0)
-    big.classList.add(
-      "positive"
-    );
-
-  if (net < 0)
-    big.classList.add(
-      "negative"
-    );
-
-
-  const angle =
-    Math.min(
-      360,
-      Math.max(
-        0,
-        earned * 20
-      )
-    );
-
-
-  document
-    .getElementById("xpRing")
-    .style
-    .setProperty(
-      "--earned-angle",
-      angle + "deg"
-    );
-
-
-  document
-    .getElementById("todayLabel")
-    .textContent =
-      todayKey();
-
-}
-
-
-/* =========================================================
-   TRAJECTORY
-========================================================= */
-
-function renderChart() {
-
-  const chart =
-    document.getElementById(
-      "chart"
-    );
-
-  const values = [
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    totalXP()
-  ];
-
-  const max =
-    Math.max(
-      1,
-      ...values.map(
-        v => Math.abs(v)
-      )
-    );
-
-  chart.innerHTML =
-
-    values.map(
-      (value, i) => {
-
-        const height =
-          Math.max(
-            3,
-            Math.min(
-              95,
-              Math.abs(value) /
-              max *
-              95
-            )
-          );
-
-        return `
-
-          <div class="bar-wrap">
-
-            <div
-              class="bar"
-              style="
-                height:${height}px
-              "
-            ></div>
-
-            <div class="bar-label">
-              ${
-                i === 6
-                  ? "Today"
-                  : "—"
-              }
-            </div>
-
-          </div>
-
-        `;
-
+  // Small visual confirmation in the button itself.
+  const btn=document.getElementById("resetButton");
+  if(btn){
+    const original=btn.textContent;
+    btn.textContent="Dashboard Reset ✓";
+    setTimeout(()=>{
+      if(btn && document.body.contains(btn)){
+        btn.textContent=activeDate===todayKey()?"Reset today's dashboard":"Reset this day";
       }
-    ).join("");
+    },1200);
+  }
 
+  return false;
 }
 
-
-/* =========================================================
-   MIRROR
-========================================================= */
-
-function renderMirror() {
-
-  const reels =
-    state.business.reels;
-
-  const memorize =
-    state.quran.memorizeSessions;
-
-  const revision =
-    state.quran.revisionSessions;
-
-  const gym =
-    state.fitness.gymDone;
-
-  const steps =
-    state.fitness.steps;
-
-  const salahCount =
-    Object.values(
-      state.salah
-    ).filter(
-      x =>
-        x === "prayed" ||
-        x === "qadha"
-    ).length;
-
-
-  document
-    .getElementById(
-      "mirrorText"
-    )
-    .textContent =
-
-      `Today you showed up for ` +
-      `${salahCount}/5 salah, ` +
-      `${reels} reels, ` +
-      `${memorize} Quran memorization ` +
-      `session(s), ` +
-      `${revision} Quran revision ` +
-      `session(s), ` +
-      `${gym ? "the gym" : "no gym"}, ` +
-      `and ${steps.toLocaleString()} steps.`;
-
-
-  let pattern =
-    "Your data is still building. Keep showing up so the dashboard can see your patterns.";
-
-
-  if (
-    quranAwwalComplete() &&
-    businessAwwalComplete() &&
-    fitnessAwwalComplete()
-  ) {
-
-    pattern =
-      "Your Awwal inputs are all present today. This is evidence of the identity you're building.";
-
-  }
-
-  else if (
-    !businessAwwalComplete()
-  ) {
-
-    pattern =
-      "Business is the unfinished Awwal input today. Four reels completes Awwal, and every reel beyond that still counts.";
-
-  }
-
-  else if (
-    !quranAwwalComplete()
-  ) {
-
-    pattern =
-      "Qur'an Awwal is still open. Read 1 Juz to complete the daily Qur'an minimum.";
-
-  }
-
-  else if (
-    !fitnessAwwalComplete()
-  ) {
-
-    pattern =
-      "Fitness Awwal is still open. Complete Gym OR 10,000 steps.";
-
-  }
-
-
-  document
-    .getElementById(
-      "patternText"
-    )
-    .textContent =
-      pattern;
-
-
-  let strategy =
-    "Don't add more complexity. Finish the Awwal inputs first.";
-
-
-  if (
-    totalXP() < 0
-  ) {
-
-    strategy =
-      "Your net energy is negative today. The response is not shame — reduce friction and return to the next Awwal action.";
-
-  }
-
-  else if (
-    quranMazeedUnlocked() &&
-    businessMazeedUnlocked()
-  ) {
-
-    strategy =
-      "Your core gates are open. Use Mazeed deliberately rather than turning extra work into pressure.";
-
-  }
-
-  else if (
-    businessAwwalComplete()
-  ) {
-
-    strategy =
-      "Business Awwal is done. Your additional reels still count as real effort, while Thani is now available.";
-
-  }
-
-
-  document
-    .getElementById(
-      "strategyText"
-    )
-    .textContent =
-      strategy;
-
+function renderEditBanner(){
+  const isEditing=activeDate!==todayKey();
+  const banner=document.getElementById("editBanner");
+  banner.classList.toggle("show",isEditing);
+  if(isEditing)document.getElementById("editBannerTitle").textContent=`Editing ${humanDate(activeDate)}`;
 }
 
-
-/* =========================================================
-   REFLECTION
-========================================================= */
-
-function renderReflection() {
-
-  document
-    .getElementById(
-      "wellInput"
-    ).value =
-      state.reflection.well || "";
-
-
-  document
-    .getElementById(
-      "wayInput"
-    ).value =
-      state.reflection.way || "";
-
-
-  document
-    .getElementById(
-      "tomorrowInput"
-    ).value =
-      state.reflection.tomorrow || "";
-
+function renderHistory(){
+  const el=document.getElementById("historyList");
+  const keys=[];
+  for(let i=0;i<7;i++)keys.push(dayOffsetKey(-i));
+  el.innerHTML=keys.map(key=>{
+    const s=db.days[key]||normalizeDay({...blank(),date:key},key);
+    const net=totalXP(s), earned=earnedXP(s), spent=spentXP(s);
+    const status=s.logged?(s.autoLogged?"Auto-logged":"Logged"):"Not logged";
+    const statusClass=s.logged?(s.autoLogged?"auto":"logged"):"";
+    return `<div class="history-card">
+      <div class="history-head">
+        <div>
+          <div class="history-date">${longDate(key)}${key===todayKey()?" · Today":""}</div>
+          <div class="history-status ${statusClass}">${status}</div>
+        </div>
+        <div class="history-net">
+          <div class="history-net-label">Net XP</div>
+          <div class="history-net-number ${net<0?"negative":""}">${fmt(net)}</div>
+        </div>
+      </div>
+      <div class="history-metrics">
+        <div class="history-metric"><div class="history-metric-label">Earned</div><div class="history-metric-value">+${fmt(earned)}</div></div>
+        <div class="history-metric"><div class="history-metric-label">Spent</div><div class="history-metric-value">-${fmt(spent)}</div></div>
+        <div class="history-metric"><div class="history-metric-label">Qur'an</div><div class="history-metric-value">${fmt(quranXP(s))}</div></div>
+        <div class="history-metric"><div class="history-metric-label">Business</div><div class="history-metric-value">${fmt(businessXP(s))}</div></div>
+      </div>
+      <button class="history-edit" onclick="editDay('${key}')">${key===todayKey()?"Open Today":"Edit this day"}</button>
+    </div>`;
+  }).join("");
 }
-
-
-function bindReflection() {
-
-  document
-    .getElementById(
-      "wellInput"
-    )
-    .oninput = e => {
-
-      state.reflection.well =
-        e.target.value;
-
-      save();
-
-    };
-
-
-  document
-    .getElementById(
-      "wayInput"
-    )
-    .oninput = e => {
-
-      state.reflection.way =
-        e.target.value;
-
-      save();
-
-    };
-
-
-  document
-    .getElementById(
-      "tomorrowInput"
-    )
-    .oninput = e => {
-
-      state.reflection.tomorrow =
-        e.target.value;
-
-      save();
-
-    };
-
-}
-
-
-/* =========================================================
-   RESET
-========================================================= */
-
-function resetToday() {
-
-  const confirmed =
-    confirm(
-      "Reset all of today's progress?"
-    );
-
-  if (!confirmed)
-    return;
-
-  state =
-    structuredClone(
-      defaultState
-    );
-
-  save();
+function editDay(key){
+  ensureDay(key);
+  activeDate=key;
+  showTab("today");
   renderAll();
-
+}
+function returnToToday(){
+  activeDate=todayKey();
+  ensureDay(activeDate);
+  showTab("today");
+  renderAll();
 }
 
+function showTab(tab){
+  const todayView=document.getElementById("todayView");
+  const historyView=document.getElementById("historyView");
+  const todayTab=document.getElementById("todayTab");
+  const historyTab=document.getElementById("historyTab");
+  if(tab==="history"){
+    todayView.style.display="none";
+    historyView.style.display="block";
+    todayTab.classList.remove("active");
+    historyTab.classList.add("active");
+    renderHistory();
+    return;
+  }
+  todayView.style.display="block";
+  historyView.style.display="none";
+  todayTab.classList.add("active");
+  historyTab.classList.remove("active");
+  renderAll();
+}
 
-/* =========================================================
-   RENDER
-========================================================= */
-
-function renderAll() {
-
+function renderAll(){
   renderSalah();
-
   renderQuran();
-
   renderBusiness();
-
   renderFitness();
-
   renderEnergy();
-
-  renderFood();
-
-  renderChart();
-
+  renderEntertainment();
   renderMirror();
-
   renderReflection();
-
-  bindReflection();
-
+  renderDayDone();
+  renderEditBanner();
+  if(document.getElementById("historyView").style.display!=="none")renderHistory();
 }
 
+function msUntil1159PM(){
+  const now=new Date();
+  const target=new Date(now.getFullYear(),now.getMonth(),now.getDate(),23,59,0,500);
+  if(target<=now)target.setDate(target.getDate()+1);
+  return Math.max(1000,target-now);
+}
+function autoLogAtEndOfDay(){
+  const today=todayKey();
+  const s=db.days[today];
+  if(s && !s.logged){
+    s.logged=true;
+    s.autoLogged=true;
+    s.loggedAt=new Date().toISOString();
+    db.days[today]=s;
+    saveDB();
+    if(activeDate===today)renderAll();
+  }
+}
+function scheduleAutoLog(){
+  setTimeout(()=>{
+    autoLogAtEndOfDay();
+    scheduleAutoLog();
+  },msUntil1159PM());
+}
+function handleResume(){
+  bootstrapDates();
+  const now=new Date();
+  if(now.getHours()===23 && now.getMinutes()>=59)autoLogAtEndOfDay();
+  if(document.getElementById("historyView").style.display!=="none")renderHistory();
+}
+window.addEventListener("focus",handleResume);
+document.addEventListener("visibilitychange",()=>{if(document.visibilityState==="visible")handleResume()});
 
-/* =========================================================
-   START
-========================================================= */
+bootstrapDates();
+ensureDay(activeDate);
 
 renderAll();
-
+scheduleAutoLog();
 </script>
 
 </body>
