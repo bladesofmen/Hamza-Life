@@ -1,0 +1,3536 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dream Self Dashboard</title>
+
+<style>
+:root {
+  --panel:#f5f5f1;
+  --card:#fff;
+  --text:#1d1d1b;
+  --muted:#72726b;
+  --border:#e2e2da;
+  --accent:#315c4c;
+  --accent-bg:#e6eee9;
+  --earned:#3d765e;
+  --spent:#b85b55;
+  --penalty:#c06a2d;
+  --reason:#DB904B;
+}
+
+* {
+  box-sizing:border-box;
+}
+
+body {
+  margin:0;
+  background:#fafaf7;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  color:var(--text);
+}
+
+button,
+input,
+select,
+textarea {
+  font:inherit;
+}
+
+button {
+  cursor:pointer;
+}
+
+input,
+select,
+textarea {
+  color:var(--text);
+  background:#fff;
+  border:1px solid var(--border);
+}
+
+.dashboard {
+  max-width:1400px;
+  margin:auto;
+  padding:20px;
+}
+
+/* TOP */
+
+.top {
+  background:var(--panel);
+  border:1px solid var(--border);
+  border-radius:22px;
+  padding:18px;
+  margin-bottom:12px;
+}
+
+.topline {
+  display:flex;
+  justify-content:space-between;
+  gap:12px;
+  align-items:flex-start;
+}
+
+.eyebrow {
+  font-size:10px;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:var(--muted);
+  font-weight:800;
+}
+
+.title {
+  font-size:27px;
+  font-weight:850;
+  line-height:1.1;
+  margin-top:4px;
+}
+
+.subtitle {
+  font-size:12px;
+  color:var(--muted);
+  line-height:1.45;
+  margin-top:6px;
+  max-width:600px;
+}
+
+.date-row {
+  display:flex;
+  align-items:center;
+  gap:6px;
+  white-space:nowrap;
+}
+
+.date-row input {
+  width:142px;
+  padding:9px;
+  border-radius:9px;
+  font-size:12px;
+}
+
+/* IDENTITY */
+
+.identity {
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:8px;
+  margin-top:15px;
+}
+
+.identity-card {
+  background:#fff;
+  border:1px solid var(--border);
+  border-radius:13px;
+  padding:11px;
+}
+
+.identity-head {
+  display:flex;
+  justify-content:space-between;
+}
+
+.identity-name {
+  font-size:11px;
+  font-weight:850;
+}
+
+.identity-pct {
+  font-size:11px;
+  font-weight:850;
+  color:var(--accent);
+}
+
+.identity-main {
+  font-size:12px;
+  font-weight:700;
+  line-height:1.35;
+  margin-top:6px;
+}
+
+.identity-foot {
+  font-size:9px;
+  color:var(--muted);
+  margin-top:4px;
+}
+
+/* CARDS */
+
+.card,
+.salah-card,
+.domain-card,
+.energy-card,
+.utility-card,
+.chart-card {
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:18px;
+  padding:15px;
+}
+
+.salah-card {
+  margin-bottom:12px;
+}
+
+.section-head {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:9px;
+}
+
+.section-title {
+  font-size:14px;
+  font-weight:850;
+}
+
+.section-sub {
+  font-size:10px;
+  color:var(--muted);
+  margin-top:3px;
+}
+
+/* SALAH */
+
+.salah-grid {
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  gap:7px;
+}
+
+.salah-item {
+  border:1px solid var(--border);
+  border-radius:11px;
+  background:var(--panel);
+  padding:8px;
+}
+
+.salah-btn {
+  width:100%;
+  min-height:43px;
+  border:0;
+  background:transparent;
+  color:var(--text);
+  font-weight:800;
+  font-size:11px;
+  border-radius:8px;
+}
+
+.salah-btn.done {
+  background:#e8f1eb;
+  color:var(--earned);
+}
+
+.salah-btn.missed {
+  background:#f8ebe9;
+  color:var(--spent);
+}
+
+.salah-btn.corrected {
+  background:#f5eee4;
+  color:var(--penalty);
+}
+
+.salah-options {
+  display:none;
+  gap:4px;
+  margin-top:5px;
+}
+
+.salah-item.open .salah-options {
+  display:grid;
+}
+
+.salah-options button {
+  border:1px solid var(--border);
+  background:#fff;
+  border-radius:7px;
+  padding:7px 5px;
+  font-size:9px;
+  font-weight:750;
+}
+
+.legendline {
+  display:flex;
+  gap:9px;
+  flex-wrap:wrap;
+  margin-top:8px;
+  font-size:9px;
+  color:var(--muted);
+}
+
+/* DOMAINS */
+
+.domains {
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:12px;
+}
+
+.domain-head {
+  margin-bottom:13px;
+}
+
+.domain-title {
+  font-size:17px;
+  font-weight:850;
+}
+
+.domain-sub {
+  font-size:10px;
+  color:var(--muted);
+  line-height:1.45;
+  margin-top:4px;
+}
+
+.stage {
+  padding-top:11px;
+  margin-top:11px;
+  border-top:1px solid #edede7;
+}
+
+.stage:first-of-type {
+  padding-top:0;
+  margin-top:0;
+  border-top:0;
+}
+
+.stage-head {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:8px;
+}
+
+.stage-title {
+  font-size:11px;
+  font-weight:850;
+}
+
+.status {
+  font-size:9px;
+  padding:5px 7px;
+  border-radius:999px;
+  background:var(--panel);
+  color:var(--muted);
+  font-weight:850;
+}
+
+.status.open,
+.status.complete {
+  background:var(--accent-bg);
+  color:var(--accent);
+}
+
+/* TASKS */
+
+.task {
+  display:grid;
+  grid-template-columns:28px minmax(0,1fr) auto;
+  gap:9px;
+  align-items:center;
+  padding:9px 0;
+  border-top:1px solid #efefe9;
+}
+
+.task:first-child {
+  border-top:0;
+}
+
+.check {
+  width:27px;
+  height:27px;
+  border-radius:8px;
+  border:1px solid #c8c8bf;
+  background:#fff;
+  display:grid;
+  place-items:center;
+  color:#fff;
+  font-weight:bold;
+}
+
+.check.done {
+  background:var(--earned);
+  border-color:var(--earned);
+}
+
+.task-name {
+  font-size:12px;
+  font-weight:750;
+}
+
+.task-meta {
+  font-size:9px;
+  color:var(--muted);
+  margin-top:2px;
+}
+
+.points {
+  font-size:10px;
+  font-weight:850;
+  color:var(--accent);
+  white-space:nowrap;
+}
+
+.reason {
+  grid-column:2/-1;
+  width:100%;
+  padding:5px 7px;
+  border-radius:8px;
+  font-size:8px;
+  color:var(--reason);
+  background:#fff7ef;
+  border:1px solid #edc7a9;
+}
+
+.lockbox {
+  padding:8px 9px;
+  border-radius:9px;
+  background:var(--panel);
+  font-size:10px;
+  color:var(--muted);
+  line-height:1.4;
+}
+
+/* FORMS */
+
+.inline-form {
+  display:grid;
+  grid-template-columns:minmax(0,1fr) auto;
+  gap:6px;
+  margin-top:7px;
+}
+
+.inline-form input,
+.inline-form select,
+.inline-form button {
+  min-height:39px;
+}
+
+.inline-form input,
+.inline-form select {
+  padding:8px;
+  border-radius:9px;
+  font-size:11px;
+}
+
+.primary,
+.secondary {
+  border-radius:9px;
+  padding:9px 11px;
+  font-size:10px;
+  font-weight:800;
+}
+
+.primary {
+  background:var(--accent);
+  color:#fff;
+  border:1px solid var(--accent);
+}
+
+.secondary {
+  background:#fff;
+  color:var(--text);
+  border:1px solid var(--border);
+}
+
+/* LOWER */
+
+.lower-grid {
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+  margin-top:12px;
+}
+
+/* ENERGY */
+
+.ring-wrap {
+  display:flex;
+  justify-content:center;
+}
+
+.ring {
+  width:178px;
+  height:178px;
+  position:relative;
+}
+
+.ring svg {
+  width:100%;
+  height:100%;
+  transform:rotate(-90deg);
+}
+
+.ring-bg {
+  fill:none;
+  stroke:#ededE7;
+  stroke-width:14;
+}
+
+.ring-earned {
+  fill:none;
+  stroke:var(--earned);
+  stroke-width:14;
+  stroke-linecap:round;
+}
+
+.ring-spent {
+  fill:none;
+  stroke:var(--spent);
+  stroke-width:14;
+  stroke-linecap:round;
+}
+
+.ring-center {
+  position:absolute;
+  inset:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  flex-direction:column;
+}
+
+.balance {
+  font-size:26px;
+  font-weight:850;
+}
+
+.balance-label {
+  font-size:9px;
+  color:var(--muted);
+}
+
+.energy-stats {
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:7px;
+}
+
+.energy-stat {
+  border:1px solid var(--border);
+  border-radius:10px;
+  padding:8px;
+}
+
+.energy-stat b {
+  display:block;
+  font-size:15px;
+}
+
+.energy-stat span {
+  font-size:9px;
+  color:var(--muted);
+}
+
+.earned-text {
+  color:var(--earned);
+}
+
+.spent-text {
+  color:var(--spent);
+}
+
+.penalty-text {
+  color:var(--penalty);
+}
+
+.full-stat {
+  margin-top:7px;
+}
+
+.progress-line {
+  display:flex;
+  justify-content:space-between;
+  font-size:9px;
+  color:var(--muted);
+  margin:9px 0 4px;
+}
+
+.progress {
+  height:7px;
+  background:#e8e8e2;
+  border-radius:99px;
+  overflow:hidden;
+}
+
+.progress i {
+  display:block;
+  height:100%;
+  background:var(--accent);
+  border-radius:99px;
+}
+
+/* NUTRITION */
+
+.nutrition-grid {
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:7px;
+}
+
+.nutri-stat {
+  border:1px solid var(--border);
+  border-radius:11px;
+  padding:10px;
+}
+
+.nutri-stat strong {
+  display:block;
+  font-size:18px;
+}
+
+.nutri-stat span {
+  font-size:9px;
+  color:var(--muted);
+}
+
+.food-grid {
+  display:grid;
+  grid-template-columns:1.7fr .8fr .6fr .6fr;
+  gap:5px;
+  margin-top:8px;
+}
+
+.food-grid input {
+  min-width:0;
+  padding:8px;
+  border-radius:8px;
+  font-size:10px;
+}
+
+/* LOGS */
+
+.log-row {
+  display:flex;
+  justify-content:space-between;
+  gap:8px;
+  align-items:center;
+  padding:7px 0;
+  border-top:1px solid #eeeeea;
+  font-size:9px;
+}
+
+.log-row:first-child {
+  border-top:0;
+}
+
+.tag {
+  padding:3px 5px;
+  border-radius:999px;
+  background:#fff0e7;
+  color:var(--spent);
+  margin-left:3px;
+}
+
+/* CHART */
+
+.chart-head {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:8px;
+}
+
+.chart-select {
+  padding:7px 8px;
+  border-radius:8px;
+  font-size:10px;
+}
+
+.chart {
+  width:100%;
+  height:190px;
+  margin-top:5px;
+}
+
+.chart svg {
+  width:100%;
+  height:100%;
+}
+
+.axis {
+  stroke:#deded7;
+  stroke-width:1;
+}
+
+.main-line {
+  fill:none;
+  stroke:var(--accent);
+  stroke-width:3;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+}
+
+.avg-line {
+  fill:none;
+  stroke:#8d8e87;
+  stroke-width:2;
+  stroke-dasharray:5 4;
+}
+
+.bar-earned {
+  fill:var(--earned);
+}
+
+.bar-spent {
+  fill:var(--spent);
+}
+
+/* OBSERVATIONS */
+
+.obs {
+  padding:8px 0;
+  border-top:1px solid #eeeeea;
+}
+
+.obs:first-child {
+  border-top:0;
+}
+
+.obs b {
+  font-size:10px;
+}
+
+.obs p {
+  margin:3px 0 0;
+  font-size:9px;
+  color:var(--muted);
+  line-height:1.45;
+}
+
+/* REFLECTION */
+
+.reflection {
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:8px;
+}
+
+.reflection textarea {
+  min-height:78px;
+  width:100%;
+  padding:9px;
+  border-radius:9px;
+  resize:vertical;
+  font-size:10px;
+}
+
+.footer {
+  display:flex;
+  justify-content:space-between;
+  gap:8px;
+  align-items:center;
+  flex-wrap:wrap;
+  margin-top:10px;
+}
+
+.small {
+  font-size:9px;
+  color:var(--muted);
+  line-height:1.4;
+}
+
+.closed {
+  display:inline-flex;
+  padding:5px 7px;
+  border-radius:999px;
+  background:var(--accent-bg);
+  color:var(--accent);
+  font-size:9px;
+  font-weight:800;
+}
+
+.pill {
+  display:inline-flex;
+  padding:5px 7px;
+  border-radius:999px;
+  background:var(--panel);
+  border:1px solid var(--border);
+  font-size:9px;
+  color:var(--muted);
+  margin:4px 4px 0 0;
+}
+
+/* RESPONSIVE */
+
+@media(max-width:960px) {
+  .domains {
+    grid-template-columns:1fr 1fr;
+  }
+
+  .lower-grid {
+    grid-template-columns:1fr;
+  }
+}
+
+@media(max-width:700px) {
+  .dashboard {
+    padding:12px;
+  }
+
+  .topline {
+    flex-direction:column;
+  }
+
+  .date-row,
+  .date-row input {
+    width:100%;
+  }
+
+  .identity {
+    grid-template-columns:1fr;
+  }
+
+  .salah-grid {
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .domains {
+    grid-template-columns:1fr;
+  }
+
+  .reflection {
+    grid-template-columns:1fr;
+  }
+
+  .food-grid {
+    grid-template-columns:1fr 1fr;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="dashboard">
+
+<!-- TOP -->
+<section class="top">
+
+  <div class="topline">
+
+    <div>
+      <div class="eyebrow">The person you are becoming</div>
+
+      <div class="title">
+        Proof over promises.
+      </div>
+
+      <div class="subtitle">
+        Show up for what matters most. Build evidence through repetition,
+        then use your earned energy deliberately.
+      </div>
+    </div>
+
+    <div class="date-row">
+      <span class="small">Day</span>
+      <input type="date" id="date">
+    </div>
+
+  </div>
+
+  <div class="identity" id="identity"></div>
+
+</section>
+
+
+<!-- SALAH -->
+<section class="salah-card">
+
+  <div class="section-head">
+
+    <div>
+      <div class="section-title">
+        🕌 Salah — Non-Negotiable
+      </div>
+
+      <div class="section-sub">
+        Connect yourself with Allah with the acts He loves the most.
+      </div>
+    </div>
+
+    <div class="status" id="salahCount">
+      0 / 5
+    </div>
+
+  </div>
+
+  <div class="salah-grid" id="salahGrid"></div>
+
+  <div class="legendline">
+    <span>🟢 Prayed +1 XP</span>
+    <span>🔴 Missed −1 XP</span>
+    <span>🟠 Qadha + Tawbah −0.25 XP</span>
+  </div>
+
+</section>
+
+
+<!-- THREE DOMAINS -->
+<div class="domains">
+
+  <!-- QURAN -->
+  <section class="domain-card">
+
+    <div class="domain-head">
+
+      <div class="domain-title">
+        📖 Awwal - Qur'an First
+      </div>
+
+      <div class="domain-sub">
+        Become the Hafidh of the Qur'an and rise closer to Allah and His Messenger (S).
+      </div>
+
+    </div>
+
+    <div class="stage">
+
+      <div class="stage-head">
+        <div class="stage-title">AWWAL</div>
+        <div class="status open" id="qAStatus">OPEN</div>
+      </div>
+
+      <div id="qA"></div>
+
+    </div>
+
+
+    <div class="stage">
+
+      <div class="stage-head">
+        <div class="stage-title">THANI</div>
+        <div class="status" id="qTStatus">LOCKED</div>
+      </div>
+
+      <div id="qT"></div>
+
+    </div>
+
+
+    <div class="stage">
+
+      <div class="stage-head">
+        <div class="stage-title">MAZEED</div>
+        <div class="status" id="qMStatus">LOCKED</div>
+      </div>
+
+      <div id="qM"></div>
+
+    </div>
+
+  </section>
+
+
+  <!-- BUSINESS -->
+  <section class="domain-card">
+
+    <div class="domain-head">
+
+      <div class="domain-title">
+        💼 Awwal - Business
+      </div>
+
+      <div class="domain-sub">
+        Build your business that pleases Allah &amp; serves the Ummah of the Beloved (S).
+      </div>
+
+    </div>
+
+
+    <div class="stage">
+
+      <div class="stage-head">
+        <div class="stage-title">AWWAL</div>
+        <div class="status" id="bAStatus">LOCKED</div>
+      </div>
+
+      <div id="bA"></div>
+
+    </div>
+
+
+    <div class="stage">
+
+      <div class="stage-head">
+        <div class="stage-title">THANI</div>
+        <div class="status" id="bTStatus">LOCKED</div>
+      </div>
+
+      <div id="bT"></div>
+
+    </div>
+
+
+    <div class="stage">
+
+      <div class="stage-head">
+        <div class="stage-title">MAZEED</div>
+        <div class="status" id="bMStatus">LOCKED</div>
+      </div>
+
+      <div id="bM"></div>
+
+    </div>
+
+  </section>
+
+
+  <!-- FITNESS -->
+  <section class="domain-card">
+
+    <div class="domain-head">
+
+      <div class="domain-title">
+        🏋️ Awwal - Fitness
+      </div>
+
+      <div class="domain-sub">
+        The Prophet (S) said a strong believer is better than a weak believer
+      </div>
+
+    </div>
+
+
+    <div class="stage">
+
+      <div class="stage-head">
+        <div class="stage-title">AWWAL</div>
+        <div class="status" id="fAStatus">LOCKED</div>
+      </div>
+
+      <div id="fA"></div>
+
+    </div>
+
+
+    <div class="stage">
+
+      <div class="stage-head">
+        <div class="stage-title">THANI</div>
+        <div class="status" id="fTStatus">LOCKED</div>
+      </div>
+
+      <div id="fT"></div>
+
+    </div>
+
+
+    <div class="stage">
+
+      <div class="stage-head">
+        <div class="stage-title">MAZEED</div>
+        <div class="status" id="fMStatus">LOCKED</div>
+      </div>
+
+      <div id="fM"></div>
+
+    </div>
+
+  </section>
+
+</div>
+
+
+<!-- ENERGY + NUTRITION -->
+<div class="lower-grid">
+
+  <!-- ENERGY -->
+  <section class="energy-card">
+
+    <h2>⚡ Daily Energy</h2>
+
+    <div class="ring-wrap">
+
+      <div class="ring">
+
+        <svg viewBox="0 0 200 200">
+
+          <circle
+            class="ring-bg"
+            cx="100"
+            cy="100"
+            r="76">
+          </circle>
+
+          <circle
+            id="earnedArc"
+            class="ring-earned"
+            cx="100"
+            cy="100"
+            r="76">
+          </circle>
+
+          <circle
+            id="spentArc"
+            class="ring-spent"
+            cx="100"
+            cy="100"
+            r="76">
+          </circle>
+
+        </svg>
+
+        <div class="ring-center">
+
+          <div class="balance" id="balance">
+            0
+          </div>
+
+          <div class="balance-label">
+            XP balance
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <div class="energy-stats">
+
+      <div class="energy-stat">
+        <b class="earned-text" id="earned">+0</b>
+        <span>earned from actions</span>
+      </div>
+
+      <div class="energy-stat">
+        <b class="spent-text" id="spent">−0</b>
+        <span>spent on entertainment</span>
+      </div>
+
+    </div>
+
+
+    <div class="energy-stat full-stat">
+
+      <b class="penalty-text" id="penalty">
+        −0
+      </b>
+
+      <span>
+        penalties: missed salah, junk/late-night food,
+        unintended scrolling
+      </span>
+
+    </div>
+
+
+    <div class="progress-line">
+
+      <span>
+        All Awwal commitments
+      </span>
+
+      <span id="requiredPct">
+        0%
+      </span>
+
+    </div>
+
+    <div class="progress">
+      <i id="requiredBar" style="width:0%"></i>
+    </div>
+
+
+    <div>
+      <span class="pill" id="streak">
+        🔥 Streak: 0
+      </span>
+
+      <span class="pill">
+        Protected: 0
+      </span>
+    </div>
+
+
+    <div style="margin-top:12px">
+
+      <h2>🎬 Spend Energy</h2>
+
+      <div class="inline-form">
+
+        <input
+          id="entName"
+          placeholder="Netflix, Halo, Instagram…">
+
+        <select id="entMode">
+          <option value="intentional">
+            Intentional
+          </option>
+
+          <option value="unintentional">
+            Unintentional scrolling
+          </option>
+        </select>
+
+        <input
+          id="entMin"
+          type="number"
+          min="1"
+          placeholder="Min">
+
+        <button
+          class="primary"
+          id="addEnt">
+          Spend
+        </button>
+
+      </div>
+
+      <div id="entList"></div>
+
+    </div>
+
+  </section>
+
+
+  <!-- NUTRITION -->
+  <section class="utility-card">
+
+    <h2>🍽 Nutrition HUD</h2>
+
+    <div class="nutrition-grid">
+
+      <div class="nutri-stat">
+        <strong id="cal">0</strong>
+        <span>/ 2,000 kcal</span>
+      </div>
+
+      <div class="nutri-stat">
+        <strong id="protein">0g</strong>
+        <span>/ 160g protein</span>
+      </div>
+
+      <div class="nutri-stat">
+        <strong id="fat">0g</strong>
+        <span>/ 88g fat</span>
+      </div>
+
+      <div class="nutri-stat">
+        <strong id="carbs">0g</strong>
+        <span>/ 142g carbs</span>
+      </div>
+
+    </div>
+
+
+    <div class="progress-line">
+      <span>Calories</span>
+      <span id="calPct">0%</span>
+    </div>
+
+    <div class="progress">
+      <i id="calBar" style="width:0%"></i>
+    </div>
+
+
+    <div class="small" style="margin-top:8px">
+      Manual food logging. Each junk-food or late-night-food
+      event costs −0.5 XP.
+    </div>
+
+
+    <div class="food-grid">
+
+      <input id="foodName" placeholder="Food">
+
+      <input
+        id="foodCal"
+        type="number"
+        placeholder="kcal">
+
+      <input
+        id="foodPro"
+        type="number"
+        placeholder="P">
+
+      <input
+        id="foodFat"
+        type="number"
+        placeholder="F">
+
+    </div>
+
+
+    <div class="food-grid">
+
+      <input
+        id="foodCarb"
+        type="number"
+        placeholder="Carbs">
+
+      <div>
+        <label class="small">
+          <input id="foodJunk" type="checkbox">
+          junk
+        </label>
+
+        <label class="small">
+          <input id="foodLate" type="checkbox">
+          late-night
+        </label>
+      </div>
+
+      <button
+        class="primary"
+        id="addFood">
+        Add food
+      </button>
+
+    </div>
+
+
+    <div id="foodList"></div>
+
+  </section>
+
+</div>
+
+
+<!-- CHART + STRATEGIST -->
+<div class="lower-grid">
+
+  <section class="chart-card">
+
+    <div class="chart-head">
+
+      <h2>📈 Your Trajectory</h2>
+
+      <select id="chartMode" class="chart-select">
+
+        <option value="consistency">
+          Awwal completion + 7-day average
+        </option>
+
+        <option value="energy">
+          XP earned vs spent
+        </option>
+
+        <option value="domains">
+          Deen / Business / Fitness
+        </option>
+
+      </select>
+
+    </div>
+
+    <div class="chart" id="chart"></div>
+
+    <div class="chart-note small" id="chartNote">
+      Close days to build your evidence history.
+    </div>
+
+  </section>
+
+
+  <section class="utility-card">
+
+    <h2>🔎 Mirror + Strategist</h2>
+
+    <div id="observations"></div>
+
+  </section>
+
+</div>
+
+
+<!-- REFLECTION -->
+
+<section class="utility-card" style="margin-top:12px">
+
+  <h2>📝 Daily Reflection</h2>
+
+  <div class="reflection">
+
+    <div>
+      <div class="small">What went well?</div>
+      <textarea
+        id="well"
+        placeholder="Capture the evidence…">
+      </textarea>
+    </div>
+
+    <div>
+      <div class="small">What got in the way?</div>
+      <textarea
+        id="way"
+        placeholder="What affected the day?">
+      </textarea>
+    </div>
+
+    <div>
+      <div class="small">What did I miss?</div>
+      <textarea
+        id="missed"
+        placeholder="Tasks, prayers, habits…">
+      </textarea>
+    </div>
+
+    <div>
+      <div class="small">What would I change tomorrow?</div>
+      <textarea
+        id="tomorrow"
+        placeholder="One adjustment…">
+      </textarea>
+    </div>
+
+  </div>
+
+
+  <div class="footer">
+
+    <span id="closeStatus" class="small">
+      Close the day when your record is final.
+    </span>
+
+    <button
+      class="primary"
+      id="closeDay">
+      Close Day &amp; Save
+    </button>
+
+  </div>
+
+</section>
+
+</div>
+
+
+<script>
+
+/* =========================================================
+   DREAM SELF DASHBOARD
+   ========================================================= */
+
+const STORAGE_KEY = "dream-self-dashboard-v1";
+
+let database =
+  JSON.parse(localStorage.getItem(STORAGE_KEY)) || {};
+
+let currentDate =
+  new Date().toISOString().split("T")[0];
+
+
+/* =========================================================
+   DATA
+   ========================================================= */
+
+function blankDay() {
+
+  return {
+
+    salah: {
+      Fajr:null,
+      Dhuhr:null,
+      Asr:null,
+      Maghrib:null,
+      Isha:null
+    },
+
+    juz:false,
+
+    memorizeMin:0,
+    revisionMin:0,
+
+    reels:0,
+    linkedin:false,
+    reachouts:false,
+    carousel:false,
+
+    gym:false,
+    steps:0,
+    nutritionDone:false,
+
+    foods:[],
+    entertainment:[],
+
+    custom: {
+      quran:[],
+      business:[],
+      fitness:[]
+    },
+
+    reasons:{},
+
+    reflection:{
+      well:"",
+      way:"",
+      missed:"",
+      tomorrow:""
+    },
+
+    closed:false
+  };
+
+}
+
+
+function day() {
+
+  if (!database[currentDate]) {
+
+    database[currentDate] =
+      blankDay();
+
+  }
+
+  return database[currentDate];
+
+}
+
+
+function save() {
+
+  localStorage.setItem(
+    STORAGE_KEY,
+    JSON.stringify(database)
+  );
+
+}
+
+
+/* =========================================================
+   XP
+   ========================================================= */
+
+function calculateXP(x) {
+
+  let earned = 0;
+  let spent = 0;
+  let penalty = 0;
+
+
+  /* Salah */
+
+  Object.values(x.salah).forEach(value => {
+
+    if (value === "done")
+      earned += 1;
+
+    if (value === "miss")
+      penalty += 1;
+
+    if (value === "corrected")
+      penalty += .25;
+
+  });
+
+
+  /* Qur'an */
+
+  if (x.juz)
+    earned += 1;
+
+  earned +=
+    Math.floor(x.memorizeMin / 27);
+
+  earned +=
+    Math.floor(x.revisionMin / 27);
+
+
+  /* Business */
+
+  earned += x.reels * .5;
+
+  if (x.linkedin)
+    earned += .5;
+
+  if (x.reachouts)
+    earned += .25;
+
+  if (x.carousel)
+    earned += .25;
+
+
+  /* Fitness */
+
+  if (x.gym)
+    earned += 1;
+
+  if (x.steps >= 5000)
+    earned += .5;
+
+
+  /* Mazeed */
+
+  ["quran","business","fitness"].forEach(domain => {
+
+    x.custom[domain].forEach(task => {
+
+      earned += Number(task.xp);
+
+    });
+
+  });
+
+
+  /* Entertainment */
+
+  x.entertainment.forEach(item => {
+
+    spent += item.cost;
+
+  });
+
+
+  /* Food */
+
+  x.foods.forEach(food => {
+
+    if (food.junk)
+      penalty += .5;
+
+    if (food.late)
+      penalty += .5;
+
+  });
+
+
+  return {
+
+    earned,
+    spent,
+    penalty,
+
+    balance:
+      earned - spent - penalty
+
+  };
+
+}
+
+
+/* =========================================================
+   SALAH
+   ========================================================= */
+
+const salahNames = [
+  "Fajr",
+  "Dhuhr",
+  "Asr",
+  "Maghrib",
+  "Isha"
+];
+
+
+function renderSalah() {
+
+  const x = day();
+
+  const grid =
+    document.getElementById("salahGrid");
+
+  grid.innerHTML = "";
+
+  let completed = 0;
+
+
+  salahNames.forEach(name => {
+
+    const item =
+      document.createElement("div");
+
+    item.className = "salah-item";
+
+
+    const button =
+      document.createElement("button");
+
+    button.className =
+      "salah-btn " + (x.salah[name] || "");
+
+    button.textContent =
+      name +
+      (
+        x.salah[name] === "done"
+          ? " ✓"
+          : x.salah[name] === "miss"
+          ? " • missed"
+          : x.salah[name] === "corrected"
+          ? " • qadha ✓"
+          : ""
+      );
+
+
+    button.onclick = () => {
+
+      const existing =
+        item.querySelector(".salah-options");
+
+      if (existing)
+        existing.remove();
+
+      const options =
+        document.createElement("div");
+
+      options.className =
+        "salah-options";
+
+
+      [
+        ["Prayed","done"],
+        ["Missed","miss"],
+        ["Qadha + Tawbah","corrected"]
+      ].forEach(([label,value]) => {
+
+        const option =
+          document.createElement("button");
+
+        option.textContent = label;
+
+        option.onclick = () => {
+
+          x.salah[name] = value;
+
+          save();
+
+          render();
+
+        };
+
+        options.appendChild(option);
+
+      });
+
+
+      item.appendChild(options);
+
+      item.classList.toggle("open");
+
+    };
+
+
+    item.appendChild(button);
+
+    grid.appendChild(item);
+
+
+    if (
+      x.salah[name] === "done" ||
+      x.salah[name] === "corrected"
+    ) {
+
+      completed++;
+
+    }
+
+  });
+
+
+  document.getElementById("salahCount")
+    .textContent =
+      `${completed} / 5`;
+
+}
+
+
+/* =========================================================
+   TASK COMPONENT
+   ========================================================= */
+
+function task({
+  name,
+  meta,
+  points,
+  done,
+  toggle,
+  reasonId
+}) {
+
+  const row =
+    document.createElement("div");
+
+  row.className = "task";
+
+
+  const check =
+    document.createElement("button");
+
+  check.className =
+    "check " + (done ? "done" : "");
+
+  check.textContent =
+    done ? "✓" : "";
+
+  check.onclick = toggle;
+
+
+  const copy =
+    document.createElement("div");
+
+  copy.innerHTML = `
+    <div class="task-name">
+      ${name}
+    </div>
+
+    <div class="task-meta">
+      ${meta || ""}
+    </div>
+  `;
+
+
+  const pointsEl =
+    document.createElement("div");
+
+  pointsEl.className = "points";
+
+  pointsEl.textContent =
+    points !== ""
+      ? "+" + points + " XP"
+      : "";
+
+
+  row.append(
+    check,
+    copy,
+    pointsEl
+  );
+
+
+  if (reasonId) {
+
+    const select =
+      document.createElement("select");
+
+    select.className = "reason";
+
+    select.innerHTML = `
+      <option value="">
+        Why not completed?
+      </option>
+
+      <option>Ran out of time</option>
+      <option>Tired</option>
+      <option>Distracted</option>
+      <option>Family / social obligation</option>
+      <option>Unexpected event</option>
+      <option>Task was unclear</option>
+      <option>Task was too difficult</option>
+      <option>Low energy</option>
+      <option>Didn't feel like it</option>
+      <option>Other</option>
+    `;
+
+    select.value =
+      day().reasons[reasonId] || "";
+
+    select.onchange = () => {
+
+      day().reasons[reasonId] =
+        select.value;
+
+      save();
+
+    };
+
+    row.appendChild(select);
+
+  }
+
+
+  return row;
+
+}
+
+
+/* =========================================================
+   QURAN
+   ========================================================= */
+
+function renderQuran() {
+
+  const x = day();
+
+  const a = document.getElementById("qA");
+  const t = document.getElementById("qT");
+  const m = document.getElementById("qM");
+
+  a.innerHTML = "";
+  t.innerHTML = "";
+  m.innerHTML = "";
+
+
+  /* AWWAL */
+
+  a.appendChild(
+    task({
+
+      name:"Read 1 Juz",
+
+      meta:"Complete this to unlock Thani.",
+
+      points:"1",
+
+      done:x.juz,
+
+      toggle:() => {
+
+        x.juz = !x.juz;
+
+        save();
+        render();
+
+      },
+
+      reasonId:"qJuz"
+
+    })
+  );
+
+
+  const qAStatus =
+    document.getElementById("qAStatus");
+
+
+  qAStatus.textContent =
+    x.juz ? "COMPLETE" : "OPEN";
+
+  qAStatus.className =
+    "status " +
+    (x.juz ? "complete" : "open");
+
+
+  /* THANI */
+
+  if (!x.juz) {
+
+    t.innerHTML =
+      `<div class="lockbox">
+        Read 1 Juz to unlock Thani.
+      </div>`;
+
+    m.innerHTML =
+      `<div class="lockbox">
+        Complete Thani to unlock Mazeed.
+      </div>`;
+
+    return;
+
+  }
+
+
+  t.appendChild(
+    task({
+
+      name:"Memorize",
+
+      meta:"27 minutes = 1 XP.",
+
+      points:
+        Math.floor(x.memorizeMin / 27),
+
+      done:
+        x.memorizeMin >= 27,
+
+      toggle:() => {
+
+        x.memorizeMin += 27;
+
+        save();
+        render();
+
+      },
+
+      reasonId:"qMem"
+
+    })
+  );
+
+
+  const qTStatus =
+    document.getElementById("qTStatus");
+
+  qTStatus.textContent =
+    x.memorizeMin >= 27
+      ? "COMPLETE"
+      : "OPEN";
+
+  qTStatus.className =
+    "status " +
+    (
+      x.memorizeMin >= 27
+        ? "complete"
+        : "open"
+    );
+
+
+  /* MAZEED */
+
+  if (x.memorizeMin < 27) {
+
+    m.innerHTML =
+      `<div class="lockbox">
+        Complete Thani to unlock Mazeed.
+      </div>`;
+
+    return;
+
+  }
+
+
+  m.appendChild(
+    task({
+
+      name:"New revision",
+
+      meta:"Every 27 minutes = 1 XP • unlimited.",
+
+      points:
+        Math.floor(x.revisionMin / 27),
+
+      done:
+        x.revisionMin >= 27,
+
+      toggle:() => {
+
+        x.revisionMin += 27;
+
+        save();
+        render();
+
+      },
+
+      reasonId:"qRevision"
+
+    })
+  );
+
+
+  addCustomMazeed(
+    m,
+    "quran"
+  );
+
+
+  document.getElementById("qMStatus")
+    .textContent = "UNLIMITED";
+
+  document.getElementById("qMStatus")
+    .className = "status open";
+
+}
+
+
+/* =========================================================
+   CUSTOM MAZEED
+   ========================================================= */
+
+function addCustomMazeed(
+  container,
+  domain
+) {
+
+  const form =
+    document.createElement("div");
+
+  form.className =
+    "inline-form";
+
+
+  const input =
+    document.createElement("input");
+
+  input.placeholder =
+    "Mazeed task";
+
+
+  const xp =
+    document.createElement("select");
+
+  xp.innerHTML = `
+    <option value=".25">0.25 XP</option>
+    <option value=".5">0.5 XP</option>
+    <option value="1">1 XP</option>
+  `;
+
+
+  const button =
+    document.createElement("button");
+
+  button.className = "primary";
+
+  button.textContent = "Add";
+
+
+  button.onclick = () => {
+
+    if (!input.value.trim())
+      return;
+
+
+    day().custom[domain].push({
+
+      name:input.value.trim(),
+
+      xp:Number(xp.value)
+
+    });
+
+
+    save();
+
+    render();
+
+  };
+
+
+  form.append(
+    input,
+    xp,
+    button
+  );
+
+
+  container.appendChild(form);
+
+
+  day().custom[domain].forEach(item => {
+
+    const row =
+      document.createElement("div");
+
+    row.className = "log-row";
+
+    row.innerHTML = `
+      <span>${item.name}</span>
+      <b class="earned-text">
+        +${item.xp} XP
+      </b>
+    `;
+
+    container.appendChild(row);
+
+  });
+
+}
+
+
+/* =========================================================
+   BUSINESS
+   ========================================================= */
+
+function renderBusiness() {
+
+  const x = day();
+
+  const a =
+    document.getElementById("bA");
+
+  const t =
+    document.getElementById("bT");
+
+  const m =
+    document.getElementById("bM");
+
+  a.innerHTML = "";
+  t.innerHTML = "";
+  m.innerHTML = "";
+
+
+  const complete =
+    x.reels >= 4;
+
+
+  a.appendChild(
+    task({
+
+      name:"Post 4 Reels",
+
+      meta:
+        `${x.reels} / 4 • 0.5 XP each`,
+
+      points:
+        (x.reels * .5).toFixed(2),
+
+      done:complete,
+
+      toggle:() => {
+
+        x.reels++;
+
+        save();
+        render();
+
+      },
+
+      reasonId:"businessReels"
+
+    })
+  );
+
+
+  if (!complete) {
+
+    t.innerHTML =
+      `<div class="lockbox">
+        Post all 4 Reels to unlock Thani.
+      </div>`;
+
+    m.innerHTML =
+      `<div class="lockbox">
+        Complete Thani to unlock Mazeed.
+      </div>`;
+
+    return;
+
+  }
+
+
+  t.append(
+    task({
+      name:"LinkedIn Post",
+      meta:"Thani • 0.5 XP",
+      points:".5",
+      done:x.linkedin,
+      toggle:() => {
+        x.linkedin=!x.linkedin;
+        save();
+        render();
+      },
+      reasonId:"linkedin"
+    }),
+
+    task({
+      name:"Reach out to 5 people",
+      meta:"Thani • 0.25 XP",
+      points:".25",
+      done:x.reachouts,
+      toggle:() => {
+        x.reachouts=!x.reachouts;
+        save();
+        render();
+      },
+      reasonId:"reachouts"
+    }),
+
+    task({
+      name:"Post Carousel",
+      meta:"Thani • 0.25 XP",
+      points:".25",
+      done:x.carousel,
+      toggle:() => {
+        x.carousel=!x.carousel;
+        save();
+        render();
+      },
+      reasonId:"carousel"
+    })
+  );
+
+
+  const taniComplete =
+    x.linkedin &&
+    x.reachouts &&
+    x.carousel;
+
+
+  if (!taniComplete) {
+
+    m.innerHTML =
+      `<div class="lockbox">
+        Complete all Thani tasks to unlock Mazeed.
+      </div>`;
+
+    return;
+
+  }
+
+
+  addCustomMazeed(
+    m,
+    "business"
+  );
+
+}
+
+
+/* =========================================================
+   FITNESS
+   ========================================================= */
+
+function renderFitness() {
+
+  const x = day();
+
+  const a =
+    document.getElementById("fA");
+
+  const t =
+    document.getElementById("fT");
+
+  const m =
+    document.getElementById("fM");
+
+  a.innerHTML = "";
+  t.innerHTML = "";
+  m.innerHTML = "";
+
+
+  a.appendChild(
+    task({
+
+      name:"Go to the Gym",
+
+      meta:
+        "Awwal • showing up is the input.",
+
+      points:"1",
+
+      done:x.gym,
+
+      toggle:() => {
+
+        x.gym=!x.gym;
+
+        save();
+        render();
+
+      },
+
+      reasonId:"gym"
+
+    })
+  );
+
+
+  if (!x.gym) {
+
+    t.innerHTML =
+      `<div class="lockbox">
+        Go to the gym to unlock Thani.
+      </div>`;
+
+    m.innerHTML =
+      `<div class="lockbox">
+        Complete Thani to unlock Mazeed.
+      </div>`;
+
+    return;
+
+  }
+
+
+  t.append(
+
+    task({
+
+      name:"Walk 5,000 steps",
+
+      meta:
+        `${x.steps} / 5,000 • 0.5 XP`,
+
+      points:".5",
+
+      done:x.steps >= 5000,
+
+      toggle:() => {
+
+        x.steps = 5000;
+
+        save();
+        render();
+
+      },
+
+      reasonId:"steps"
+
+    }),
+
+
+    task({
+
+      name:"Nutritional goals",
+
+      meta:
+        "Review Nutrition HUD and mark complete.",
+
+      points:"",
+
+      done:x.nutritionDone,
+
+      toggle:() => {
+
+        x.nutritionDone =
+          !x.nutritionDone;
+
+        save();
+        render();
+
+      },
+
+      reasonId:"nutrition"
+
+    })
+
+  );
+
+
+  const complete =
+    x.steps >= 5000 &&
+    x.nutritionDone;
+
+
+  if (!complete) {
+
+    m.innerHTML =
+      `<div class="lockbox">
+        Complete all Thani tasks to unlock Mazeed.
+      </div>`;
+
+    return;
+
+  }
+
+
+  addCustomMazeed(
+    m,
+    "fitness"
+  );
+
+}
+
+
+/* =========================================================
+   ENERGY
+   ========================================================= */
+
+function renderEnergy() {
+
+  const x = day();
+
+  const xp =
+    calculateXP(x);
+
+
+  document.getElementById("earned")
+    .textContent =
+      "+" + xp.earned.toFixed(2);
+
+  document.getElementById("spent")
+    .textContent =
+      "−" + xp.spent.toFixed(2);
+
+  document.getElementById("penalty")
+    .textContent =
+      "−" + xp.penalty.toFixed(2);
+
+  document.getElementById("balance")
+    .textContent =
+      xp.balance.toFixed(2);
+
+
+  const total =
+    Math.max(
+      .001,
+      xp.earned + xp.spent
+    );
+
+
+  const circumference =
+    2 * Math.PI * 76;
+
+
+  const earnedLength =
+    circumference *
+    (xp.earned / total);
+
+
+  const spentLength =
+    circumference *
+    (xp.spent / total);
+
+
+  const earnedArc =
+    document.getElementById("earnedArc");
+
+  const spentArc =
+    document.getElementById("spentArc");
+
+
+  earnedArc.style.strokeDasharray =
+    `${earnedLength} ${circumference}`;
+
+  spentArc.style.strokeDasharray =
+    `${spentLength} ${circumference}`;
+
+  spentArc.style.strokeDashoffset =
+    -earnedLength;
+
+
+  let progress = 0;
+
+
+  const salahComplete =
+    Object.values(x.salah)
+      .every(v =>
+        v === "done" ||
+        v === "corrected"
+      );
+
+
+  if (salahComplete)
+    progress += 25;
+
+  if (x.juz)
+    progress += 25;
+
+  progress +=
+    Math.min(x.reels,4) / 4 * 25;
+
+  if (x.gym)
+    progress += 25;
+
+
+  progress =
+    Math.round(progress);
+
+
+  document.getElementById("requiredPct")
+    .textContent =
+      progress + "%";
+
+  document.getElementById("requiredBar")
+    .style.width =
+      progress + "%";
+
+
+  document.getElementById("streak")
+    .textContent =
+      "🔥 Streak: " +
+      calculateStreak();
+
+}
+
+
+/* =========================================================
+   ENTERTAINMENT
+   ========================================================= */
+
+document
+  .getElementById("addEnt")
+  .onclick = () => {
+
+    const x = day();
+
+    const name =
+      document
+        .getElementById("entName")
+        .value.trim() ||
+      "Entertainment";
+
+
+    const mode =
+      document
+        .getElementById("entMode")
+        .value;
+
+
+    const minutes =
+      Number(
+        document
+          .getElementById("entMin")
+          .value
+      );
+
+
+    if (!minutes)
+      return;
+
+
+    const multiplier =
+      mode === "unintentional"
+        ? 1.5
+        : 1;
+
+
+    x.entertainment.push({
+
+      name,
+
+      minutes,
+
+      cost:
+        minutes / 30 *
+        multiplier
+
+    });
+
+
+    document.getElementById("entName")
+      .value = "";
+
+    document.getElementById("entMin")
+      .value = "";
+
+
+    save();
+    render();
+
+  };
+
+
+function renderEntertainment() {
+
+  const box =
+    document.getElementById("entList");
+
+  box.innerHTML = "";
+
+
+  day().entertainment.forEach(item => {
+
+    const row =
+      document.createElement("div");
+
+    row.className = "log-row";
+
+    row.innerHTML = `
+      <span>
+        ${item.name}
+        • ${item.minutes} min
+      </span>
+
+      <b class="spent-text">
+        −${item.cost.toFixed(2)} XP
+      </b>
+    `;
+
+    box.appendChild(row);
+
+  });
+
+}
+
+
+/* =========================================================
+   FOOD
+   ========================================================= */
+
+document
+  .getElementById("addFood")
+  .onclick = () => {
+
+    const x = day();
+
+    const name =
+      document
+        .getElementById("foodName")
+        .value.trim() ||
+      "Food";
+
+
+    const food = {
+
+      name,
+
+      calories:Number(
+        document.getElementById("foodCal").value
+      ) || 0,
+
+      protein:Number(
+        document.getElementById("foodPro").value
+      ) || 0,
+
+      fat:Number(
+        document.getElementById("foodFat").value
+      ) || 0,
+
+      carbs:Number(
+        document.getElementById("foodCarb").value
+      ) || 0,
+
+      junk:
+        document.getElementById("foodJunk").checked,
+
+      late:
+        document.getElementById("foodLate").checked
+
+    };
+
+
+    x.foods.push(food);
+
+    save();
+
+    render();
+
+  };
+
+
+function renderFood() {
+
+  const x = day();
+
+  let calories = 0;
+  let protein = 0;
+  let fat = 0;
+  let carbs = 0;
+
+
+  x.foods.forEach(food => {
+
+    calories += food.calories;
+    protein += food.protein;
+    fat += food.fat;
+    carbs += food.carbs;
+
+  });
+
+
+  document.getElementById("cal")
+    .textContent =
+      Math.round(calories);
+
+  document.getElementById("protein")
+    .textContent =
+      Math.round(protein) + "g";
+
+  document.getElementById("fat")
+    .textContent =
+      Math.round(fat) + "g";
+
+  document.getElementById("carbs")
+    .textContent =
+      Math.round(carbs) + "g";
+
+
+  const pct =
+    Math.min(
+      100,
+      calories / 2000 * 100
+    );
+
+
+  document.getElementById("calPct")
+    .textContent =
+      Math.round(pct) + "%";
+
+  document.getElementById("calBar")
+    .style.width =
+      pct + "%";
+
+
+  const list =
+    document.getElementById("foodList");
+
+  list.innerHTML = "";
+
+
+  x.foods.forEach(food => {
+
+    const row =
+      document.createElement("div");
+
+    row.className = "log-row";
+
+    let tags = "";
+
+    if (food.junk)
+      tags +=
+        `<span class="tag">junk −0.5</span>`;
+
+    if (food.late)
+      tags +=
+        `<span class="tag">late −0.5</span>`;
+
+
+    row.innerHTML = `
+      <span>
+        ${food.name}
+      </span>
+
+      <span>
+        ${Math.round(food.calories)} kcal
+        ${tags}
+      </span>
+    `;
+
+
+    list.appendChild(row);
+
+  });
+
+}
+
+
+/* =========================================================
+   STREAK
+   ========================================================= */
+
+function calculateStreak() {
+
+  const dates =
+    Object.keys(database)
+      .filter(date =>
+        database[date].closed
+      )
+      .sort()
+      .reverse();
+
+
+  let streak = 0;
+
+
+  for (const date of dates) {
+
+    const x =
+      database[date];
+
+
+    const salah =
+      Object.values(x.salah)
+        .every(v =>
+          v === "done" ||
+          v === "corrected"
+        );
+
+
+    if (
+      salah &&
+      x.juz &&
+      x.reels >= 4 &&
+      x.gym
+    ) {
+
+      streak++;
+
+    } else {
+
+      break;
+
+    }
+
+  }
+
+
+  return streak;
+
+}
+
+
+/* =========================================================
+   IDENTITY
+   ========================================================= */
+
+function renderIdentity() {
+
+  const dates =
+    Object.keys(database)
+      .filter(date =>
+        database[date].closed
+      )
+      .sort()
+      .slice(-30);
+
+
+  const total =
+    dates.length || 1;
+
+
+  const quran =
+    dates.filter(date =>
+      database[date].juz
+    ).length;
+
+
+  const business =
+    dates.filter(date =>
+      database[date].reels >= 4
+    ).length;
+
+
+  const fitness =
+    dates.filter(date =>
+      database[date].gym
+    ).length;
+
+
+  document.getElementById("identity")
+    .innerHTML = `
+
+      <div class="identity-card">
+
+        <div class="identity-head">
+
+          <div class="identity-name">
+            📖 QUR'AN
+          </div>
+
+          <div class="identity-pct">
+            ${Math.round(quran/total*100)}%
+          </div>
+
+        </div>
+
+        <div class="identity-main">
+          ${quran}/${total}
+          tracked days with 1 Juz completed.
+        </div>
+
+        <div class="identity-foot">
+          30-day evidence window.
+        </div>
+
+      </div>
+
+
+      <div class="identity-card">
+
+        <div class="identity-head">
+
+          <div class="identity-name">
+            💼 BUSINESS
+          </div>
+
+          <div class="identity-pct">
+            ${Math.round(business/total*100)}%
+          </div>
+
+        </div>
+
+        <div class="identity-main">
+          ${business}/${total}
+          tracked days with the 4-Reel Awwal completed.
+        </div>
+
+        <div class="identity-foot">
+          30-day evidence window.
+        </div>
+
+      </div>
+
+
+      <div class="identity-card">
+
+        <div class="identity-head">
+
+          <div class="identity-name">
+            🏋️ FITNESS
+          </div>
+
+          <div class="identity-pct">
+            ${Math.round(fitness/total*100)}%
+          </div>
+
+        </div>
+
+        <div class="identity-main">
+          ${fitness}/${total}
+          tracked days with a gym session.
+        </div>
+
+        <div class="identity-foot">
+          30-day evidence window.
+        </div>
+
+      </div>
+    `;
+
+}
+
+
+/* =========================================================
+   OBSERVATIONS
+   ========================================================= */
+
+function renderObservations() {
+
+  const box =
+    document.getElementById("observations");
+
+  box.innerHTML = "";
+
+
+  const dates =
+    Object.keys(database)
+      .filter(date =>
+        database[date].closed
+      )
+      .sort()
+      .slice(-14);
+
+
+  if (dates.length < 3) {
+
+    box.innerHTML = `
+      <div class="small">
+        Keep closing days. The strategist needs
+        repeated evidence before identifying patterns.
+      </div>
+    `;
+
+    return;
+
+  }
+
+
+  const days =
+    dates.map(date =>
+      database[date]
+    );
+
+
+  const businessMisses =
+    days.filter(x =>
+      x.reels < 4
+    ).length;
+
+
+  const gymMisses =
+    days.filter(x =>
+      !x.gym
+    ).length;
+
+
+  const observations = [];
+
+
+  if (businessMisses >= 3) {
+
+    observations.push([
+      "Business friction",
+      `You missed the 4-Reel Awwal on
+       ${businessMisses} of the last
+       ${days.length} closed days.`
+    ]);
+
+  }
+
+
+  if (gymMisses >= 3) {
+
+    observations.push([
+      "Fitness friction",
+      `You missed the gym Awwal on
+       ${gymMisses} of the last
+       ${days.length} closed days.`
+    ]);
+
+  }
+
+
+  const reasons = {};
+
+
+  days.forEach(x => {
+
+    Object.values(x.reasons)
+      .forEach(reason => {
+
+        if (!reason)
+          return;
+
+        reasons[reason] =
+          (reasons[reason] || 0) + 1;
+
+      });
+
+  });
+
+
+  const mostCommon =
+    Object.entries(reasons)
+      .sort((a,b) => b[1] - a[1])[0];
+
+
+  if (
+    mostCommon &&
+    mostCommon[1] >= 2
+  ) {
+
+    observations.push([
+      "Recurring friction reason",
+
+      `"${mostCommon[0]}"
+       is your most repeated logged reason
+       (${mostCommon[1]} times).`
+    ]);
+
+  }
+
+
+  if (!observations.length) {
+
+    observations.push([
+      "Pattern scan",
+      "No strong recurring pattern yet. Keep collecting evidence."
+    ]);
+
+  }
+
+
+  observations.forEach(([title,text]) => {
+
+    const row =
+      document.createElement("div");
+
+    row.className = "obs";
+
+    row.innerHTML = `
+      <b>${title}</b>
+      <p>${text}</p>
+    `;
+
+    box.appendChild(row);
+
+  });
+
+}
+
+
+/* =========================================================
+   CHART
+   ========================================================= */
+
+document
+  .getElementById("chartMode")
+  .onchange = renderChart;
+
+
+function renderChart() {
+
+  const chart =
+    document.getElementById("chart");
+
+  chart.innerHTML = "";
+
+
+  const dates =
+    Object.keys(database)
+      .filter(date =>
+        database[date].closed
+      )
+      .sort()
+      .slice(-14);
+
+
+  if (!dates.length) {
+
+    chart.innerHTML = `
+      <div
+        class="small"
+        style="
+          padding:55px 10px;
+          text-align:center;
+        ">
+        Close your first day to start
+        the trajectory.
+      </div>
+    `;
+
+    return;
+
+  }
+
+
+  const mode =
+    document.getElementById("chartMode").value;
+
+
+  const W = 680;
+  const H = 190;
+
+  const pad = {
+    left:30,
+    right:12,
+    top:12,
+    bottom:25
+  };
+
+
+  const innerW =
+    W - pad.left - pad.right;
+
+  const innerH =
+    H - pad.top - pad.bottom;
+
+
+  const svg =
+    document.createElementNS(
+      "http://www.w3.org/2000/svg",
+      "svg"
+    );
+
+
+  svg.setAttribute(
+    "viewBox",
+    `0 0 ${W} ${H}`
+  );
+
+
+  if (mode === "consistency") {
+
+    const values =
+      dates.map(date => {
+
+        const x =
+          database[date];
+
+        const salah =
+          Object.values(x.salah)
+            .every(v =>
+              v === "done" ||
+              v === "corrected"
+            );
+
+        return (
+          salah &&
+          x.juz &&
+          x.reels >= 4 &&
+          x.gym
+        )
+          ? 100
+          : 0;
+
+      });
+
+
+    drawLine(
+      svg,
+      values,
+      "main-line",
+      W,
+      H,
+      pad,
+      100
+    );
+
+
+    document.getElementById("chartNote")
+      .textContent =
+        "Solid line = daily completion of required Awwal commitments.";
+
+  }
+
+
+  if (mode === "energy") {
+
+    const values =
+      dates.map(date =>
+        calculateXP(
+          database[date]
+        )
+      );
+
+
+    const max =
+      Math.max(
+        1,
+        ...values.map(x =>
+          Math.max(
+            x.earned,
+            x.spent
+          )
+        )
+      );
+
+
+    values.forEach((value,i) => {
+
+      const x =
+        pad.left +
+        i /
+        Math.max(
+          1,
+          values.length - 1
+        ) *
+        innerW;
+
+
+      const width =
+        Math.max(
+          4,
+          innerW / values.length * .4
+        );
+
+
+      const earnedY =
+        pad.top +
+        innerH -
+        value.earned/max*innerH;
+
+
+      const spentY =
+        pad.top +
+        innerH -
+        value.spent/max*innerH;
+
+
+      svg.appendChild(
+        rect(
+          x-width,
+          earnedY,
+          width,
+          H-pad.bottom-earnedY,
+          "bar-earned"
+        )
+      );
+
+
+      svg.appendChild(
+        rect(
+          x,
+          spentY,
+          width,
+          H-pad.bottom-spentY,
+          "bar-spent"
+        )
+      );
+
+    });
+
+
+    document.getElementById("chartNote")
+      .textContent =
+        "Green = earned XP. Red = entertainment spent.";
+
+  }
+
+
+  const axis =
+    document.createElementNS(
+      "http://www.w3.org/2000/svg",
+      "line"
+    );
+
+
+  axis.setAttribute("x1",pad.left);
+  axis.setAttribute("x2",W-pad.right);
+  axis.setAttribute("y1",H-pad.bottom);
+  axis.setAttribute("y2",H-pad.bottom);
+  axis.setAttribute("class","axis");
+
+
+  svg.appendChild(axis);
+
+  chart.appendChild(svg);
+
+}
+
+
+function drawLine(
+  svg,
+  values,
+  className,
+  W,
+  H,
+  pad,
+  max
+) {
+
+  const innerW =
+    W-pad.left-pad.right;
+
+  const innerH =
+    H-pad.top-pad.bottom;
+
+
+  const points =
+    values.map((value,i) => {
+
+      const x =
+        pad.left +
+        i /
+        Math.max(
+          1,
+          values.length-1
+        ) *
+        innerW;
+
+
+      const y =
+        pad.top +
+        innerH -
+        value/max*innerH;
+
+
+      return `${x},${y}`;
+
+    }).join(" ");
+
+
+  const line =
+    document.createElementNS(
+      "http://www.w3.org/2000/svg",
+      "polyline"
+    );
+
+
+  line.setAttribute(
+    "points",
+    points
+  );
+
+  line.setAttribute(
+    "class",
+    className
+  );
+
+
+  svg.appendChild(line);
+
+}
+
+
+function rect(
+  x,
+  y,
+  width,
+  height,
+  className
+) {
+
+  const el =
+    document.createElementNS(
+      "http://www.w3.org/2000/svg",
+      "rect"
+    );
+
+  el.setAttribute("x",x);
+  el.setAttribute("y",y);
+  el.setAttribute("width",width);
+  el.setAttribute("height",height);
+  el.setAttribute("class",className);
+
+  return el;
+
+}
+
+
+/* =========================================================
+   REFLECTION
+   ========================================================= */
+
+const reflectionFields = [
+  ["well","well"],
+  ["way","way"],
+  ["missed","missed"],
+  ["tomorrow","tomorrow"]
+];
+
+
+reflectionFields.forEach(([id,key]) => {
+
+  document.getElementById(id)
+    .addEventListener("input",event => {
+
+      day().reflection[key] =
+        event.target.value;
+
+      save();
+
+    });
+
+});
+
+
+function renderReflection() {
+
+  const reflection =
+    day().reflection;
+
+
+  reflectionFields.forEach(([id,key]) => {
+
+    document.getElementById(id)
+      .value =
+        reflection[key] || "";
+
+  });
+
+
+  document.getElementById("closeStatus")
+    .innerHTML =
+      day().closed
+        ? `<span class="closed">
+             ✓ Day closed and saved
+           </span>`
+        : "Close the day when your record is final.";
+
+}
+
+
+/* =========================================================
+   CLOSE DAY
+   ========================================================= */
+
+document
+  .getElementById("closeDay")
+  .onclick = () => {
+
+    day().closed = true;
+
+    save();
+
+    render();
+
+  };
+
+
+/* =========================================================
+   DATE
+   ========================================================= */
+
+const dateInput =
+  document.getElementById("date");
+
+
+dateInput.value =
+  currentDate;
+
+
+dateInput.onchange = event => {
+
+  currentDate =
+    event.target.value;
+
+  render();
+
+};
+
+
+/* =========================================================
+   MASTER RENDER
+   ========================================================= */
+
+function render() {
+
+  renderSalah();
+
+  renderQuran();
+
+  renderBusiness();
+
+  renderFitness();
+
+  renderEnergy();
+
+  renderEntertainment();
+
+  renderFood();
+
+  renderIdentity();
+
+  renderChart();
+
+  renderObservations();
+
+  renderReflection();
+
+}
+
+
+/* =========================================================
+   START
+   ========================================================= */
+
+render();
+
+</script>
+
+</body>
+</html>
